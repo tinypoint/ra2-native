@@ -1,0 +1,5 @@
+host_lite.c: syntax accepted
+pe_loader.c: syntax accepted
+kernel32.c: syntax accepted
+kernel32_ext.c: compile failed
+wsock32.c: syntax accepted

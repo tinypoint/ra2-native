@@ -1,0 +1,27 @@
+[
+  {
+    "file": "host_lite.c",
+    "exit_code": 0,
+    "log": "logs/hle-host_lite.c.log"
+  },
+  {
+    "file": "pe_loader.c",
+    "exit_code": 0,
+    "log": "logs/hle-pe_loader.c.log"
+  },
+  {
+    "file": "kernel32.c",
+    "exit_code": 0,
+    "log": "logs/hle-kernel32.c.log"
+  },
+  {
+    "file": "kernel32_ext.c",
+    "exit_code": 1,
+    "log": "logs/hle-kernel32_ext.c.log"
+  },
+  {
+    "file": "wsock32.c",
+    "exit_code": 0,
+    "log": "logs/hle-wsock32.c.log"
+  }
+]

@@ -1,0 +1,3 @@
+$ /usr/bin/clang -arch arm64 -O2 -g -fno-strict-aliasing -fwrapv -ffp-contract=off -I /Users/zz/Projects/ra2-native/vendor/pcrecomp/runtime/recomp32 /Users/zz/Projects/ra2-native/poc/platform_probe.c -o /Users/zz/Projects/ra2-native/poc/generated/platform_probe
+
+exit_code=0

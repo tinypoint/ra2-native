@@ -1,0 +1,4 @@
+$ /Users/zz/Projects/ra2-native/poc/generated/bridge_global 0x7fffffff
+{"eax":2147483666,"esp":4325380,"object_result":2147483654,"shim_calls":1,"callback_calls":1,"host_above_4g":true}
+
+exit_code=0

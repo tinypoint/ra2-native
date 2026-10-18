@@ -1,0 +1,5 @@
+capstone==5.0.9
+pefile==2024.8.26
+unicorn==2.1.4
+cmake==4.4.4
+ninja==1.13.2

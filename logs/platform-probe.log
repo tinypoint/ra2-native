@@ -1,0 +1,6 @@
+$ /Users/zz/Projects/ra2-native/poc/generated/platform_probe
+pointer_bits=64 long_double_bits=64 page_size=16384
+heap=0x100df4fb0 fits_guest_uint32=no
+low_address_hint=0x400000 actual=0x10052c000 exact=no
+
+exit_code=0

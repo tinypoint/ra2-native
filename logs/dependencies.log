@@ -1,0 +1,14 @@
+Resolved 5 packages in 800ms
+Downloading unicorn (11.6MiB)
+Downloading capstone (1.1MiB)
+Downloading cmake (51.9MiB)
+ Downloaded capstone
+ Downloaded unicorn
+ Downloaded cmake
+Prepared 5 packages in 4.43s
+Installed 5 packages in 43ms
+ + capstone==5.0.9
+ + cmake==4.4.4
+ + ninja==1.13.2
+ + pefile==2024.8.26
+ + unicorn==2.1.4

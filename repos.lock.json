@@ -1,0 +1,10 @@
+{
+  "redalert2-recomp": {
+    "url": "https://github.com/sp00nznet/redalert2-recomp.git",
+    "commit": "ffc982534951acec02211cc79f9ed1a734bddc16"
+  },
+  "pcrecomp": {
+    "url": "https://github.com/sp00nznet/pcrecomp.git",
+    "commit": "bd26806fbd4714d670d2dee75973c5eaff64674c"
+  }
+}

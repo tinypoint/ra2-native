@@ -1,0 +1,4 @@
+$ /usr/bin/file /Users/zz/Projects/ra2-native/poc/generated/upstream_cases_O0
+/Users/zz/Projects/ra2-native/poc/generated/upstream_cases_O0: Mach-O 64-bit executable arm64
+
+exit_code=0

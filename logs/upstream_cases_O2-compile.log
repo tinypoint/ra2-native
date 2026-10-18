@@ -1,0 +1,28 @@
+$ /usr/bin/clang -arch arm64 -O2 -g -fno-strict-aliasing -fwrapv -ffp-contract=off -I /Users/zz/Projects/ra2-native/vendor/pcrecomp/runtime/recomp32 /Users/zz/Projects/ra2-native/poc/generated/upstream_cases.c -o /Users/zz/Projects/ra2-native/poc/generated/upstream_cases_O2
+/Users/zz/Projects/ra2-native/poc/generated/upstream_cases.c:5687:79: warning: for loop has empty body [-Wempty-body]
+ 5687 |     { uint32_t _v = ecx, _i; if (_v) { for (_i = 0; !((_v >> _i) & 1u); _i++) ; eax = _i; } _flag_a = _flag_b = _v; } _cf = 0; /* 0x00400000: bsf eax, ecx */
+      |                                                                               ^
+/Users/zz/Projects/ra2-native/poc/generated/upstream_cases.c:5687:79: note: put the semicolon on a separate line to silence this warning
+/Users/zz/Projects/ra2-native/poc/generated/upstream_cases.c:5699:79: warning: for loop has empty body [-Wempty-body]
+ 5699 |     { uint32_t _v = ecx, _i; if (_v) { for (_i = 0; !((_v >> _i) & 1u); _i++) ; eax = _i; } _flag_a = _flag_b = _v; } _cf = 0; /* 0x00400000: bsf eax, ecx */
+      |                                                                               ^
+/Users/zz/Projects/ra2-native/poc/generated/upstream_cases.c:5699:79: note: put the semicolon on a separate line to silence this warning
+/Users/zz/Projects/ra2-native/poc/generated/upstream_cases.c:5711:79: warning: for loop has empty body [-Wempty-body]
+ 5711 |     { uint32_t _v = ecx, _i; if (_v) { for (_i = 0; !((_v >> _i) & 1u); _i++) ; eax = _i; } _flag_a = _flag_b = _v; } _cf = 0; /* 0x00400000: bsf eax, ecx */
+      |                                                                               ^
+/Users/zz/Projects/ra2-native/poc/generated/upstream_cases.c:5711:79: note: put the semicolon on a separate line to silence this warning
+/Users/zz/Projects/ra2-native/poc/generated/upstream_cases.c:5723:80: warning: for loop has empty body [-Wempty-body]
+ 5723 |     { uint32_t _v = ecx, _i; if (_v) { for (_i = 31; !((_v >> _i) & 1u); _i--) ; eax = _i; } _flag_a = _flag_b = _v; } _cf = 0; /* 0x00400000: bsr eax, ecx */
+      |                                                                                ^
+/Users/zz/Projects/ra2-native/poc/generated/upstream_cases.c:5723:80: note: put the semicolon on a separate line to silence this warning
+/Users/zz/Projects/ra2-native/poc/generated/upstream_cases.c:5735:80: warning: for loop has empty body [-Wempty-body]
+ 5735 |     { uint32_t _v = ecx, _i; if (_v) { for (_i = 31; !((_v >> _i) & 1u); _i--) ; eax = _i; } _flag_a = _flag_b = _v; } _cf = 0; /* 0x00400000: bsr eax, ecx */
+      |                                                                                ^
+/Users/zz/Projects/ra2-native/poc/generated/upstream_cases.c:5735:80: note: put the semicolon on a separate line to silence this warning
+/Users/zz/Projects/ra2-native/poc/generated/upstream_cases.c:5747:80: warning: for loop has empty body [-Wempty-body]
+ 5747 |     { uint32_t _v = ecx, _i; if (_v) { for (_i = 31; !((_v >> _i) & 1u); _i--) ; eax = _i; } _flag_a = _flag_b = _v; } _cf = 0; /* 0x00400000: bsr eax, ecx */
+      |                                                                                ^
+/Users/zz/Projects/ra2-native/poc/generated/upstream_cases.c:5747:80: note: put the semicolon on a separate line to silence this warning
+6 warnings generated.
+
+exit_code=0

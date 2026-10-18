@@ -1,0 +1,296 @@
+{
+  "scope": "Synthetic ARM64 feasibility only; no actual RA2/YR game function tested.",
+  "platform_probe": "pointer_bits=64 long_double_bits=64 page_size=16384\nheap=0x100df4fb0 fits_guest_uint32=no\nlow_address_hint=0x400000 actual=0x10052c000 exact=no\n",
+  "upstream_differential": {
+    "-O0": {
+      "total": 371,
+      "matched": 370,
+      "known": [],
+      "failures": [
+        {
+          "name": "sse.sqrtps",
+          "differences": [
+            [
+              "[00410107]",
+              "7F",
+              "FF"
+            ]
+          ],
+          "note": ""
+        }
+      ]
+    },
+    "-O2": {
+      "total": 371,
+      "matched": 370,
+      "known": [],
+      "failures": [
+        {
+          "name": "sse.sqrtps",
+          "differences": [
+            [
+              "[00410107]",
+              "7F",
+              "FF"
+            ]
+          ],
+          "note": ""
+        }
+      ]
+    }
+  },
+  "synthetic_bridge": [
+    {
+      "local_registers": false,
+      "input": 0,
+      "actual": {
+        "eax": 21,
+        "esp": 4325380,
+        "object_result": 7,
+        "shim_calls": 1,
+        "callback_calls": 1,
+        "host_above_4g": true
+      },
+      "expected": {
+        "eax": 21,
+        "esp": 4325380,
+        "object_result": 7,
+        "shim_calls": 1,
+        "callback_calls": 1
+      },
+      "passed": true,
+      "differences": {}
+    },
+    {
+      "local_registers": false,
+      "input": 1,
+      "actual": {
+        "eax": 24,
+        "esp": 4325380,
+        "object_result": 8,
+        "shim_calls": 1,
+        "callback_calls": 1,
+        "host_above_4g": true
+      },
+      "expected": {
+        "eax": 24,
+        "esp": 4325380,
+        "object_result": 8,
+        "shim_calls": 1,
+        "callback_calls": 1
+      },
+      "passed": true,
+      "differences": {}
+    },
+    {
+      "local_registers": false,
+      "input": 12345,
+      "actual": {
+        "eax": 37056,
+        "esp": 4325380,
+        "object_result": 12352,
+        "shim_calls": 1,
+        "callback_calls": 1,
+        "host_above_4g": true
+      },
+      "expected": {
+        "eax": 37056,
+        "esp": 4325380,
+        "object_result": 12352,
+        "shim_calls": 1,
+        "callback_calls": 1
+      },
+      "passed": true,
+      "differences": {}
+    },
+    {
+      "local_registers": false,
+      "input": 2147483647,
+      "actual": {
+        "eax": 2147483666,
+        "esp": 4325380,
+        "object_result": 2147483654,
+        "shim_calls": 1,
+        "callback_calls": 1,
+        "host_above_4g": true
+      },
+      "expected": {
+        "eax": 2147483666,
+        "esp": 4325380,
+        "object_result": 2147483654,
+        "shim_calls": 1,
+        "callback_calls": 1
+      },
+      "passed": true,
+      "differences": {}
+    },
+    {
+      "local_registers": false,
+      "input": 4294967289,
+      "actual": {
+        "eax": 0,
+        "esp": 4325380,
+        "object_result": 0,
+        "shim_calls": 1,
+        "callback_calls": 1,
+        "host_above_4g": true
+      },
+      "expected": {
+        "eax": 0,
+        "esp": 4325380,
+        "object_result": 0,
+        "shim_calls": 1,
+        "callback_calls": 1
+      },
+      "passed": true,
+      "differences": {}
+    },
+    {
+      "local_registers": false,
+      "input": 4294967295,
+      "actual": {
+        "eax": 18,
+        "esp": 4325380,
+        "object_result": 6,
+        "shim_calls": 1,
+        "callback_calls": 1,
+        "host_above_4g": true
+      },
+      "expected": {
+        "eax": 18,
+        "esp": 4325380,
+        "object_result": 6,
+        "shim_calls": 1,
+        "callback_calls": 1
+      },
+      "passed": true,
+      "differences": {}
+    },
+    {
+      "local_registers": true,
+      "input": 0,
+      "actual": {
+        "eax": 21,
+        "esp": 4325380,
+        "object_result": 7,
+        "shim_calls": 1,
+        "callback_calls": 1,
+        "host_above_4g": true
+      },
+      "expected": {
+        "eax": 21,
+        "esp": 4325380,
+        "object_result": 7,
+        "shim_calls": 1,
+        "callback_calls": 1
+      },
+      "passed": true,
+      "differences": {}
+    },
+    {
+      "local_registers": true,
+      "input": 1,
+      "actual": {
+        "eax": 24,
+        "esp": 4325380,
+        "object_result": 8,
+        "shim_calls": 1,
+        "callback_calls": 1,
+        "host_above_4g": true
+      },
+      "expected": {
+        "eax": 24,
+        "esp": 4325380,
+        "object_result": 8,
+        "shim_calls": 1,
+        "callback_calls": 1
+      },
+      "passed": true,
+      "differences": {}
+    },
+    {
+      "local_registers": true,
+      "input": 12345,
+      "actual": {
+        "eax": 37056,
+        "esp": 4325380,
+        "object_result": 12352,
+        "shim_calls": 1,
+        "callback_calls": 1,
+        "host_above_4g": true
+      },
+      "expected": {
+        "eax": 37056,
+        "esp": 4325380,
+        "object_result": 12352,
+        "shim_calls": 1,
+        "callback_calls": 1
+      },
+      "passed": true,
+      "differences": {}
+    },
+    {
+      "local_registers": true,
+      "input": 2147483647,
+      "actual": {
+        "eax": 2147483666,
+        "esp": 4325380,
+        "object_result": 2147483654,
+        "shim_calls": 1,
+        "callback_calls": 1,
+        "host_above_4g": true
+      },
+      "expected": {
+        "eax": 2147483666,
+        "esp": 4325380,
+        "object_result": 2147483654,
+        "shim_calls": 1,
+        "callback_calls": 1
+      },
+      "passed": true,
+      "differences": {}
+    },
+    {
+      "local_registers": true,
+      "input": 4294967289,
+      "actual": {
+        "eax": 0,
+        "esp": 4325380,
+        "object_result": 0,
+        "shim_calls": 1,
+        "callback_calls": 1,
+        "host_above_4g": true
+      },
+      "expected": {
+        "eax": 0,
+        "esp": 4325380,
+        "object_result": 0,
+        "shim_calls": 1,
+        "callback_calls": 1
+      },
+      "passed": true,
+      "differences": {}
+    },
+    {
+      "local_registers": true,
+      "input": 4294967295,
+      "actual": {
+        "eax": 18,
+        "esp": 4325380,
+        "object_result": 6,
+        "shim_calls": 1,
+        "callback_calls": 1,
+        "host_above_4g": true
+      },
+      "expected": {
+        "eax": 18,
+        "esp": 4325380,
+        "object_result": 6,
+        "shim_calls": 1,
+        "callback_calls": 1
+      },
+      "passed": true,
+      "differences": {}
+    }
+  ]
+}

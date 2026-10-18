@@ -1,0 +1,4 @@
+$ /usr/bin/file /Users/zz/Projects/ra2-native/poc/generated/bridge_global
+/Users/zz/Projects/ra2-native/poc/generated/bridge_global: Mach-O 64-bit executable arm64
+
+exit_code=0

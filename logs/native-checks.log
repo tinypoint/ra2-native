@@ -1,0 +1,6 @@
+pointer_bits=64 long_double_bits=64 page_size=16384
+heap=0x100df4fb0 fits_guest_uint32=no
+low_address_hint=0x400000 actual=0x10052c000 exact=no
+upstream -O0: 370/371 match; failures=1
+upstream -O2: 370/371 match; failures=1
+synthetic bridge: 12/12 passed

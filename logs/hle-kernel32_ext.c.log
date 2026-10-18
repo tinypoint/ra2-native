@@ -1,0 +1,58 @@
+$ /usr/bin/clang -arch arm64 -fsyntax-only -I /Users/zz/Projects/ra2-native/vendor/pcrecomp/runtime/win32hle -I /Users/zz/Projects/ra2-native/vendor/pcrecomp/runtime/recomp32 /Users/zz/Projects/ra2-native/vendor/pcrecomp/runtime/win32hle/kernel32_ext.c
+/Users/zz/Projects/ra2-native/vendor/pcrecomp/runtime/win32hle/kernel32_ext.c:289:34: error: no member named 'st_mtim' in 'struct stat'
+  289 |     put_ft(A32(1), unix_to_ft(st.st_mtim.tv_sec, st.st_mtim.tv_nsec));
+      |                               ~~ ^
+/Users/zz/Projects/ra2-native/vendor/pcrecomp/runtime/win32hle/kernel32_ext.c:289:53: error: no member named 'st_mtim' in 'struct stat'
+  289 |     put_ft(A32(1), unix_to_ft(st.st_mtim.tv_sec, st.st_mtim.tv_nsec));
+      |                                                  ~~ ^
+/Users/zz/Projects/ra2-native/vendor/pcrecomp/runtime/win32hle/kernel32_ext.c:290:34: error: no member named 'st_atim' in 'struct stat'
+  290 |     put_ft(A32(2), unix_to_ft(st.st_atim.tv_sec, st.st_atim.tv_nsec));
+      |                               ~~ ^
+/Users/zz/Projects/ra2-native/vendor/pcrecomp/runtime/win32hle/kernel32_ext.c:290:53: error: no member named 'st_atim' in 'struct stat'
+  290 |     put_ft(A32(2), unix_to_ft(st.st_atim.tv_sec, st.st_atim.tv_nsec));
+      |                                                  ~~ ^
+/Users/zz/Projects/ra2-native/vendor/pcrecomp/runtime/win32hle/kernel32_ext.c:291:34: error: no member named 'st_mtim' in 'struct stat'
+  291 |     put_ft(A32(3), unix_to_ft(st.st_mtim.tv_sec, st.st_mtim.tv_nsec));
+      |                               ~~ ^
+/Users/zz/Projects/ra2-native/vendor/pcrecomp/runtime/win32hle/kernel32_ext.c:291:53: error: no member named 'st_mtim' in 'struct stat'
+  291 |     put_ft(A32(3), unix_to_ft(st.st_mtim.tv_sec, st.st_mtim.tv_nsec));
+      |                                                  ~~ ^
+/Users/zz/Projects/ra2-native/vendor/pcrecomp/runtime/win32hle/kernel32_ext.c:318:33: error: no member named 'st_mtim' in 'struct stat'
+  318 |     put_ft(o + 4, unix_to_ft(st.st_mtim.tv_sec, st.st_mtim.tv_nsec));
+      |                              ~~ ^
+/Users/zz/Projects/ra2-native/vendor/pcrecomp/runtime/win32hle/kernel32_ext.c:318:52: error: no member named 'st_mtim' in 'struct stat'
+  318 |     put_ft(o + 4, unix_to_ft(st.st_mtim.tv_sec, st.st_mtim.tv_nsec));
+      |                                                 ~~ ^
+/Users/zz/Projects/ra2-native/vendor/pcrecomp/runtime/win32hle/kernel32_ext.c:319:34: error: no member named 'st_atim' in 'struct stat'
+  319 |     put_ft(o + 12, unix_to_ft(st.st_atim.tv_sec, st.st_atim.tv_nsec));
+      |                               ~~ ^
+/Users/zz/Projects/ra2-native/vendor/pcrecomp/runtime/win32hle/kernel32_ext.c:319:53: error: no member named 'st_atim' in 'struct stat'
+  319 |     put_ft(o + 12, unix_to_ft(st.st_atim.tv_sec, st.st_atim.tv_nsec));
+      |                                                  ~~ ^
+/Users/zz/Projects/ra2-native/vendor/pcrecomp/runtime/win32hle/kernel32_ext.c:320:34: error: no member named 'st_mtim' in 'struct stat'
+  320 |     put_ft(o + 20, unix_to_ft(st.st_mtim.tv_sec, st.st_mtim.tv_nsec));
+      |                               ~~ ^
+/Users/zz/Projects/ra2-native/vendor/pcrecomp/runtime/win32hle/kernel32_ext.c:320:53: error: no member named 'st_mtim' in 'struct stat'
+  320 |     put_ft(o + 20, unix_to_ft(st.st_mtim.tv_sec, st.st_mtim.tv_nsec));
+      |                                                  ~~ ^
+/Users/zz/Projects/ra2-native/vendor/pcrecomp/runtime/win32hle/kernel32_ext.c:431:37: error: no member named 'st_mtim' in 'struct stat'
+  431 |         put_ft(o + 4, unix_to_ft(st.st_mtim.tv_sec, st.st_mtim.tv_nsec));
+      |                                  ~~ ^
+/Users/zz/Projects/ra2-native/vendor/pcrecomp/runtime/win32hle/kernel32_ext.c:431:56: error: no member named 'st_mtim' in 'struct stat'
+  431 |         put_ft(o + 4, unix_to_ft(st.st_mtim.tv_sec, st.st_mtim.tv_nsec));
+      |                                                     ~~ ^
+/Users/zz/Projects/ra2-native/vendor/pcrecomp/runtime/win32hle/kernel32_ext.c:432:38: error: no member named 'st_atim' in 'struct stat'
+  432 |         put_ft(o + 12, unix_to_ft(st.st_atim.tv_sec, st.st_atim.tv_nsec));
+      |                                   ~~ ^
+/Users/zz/Projects/ra2-native/vendor/pcrecomp/runtime/win32hle/kernel32_ext.c:432:57: error: no member named 'st_atim' in 'struct stat'
+  432 |         put_ft(o + 12, unix_to_ft(st.st_atim.tv_sec, st.st_atim.tv_nsec));
+      |                                                      ~~ ^
+/Users/zz/Projects/ra2-native/vendor/pcrecomp/runtime/win32hle/kernel32_ext.c:433:38: error: no member named 'st_mtim' in 'struct stat'
+  433 |         put_ft(o + 20, unix_to_ft(st.st_mtim.tv_sec, st.st_mtim.tv_nsec));
+      |                                   ~~ ^
+/Users/zz/Projects/ra2-native/vendor/pcrecomp/runtime/win32hle/kernel32_ext.c:433:57: error: no member named 'st_mtim' in 'struct stat'
+  433 |         put_ft(o + 20, unix_to_ft(st.st_mtim.tv_sec, st.st_mtim.tv_nsec));
+      |                                                      ~~ ^
+18 errors generated.
+
+exit_code=1

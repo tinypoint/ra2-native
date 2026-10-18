@@ -1,0 +1,54 @@
+{
+  "capstone": {
+    "version": "5.0.9",
+    "license": null,
+    "license_expression": null,
+    "license_files": [
+      "capstone-5.0.9.dist-info/LICENSE.TXT"
+    ]
+  },
+  "pefile": {
+    "version": "2024.8.26",
+    "license": "MIT",
+    "license_expression": null,
+    "license_files": [
+      "pefile-2024.8.26.dist-info/LICENSE"
+    ]
+  },
+  "unicorn": {
+    "version": "2.1.4",
+    "license": "BSD License",
+    "license_expression": null,
+    "license_files": []
+  },
+  "cmake": {
+    "version": "4.4.4",
+    "license": "Apache 2.0",
+    "license_expression": null,
+    "license_files": [
+      "cmake-4.4.4.dist-info/licenses/AUTHORS.rst",
+      "cmake-4.4.4.dist-info/licenses/LICENSE_Apache_20",
+      "cmake-4.4.4.dist-info/licenses/LICENSE_BSD_3",
+      "cmake/data/doc/cmake/LICENSE.rst",
+      "cmake/data/doc/cmake/cmlibarchive/COPYING",
+      "cmake/data/doc/cmake/cmliblzma/COPYING",
+      "cmake/data/doc/cmake/cmlibrhash/COPYING",
+      "cmake/data/doc/cmake/cmlibuv/LICENSE",
+      "cmake/data/doc/cmake/cmzstd/LICENSE",
+      "cmake/data/share/cmake-4.4/Help/prop_tgt/SPDX_LICENSE.rst",
+      "cmake/data/share/cmake-4.4/Help/variable/CMAKE_PROJECT_SPDX_LICENSE.rst",
+      "cmake/data/share/cmake-4.4/Help/variable/PROJECT-NAME_SPDX_LICENSE.rst",
+      "cmake/data/share/cmake-4.4/Help/variable/PROJECT_SPDX_LICENSE.rst",
+      "cmake/data/share/cmake-4.4/Licenses/LGPLv3.txt",
+      "cmake/data/share/cmake-4.4/Templates/CPack.GenericLicense.txt"
+    ]
+  },
+  "ninja": {
+    "version": "1.13.2",
+    "license": null,
+    "license_expression": "Apache-2.0",
+    "license_files": [
+      "ninja-1.13.2.dist-info/licenses/LICENSE_Apache_20"
+    ]
+  }
+}

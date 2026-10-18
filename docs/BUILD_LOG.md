@@ -1,0 +1,70 @@
+# 构建与运行记录
+
+日期：2026-10-18（Asia/Shanghai）；工程目录 `/Users/zz/Projects/ra2-native`。
+
+所有代码操作在独立新目录进行。原聊天目录为另一个项目，访问持续无响应，本次没有对其写入。未运行上游自动安装脚本，未安装系统级依赖，未下载游戏整合包，未创建或发布远程仓库。
+
+## 固定环境和来源
+
+- 完整元数据：`logs/environment.json`。
+- Clang：`logs/clang-version.log`；macOS：`logs/macos-version.log`。
+- 上游提交：`repos.lock.json`；干净 checkout 校验：`logs/pins-verification.log`。
+- Python 包版本：`requirements.txt`；安装记录：`logs/dependencies.log`。
+- 首次依次克隆 redalert2-recomp、pcrecomp，使用 GitHub HTTPS 和 `--depth 1`；没有运行克隆内容中的 setup。
+
+```sh
+git clone --depth 1 https://github.com/sp00nznet/redalert2-recomp.git vendor/redalert2-recomp
+git clone --depth 1 https://github.com/sp00nznet/pcrecomp.git vendor/pcrecomp
+uv venv --python 3.12 .venv
+uv pip install --python .venv/bin/python -r requirements.txt
+.venv/bin/python poc/bootstrap.py
+```
+
+未来复现应以 bootstrap 固定提交；当前分支 HEAD 可能变化，不能仅重跑 shallow clone 就当作同一实验。
+
+## 实验 1：原样工程 ARM64 配置
+
+```sh
+.venv/bin/cmake -S vendor/redalert2-recomp -B poc/build-upstream-arm64 -G Ninja \
+  -DCMAKE_MAKE_PROGRAM=/Users/zz/Projects/ra2-native/.venv/bin/ninja \
+  -DCMAKE_OSX_ARCHITECTURES=arm64
+```
+
+结果：退出 1，`CMakeLists.txt:15` 报 `the host must be 32-bit`。日志：`logs/upstream-cmake-arm64.log`。这是配置失败，未声称开始完整编译。
+
+## 实验 2：未修改的上游差分脚本
+
+```sh
+RECOMP_CC=/usr/bin/clang .venv/bin/python vendor/pcrecomp/tools/lift/difftest.py --keep
+```
+
+结果：退出 1，370/371 与 Unicorn 一致，`sse.sqrtps` 的一个 NaN 符号位字节不同。日志：`logs/upstream-difftest.log`。临时生成目录由上游创建，不作为交付路径；下一个实验在项目内重新生成同一组案例。
+
+## 实验 3：固定 ARM64 构建与合成桥接
+
+```sh
+.venv/bin/python poc/run_native_checks.py
+```
+
+结果：退出 1（保留语义失败）。`logs/native-results.json` 是完整机器可读结果。
+
+- 生成文件：`poc/generated/upstream_cases.c` 与 `synthetic_bridge.c`，可随时由脚本重建。
+- 显式 `clang -arch arm64`，`-fno-strict-aliasing -fwrapv -ffp-contract=off`；上游用例分别 `-O0`、`-O2`，合成桥接为 `-O2`。
+- 上游：两个优化级别均 370/371，失败均为同一 `sse.sqrtps`；未屏蔽失败、未启用 fast-math。编译有空循环体警告，完整保留。
+- 桥接：global/local register 模式 × 6 个边界输入，12/12 通过。
+- 精确编译命令：`logs/*-compile.log`；架构证明：`logs/*-file.log`；执行状态：`logs/*-execution.log` 及各 bridge 输入日志。
+- 平台探针：`logs/platform-probe.log`；Mach-O 映射布局：`logs/platform-probe-load-commands.log`。
+
+## 实验 4：原样 HLE 文件的 macOS 语法编译
+
+```sh
+.venv/bin/python poc/check_hle_compile.py
+```
+
+结果：退出 1；4/5 文件语法接受，kernel32_ext.c 因 Linux stat 时间字段失败。日志：`logs/hle-compile-results.json`、`logs/hle-*.log`。仅 `-fsyntax-only`，未链接或运行完整 HLE。
+
+## 本批限制
+
+没有真实游戏文件，因此任务书中“选取真实 lifted game function”的实验、完整游戏启动和两个平台的游戏结果对照未完成；本次成功项均限于合成或上游语义测试。未测试画面、帧率、CPU、内存峰值、音效、存档、战役、遭遇战、联机、MOD 或可安装 .app。
+
+所有失败保持可见；本批没有为了让结果变绿修改上游代码。下一步计划见 ROADMAP。

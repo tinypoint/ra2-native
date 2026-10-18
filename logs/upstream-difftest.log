@@ -1,0 +1,7 @@
+generated source in /var/folders/p9/s73jvthx7zn_7y2h4qxz16vr0000gn/T/difftest-lfa4xryy
+FIXED sbb.idiom   [cmp eax, ecx; sbb eax, eax] -- matches now; drop the known= note
+FIXED span.carry.default   [add edx, eax; sbb ecx, ecx; add ebx, ebp; adc esi, dword ptr [edi + ecx*4 + 4]] -- matches now; drop the known= note
+FAIL sse.sqrtps   [movups xmm0, xmmword ptr [esi]; movups xmm1, xmmword ptr [esi + 0x10]; sqrtps xmm0, xmm1; movups xmmword ptr [edi], xmm0; movups xmmword ptr [edi + 0x10], xmm1; movq qword ptr [edi + 0x30], mm0]
+       [00410107]  lifted       7F   cpu       FF
+
+370/371 match hardware, 0 known divergences, 1 failures

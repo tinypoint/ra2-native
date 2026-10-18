@@ -1,0 +1,10 @@
+.venv/
+vendor/
+poc/build*/
+poc/generated/
+game/
+*.exe
+*.mix
+*.dll
+__pycache__/
+.DS_Store
