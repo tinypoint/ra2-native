@@ -1,0 +1,46 @@
+release-unpaced-1 menu 15.624s
+release-unpaced-1 single 22.606s
+release-unpaced-1 skirmish 29.466s
+release-unpaced-1 battle 42.593s
+{
+  "label": "release-unpaced-1",
+  "profile": "release",
+  "idle_pacing": 0,
+  "binary_sha256": "3777f77b6d20f85cc65fd1a9f526efe8478e4fac6feb092b989c503eebf474f7",
+  "trace_enabled": false,
+  "capture_interval_ms": 500,
+  "planned_battle_seconds": 20,
+  "stop_reason": "battle_observation_complete",
+  "process_exit_code": -15,
+  "stage_detection": "previously inspected title masks and battlefield blue command bar; inspect saved frames",
+  "transitions": [
+    {
+      "stage": "menu",
+      "seconds": 15.623544125119224
+    },
+    {
+      "stage": "single",
+      "seconds": 22.606417125090957
+    },
+    {
+      "stage": "skirmish",
+      "seconds": 29.465631500119343
+    },
+    {
+      "stage": "battle",
+      "seconds": 42.59251049999148
+    }
+  ],
+  "wall_seconds": 62.81084595806897,
+  "cpu_user_seconds": 29.682001,
+  "cpu_system_seconds": 2.520695,
+  "max_rss_bytes": 253427712,
+  "battle_present_callback_fps_median": 65.80259222333001,
+  "battle_cpu_percent_median": 101.87999382313556,
+  "game_logic_fps_measured": true,
+  "game_frame_counter_va": "0xA40D2C",
+  "battle_logic_fps_median": 849.3265243950688,
+  "cpu_percent_basis": "100 percent is one logical CPU",
+  "image_detection_resolution_seconds": 0.6,
+  "game_completed": false
+}

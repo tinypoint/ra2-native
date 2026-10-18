@@ -1,0 +1,15 @@
+[screen] cocoa, renderer metal, scaling sharp (F12), fullscreen F11
+[pe] /Users/zz/Projects/ra2-native/game/ra2-upload-41bbcc83/game.exe mapped at 0x00400000, span 0x743000
+[pe] bound 368 imports, 0 unresolved
+[native-boot] platform launcher objects established; game checks unmodified
+[native-boot] entering actual game CRT entry 00785aa0 as ARM64
+[file] CreateFileA "RA2.INI" -> RA2.INI ok
+[file] CreateFileA "RA2.INI" -> RA2.INI ok
+[module] GetProcAddress(kernel32.dll, GetDiskFreeSpaceExA): not answered
+[blowfish] no Blowfish.dll in the game folder
+[pe] blowfish.dll mapped at 0x10BF4000, span 0x39000
+[module] LoadLibraryA("blowfish.dll") -> 0x10BF4000 (its code is not run)
+[module] GetProcAddress(blowfish.dll, DllRegisterServer): not answered
+[native-boot] game dialog title=***FATAL*** String Manager failed to initilaized properly text=***FATAL*** String Manager failed to initilaized properly buttons=00000030
+[win32hle] FATAL: game requested a dialog; headless probe stops for diagnosis
+[native-boot] signal=6 address=0x185de1650 guest=006fa040 last_import=MessageBoxA esp=104094dc

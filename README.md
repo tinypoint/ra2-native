@@ -2,7 +2,7 @@
 
 目标：将原版游戏逻辑静态转换、编译为 ARM64，使用本地运行时提供系统接口。
 
-**状态：完整 RA2 程序已转换并编译为 ARM64，实际创建 Cocoa/Metal 窗口并显示繁体中文主菜单；DirectSound 通过 CoreAudio 初始化，Bink 界面动画已解码。100/100 项运行时集成检查通过。已验证菜单点击并进入默认遭遇战战场，已验证鼠标选中基地车和 D 键展开建造厂，完整一局仍待验证，尚未证明完整可玩，已生成本机测试 .app，尚非发布版。**
+**状态：RA2 已编译为本机 ARM64，已验证遭遇战进入、建造、战斗结算，以及保存后退出进程再读档。124/124 项运行时检查通过。优化版本同速约 31.25 个逻辑帧/秒，CPU 约 43% → 36%，峰值内存约 261 → 235 MiB。仍为本地研究构建；YR、战役与长期稳定性尚未验证。**
 
 2026-10-18，在本机 macOS ARM64 上实测：
 
@@ -10,8 +10,8 @@
 | --- | --- |
 | 上传安装包静态解包 | 取得 game.exe 和主要 MIX；音乐、过场资源不完整 |
 | 完整游戏转换 | 23116 个函数、0 转换错误；168 个 no_terminator 项保留待回归 |
-| 真实启动与主菜单 | Cocoa/Metal、640×480×16；已目视检查游戏帧，输入已验证，已显示遭遇战战场；整局仍待验收 |
-| 实际 HLE 集成检查 | 100/100；IAT 362 个注册处理器、6 个显式缺失入口，处理器覆盖不等于完整 API 语义 |
+| 真实启动与主菜单 | Cocoa/Metal、640×480×16；已目视检查游戏帧，输入已验证，已显示遭遇战战场；已走到实际遭遇战积分结算 |
+| 实际 HLE 集成检查 | 124/124；IAT 366 个注册处理器、2 个显式缺失入口，处理器覆盖不等于完整 API 语义 |
 | 真实 game.exe 函数在 ARM64 上执行 | 10 个函数，110/110 个对照用例一致 |
 | 真实函数的 guest 地址空间 | 在高于 4 GiB 的地址保留 4 GiB 虚拟窗口，按页提交图像与测试状态 |
 | 上游完整工程 ARM64 配置 | 被 32 位宿主检查拒绝 |
@@ -25,6 +25,8 @@ Unicorn 仅用来产生 x86 对照结果。被验证的 C 程序由 Apple Clang 
 ## 阅读入口
 
 - [完整 ARM64 运行时与启动日志](docs/NATIVE_RUNTIME.md)
+- [性能对照](docs/PERFORMANCE.md)
+- [存档与对局证据](docs/SAVE_LOAD.md)
 - [决策与下一步](docs/ROADMAP.md)
 - [ARM64 证据与边界](docs/ARM64_FEASIBILITY.md)
 - [仓库审计](docs/REPO_AUDIT.md)
@@ -62,4 +64,4 @@ uv pip install --python .venv/bin/python -r requirements.txt
 
 这是本地研究工程，尚未发布到社区或创建远程仓库。
 
-本机交互研究构建：`.venv/bin/python tools/launch_native_game.py`，或打开 `.local/Red Alert 2 ARM64.app`。应用包由 `tools/package_local_app.py` 生成，绑定当前资源目录；完整一局、存档与 YR 待验收。
+本机交互研究构建：`.venv/bin/python tools/launch_native_game.py`，或打开 `.local/Red Alert 2 ARM64 Optimized.app`。应用包由 `tools/package_local_app.py` 生成，绑定当前资源目录；遭遇战结算与跨进程存档恢复已验收；YR 待验收。

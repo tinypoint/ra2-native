@@ -1,0 +1,9 @@
+{
+  "app": ".local/Red Alert 2 ARM64 Optimized.app",
+  "launch_method": "macOS LaunchServices open -W -n",
+  "watchdog_seconds": 20,
+  "visually_verified": "Traditional Chinese RA2 main menu",
+  "image": ".local/optimized-app-smoke.png",
+  "image_sha256": "05191e9c969fde803891f8183ebb16d810e717741f6b640394ee27f42778a80d",
+  "normal_game_exit_verified": false
+}

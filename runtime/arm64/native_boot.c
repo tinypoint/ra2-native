@@ -1,4 +1,4 @@
-/* Headless initialization probe. Explicitly stops at missing APIs; no UI. */
+/* ARM64 game host with optional startup, input and performance probes. */
 #include <signal.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -8,6 +8,7 @@
 #include "win32hle.h"
 #include "pe_loader.h"
 
+static uint32_t host_started_ms;
 static void fault(int sig,siginfo_t *si,void *context) {
     (void)context;
     fprintf(stderr,"[native-boot] signal=%d address=%p guest=%08x last_import=%s esp=%08x\n",
@@ -51,22 +52,43 @@ static void capture_frame(const uint8_t *px,int w,int h,int pitch,int bpp) {
             else hle_fatal("invalid local probe command");
             fprintf(stderr,"[native-boot] control id=%u %s %d %d\n",id,action,a,b);
         }fclose(in);}}
-    const char *path=getenv("RA2_FRAME_PATH");
-    if(!path || (frames!=1 && frames%30))return;
-    FILE *f=fopen(path,"wb");if(!f)return;
-    fprintf(f,"P6\n%d %d\n255\n",w,h);
-    for(int y=0;y<h;y++)for(int x=0;x<w;x++) {
-        const uint8_t *p=px+y*pitch+x*(bpp/8);uint8_t rgb[3]={0};
-        if(bpp==16){unsigned v=p[0]|p[1]<<8;rgb[0]=((v>>11)&31)*255/31;rgb[1]=((v>>5)&63)*255/63;rgb[2]=(v&31)*255/31;}
-        else if(bpp==24||bpp==32){rgb[0]=p[2];rgb[1]=p[1];rgb[2]=p[0];}
-        else if(bpp==8){const uint8_t *ignore;const uint32_t *pal;int a,b,c,d;unsigned seq;
-            hle_dd_frame(&ignore,&a,&b,&c,&d,&pal,&seq);unsigned v=pal?pal[*p]:0;rgb[0]=v&255;rgb[1]=(v>>8)&255;rgb[2]=(v>>16)&255;}
-        fwrite(rgb,1,3,f);
+    const char *metrics=getenv("RA2_METRICS_PATH");
+    static uint32_t metric_ms;static unsigned metric_frames;
+    uint32_t now=hle_ticks_ms();
+    if(metrics && (!metric_ms || now-metric_ms>=1000)) {
+        FILE *mf=fopen(metrics,"a");if(mf){
+            const char *frame_va_text=getenv("RA2_GAME_FRAME_VA");
+            uint32_t frame_va=frame_va_text?(uint32_t)strtoul(frame_va_text,NULL,0):0;
+            uint32_t game_frame=frame_va&&gm_accessible(frame_va,4,0)?MEM32(frame_va):0;
+            fprintf(mf,"{\"monotonic_ms\":%u,\"present_callbacks\":%u,\"interval_ms\":%u,\"interval_frames\":%u,\"host_elapsed_ms\":%u,\"game_frame\":%u}\n",
+                    now,frames,metric_ms?now-metric_ms:0,frames-metric_frames,now-host_started_ms,game_frame);fclose(mf);}
+        metric_ms=now;metric_frames=frames;
     }
-    fclose(f);fprintf(stderr,"[native-boot] captured guest frame=%u %dx%d %dbpp\n",frames,w,h,bpp);
+    const char *path=getenv("RA2_FRAME_PATH");
+    static uint32_t captured_ms;
+    unsigned interval=getenv("RA2_CAPTURE_MS")?(unsigned)strtoul(getenv("RA2_CAPTURE_MS"),NULL,10):1000;
+    if(!path || (captured_ms && now-captured_ms<interval))return;
+    captured_ms=now;
+    size_t size=(size_t)w*h*3;uint8_t *rgb=malloc(size);if(!rgb)return;
+    const uint8_t *unused;const uint32_t *palette=NULL;int aw,ah,ap,ab;unsigned seq;
+    if(bpp==8)hle_dd_frame(&unused,&aw,&ah,&ap,&ab,&palette,&seq);
+    for(int y=0;y<h;y++)for(int x=0;x<w;x++) {
+        const uint8_t *p=px+y*pitch+x*(bpp/8);uint8_t *out=rgb+((size_t)y*w+x)*3;
+        if(bpp==16){unsigned v=p[0]|p[1]<<8;out[0]=((v>>11)&31)*255/31;out[1]=((v>>5)&63)*255/63;out[2]=(v&31)*255/31;}
+        else if(bpp==24||bpp==32){out[0]=p[2];out[1]=p[1];out[2]=p[0];}
+        else {unsigned v=palette?palette[*p]:0;out[0]=v&255;out[1]=(v>>8)&255;out[2]=(v>>16)&255;}
+    }
+    char temporary[4096];
+    if(snprintf(temporary,sizeof temporary,"%s.tmp",path)>=(int)sizeof temporary){free(rgb);return;}
+    FILE *f=fopen(temporary,"wb");if(!f){free(rgb);return;}
+    fprintf(f,"P6\n%d %d\n255\n",w,h);size_t written=fwrite(rgb,1,size,f);int closed=fclose(f);free(rgb);
+    if(written==size&&!closed)rename(temporary,path);
+    fprintf(stderr,"[native-boot] captured guest frame=%u %dx%d %dbpp\n",frames,w,h,bpp);
+
 }
 extern uint32_t ra2_blowfish_create(const uint8_t *,uint32_t *);
 int main(int argc,char **argv) {
+    host_started_ms=hle_ticks_ms();
     if ((argc!=2 && argc!=3) || !gm_init()) return 2;
     struct sigaction sa={0};sa.sa_sigaction=fault;sa.sa_flags=SA_SIGINFO;
     sigaction(SIGSEGV,&sa,NULL);sigaction(SIGBUS,&sa,NULL);sigaction(SIGABRT,&sa,NULL);
@@ -81,6 +103,7 @@ int main(int argc,char **argv) {
     win32hle_register(win32hle_winmm);
     win32hle_register(win32hle_wsock32);
     win32hle_register(win32hle_ole32);
+    win32hle_register(win32hle_storage);
     win32hle_register(win32hle_advapi32);
     static const win32hle_shim diagnostics[]={{"MessageBoxA",headless_messagebox},{0,0}};
     win32hle_register(diagnostics);

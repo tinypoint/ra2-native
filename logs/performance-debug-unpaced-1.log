@@ -1,0 +1,8 @@
+debug-unpaced-1 menu 16.752s
+Traceback (most recent call last):
+  File "/Users/zz/Projects/ra2-native/tools/benchmark_native_game.py", line 149, in <module>
+    run(a.profile,a.label,a.battle_seconds,a.timeout,a.idle_pacing)
+  File "/Users/zz/Projects/ra2-native/tools/benchmark_native_game.py", line 106, in run
+    if observed==stage and stage not in [t['stage'] for t in transitions]:
+                                         ~^^^^^^^^^
+KeyError: 'stage'

@@ -1,0 +1,22 @@
+{
+  "input_sha256": "fe67fdac5073530a79baec14c4e072b5e7e4c0c462cee9659870c5330e9e6e3e",
+  "frame_counter_va": "0xA40D2C",
+  "mode": "read-only diagnostic; game memory not patched",
+  "evidence": [
+    {
+      "instruction_va": "0x4b7131",
+      "bytes": "8b0d2c0da400",
+      "evidence": "Event.CPP log reads this global for Processing EXIT event on frame %d"
+    },
+    {
+      "instruction_va": "0x4b9c00",
+      "bytes": "a12c0da400",
+      "evidence": "Frame == %d diagnostic loads this global"
+    },
+    {
+      "instruction_va": "0x540676",
+      "bytes": "8b152c0da400a17491ab00423bc789152c0da400",
+      "evidence": "Load global, increment edx, store global at 0x540684"
+    }
+  ]
+}

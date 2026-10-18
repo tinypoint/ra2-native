@@ -26,7 +26,7 @@ sources=[ROOT/'runtime/arm64/guest_memory.c',ROOT/'runtime/win32hle-arm64/host_l
          ROOT/'runtime/win32hle-arm64/wsock32.c',
          ROOT/'runtime/win32hle-arm64/ole32.c',
          ROOT/'runtime/win32hle-arm64/advapi32.c',
-         ROOT/'runtime/ra2/blowfish.c',*[ROOT/'runtime/win32hle-arm64'/n for n in ['user32.c','ddraw.c','gdi32.c','gdidc.c','dsound.c','bink.c']],
+         ROOT/'runtime/ra2/blowfish.c',*[ROOT/'runtime/win32hle-arm64'/n for n in ['user32.c','ddraw.c','gdi32.c','gdidc.c','dsound.c','bink.c','storage.c']],
          ROOT/'poc/generated_game/real_functions.c',OUT/'dispatch.c',ROOT/'poc/arm64_runtime_checks.c']
 args=['/usr/bin/clang','-arch','arm64','-O2','-g','-fno-strict-aliasing','-fwrapv','-ffp-contract=off',
       '-I',str(ROOT/'runtime/win32hle-arm64'),'-I',str(ROOT/'runtime/arm64'),

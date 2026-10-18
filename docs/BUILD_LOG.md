@@ -1,5 +1,11 @@
 # 构建与运行记录
 
+## 性能、保存恢复与结算（2026-10-18）
+
+`tools/build_native_boot.py --profile release` 构建独立 -O2 本机版本；同 GameSpeed=2 对照见 PERFORMANCE.md。新增 storage.c 与实际 fsync，124 项检查通过，见 logs/arm64-runtime-results.json。先前缺失 StgCreateDocfile 的保存尝试已修复，实际新进程读回 880640 字节保存文件，恢复帧计数 1688 并继续游戏到最终结算。见 SAVE_LOAD.md 及对应 JSON。
+
+`tools/package_local_app.py --profile release` 生成本机优化应用。输入资源仍在外部游戏目录，不纳入应用或 Git。
+
 日期：2026-10-18（Asia/Shanghai）；工程目录 `/Users/zz/Projects/ra2-native`。
 
 所有代码操作在独立新目录进行。原聊天目录为另一个项目，访问持续无响应，本次没有对其写入。未运行上游自动安装脚本，未安装系统级依赖，未下载游戏整合包，未创建或发布远程仓库。

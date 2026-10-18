@@ -1,0 +1,12 @@
+/Users/zz/Projects/ra2-native/.local/sessions/load-roundtrip pid 30438
+{
+  "name": "load-roundtrip",
+  "input_sha256": "fe67fdac5073530a79baec14c4e072b5e7e4c0c462cee9659870c5330e9e6e3e",
+  "binary_sha256": "771c1e91d9658c29599271b89d5ec75fa6a02fce93b518219abbb3dc06bbf904",
+  "configured_game_speed": null,
+  "watchdog_seconds": 600,
+  "status": "stopped",
+  "pid": 30438,
+  "process_exit_code": -15,
+  "wall_seconds": 476.1865580000449
+}

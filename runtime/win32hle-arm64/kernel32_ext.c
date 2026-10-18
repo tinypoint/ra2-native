@@ -178,7 +178,13 @@ static void k_SetEndOfFile(void) {
     off_t pos = fd >= 0 ? lseek(fd, 0, SEEK_CUR) : -1;
     RET(pos >= 0 && ftruncate(fd, pos) == 0 ? 1u : 0u, 1);
 }
-static void k_FlushFileBuffers(void) { int fd = fd_of(A32(0)); RET(fd >= 0 ? 1u : 0u, 1); }
+static void k_FlushFileBuffers(void) {
+    int fd=fd_of(A32(0));
+    if(fd<0){hle_set_last_error(ERROR_INVALID_HANDLE);RET(0,1);}
+    int result;do{result=fsync(fd);}while(result<0&&errno==EINTR);
+    if(result<0){hle_set_last_error(errno_to_win(errno));RET(0,1);}
+    RET(1,1);
+}
 static void k_GetFileSize(void) {                        /* (h,&high) -> low */
     int fd = fd_of(A32(0));
     uint32_t *hi = (uint32_t *)APTR(1);

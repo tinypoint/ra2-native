@@ -1,0 +1,23 @@
+{
+  "saved_game": "game/ra2-upload-41bbcc83/SAVE0029.SAV",
+  "size_bytes": 880640,
+  "sha256": "caef2a2acf38dc6153fc2c7fdf5bb455a2b01285f1e6909946b7c097c371c9a3",
+  "save_process_pid": 29912,
+  "load_process_pid": 30438,
+  "process_restarted": true,
+  "before_save_frame": 1688,
+  "first_observed_restored_frame": 1688,
+  "later_observed_frame": 2485,
+  "visual_state_verified": [
+    "Allied construction yard at the saved map position",
+    "Same initial unit layout",
+    "10000 credits"
+  ],
+  "before_image": ".local/performance/save-second-session/before-save.png",
+  "after_image": ".local/sessions/load-roundtrip/load-result.png",
+  "load_menu_image": ".local/sessions/load-roundtrip/load-menu.png",
+  "continued_running": true,
+  "post_load_construction_verified": true,
+  "post_load_evidence": "Power plant completed production; credits changed from 10000 to 9200; Ready indicator displayed",
+  "post_load_image": ".local/sessions/load-roundtrip/construction.png"
+}

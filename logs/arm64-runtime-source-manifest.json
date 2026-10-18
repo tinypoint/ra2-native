@@ -63,7 +63,7 @@
     "file": "runtime/win32hle-arm64/kernel32_ext.c",
     "upstream_commit": "bd26806fbd4714d670d2dee75973c5eaff64674c",
     "upstream_sha256": "aa1a4c2114a8c99d594050379948291b48bf774f85a89d6182d55a80d52fb970",
-    "adapted_sha256": "89d0ccfe787ddabfa7a6f9eb2b6a9fc97e519d330c91ccc07620e4565df88827"
+    "adapted_sha256": "8e83a0063d90956e0c1f399e9c208cdf049cb29fd96d5aea1312a83b82f84951"
   },
   {
     "file": "runtime/win32hle-arm64/module.c",
@@ -99,7 +99,7 @@
     "file": "runtime/win32hle-arm64/screen.c",
     "upstream_commit": "bd26806fbd4714d670d2dee75973c5eaff64674c",
     "upstream_sha256": "e8639bec5d084b43e8eb795d18677bfc8b0360af40ec54c0cf6460fbdb689fbc",
-    "adapted_sha256": "e8639bec5d084b43e8eb795d18677bfc8b0360af40ec54c0cf6460fbdb689fbc"
+    "adapted_sha256": "ef51fed8307374cf8e29815f2b56d2b8fa72cfcfd12bdc35b7beda375dd8b1d4"
   },
   {
     "file": "runtime/win32hle-arm64/user32.c",
@@ -130,5 +130,11 @@
     "upstream_commit": "ffc982534951acec02211cc79f9ed1a734bddc16",
     "upstream_sha256": "45c4a6ed6a332cc861fba1a0cfb017b97dcc15f40af1f55e58e6dfdfeeafa665",
     "adapted_sha256": "eb8ada3237deb95b87b8a35d11143073ef0510212d69eb1468dfe0e386073194"
+  },
+  {
+    "file": "runtime/win32hle-arm64/storage.c",
+    "upstream_commit": "bd26806fbd4714d670d2dee75973c5eaff64674c",
+    "upstream_sha256": "7098af998a42ec379d455415e807cd037846fab4e28ae7ea30aec77bfa70f968",
+    "adapted_sha256": "240327fa2321585389ad60fbc10068cff0678865f2eb465a62492fe85e528de1"
   }
 ]

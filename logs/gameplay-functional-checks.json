@@ -1,0 +1,61 @@
+{
+  "session": "gameplay-production-2",
+  "game_speed": 2,
+  "verified": [
+    "MCV deployment",
+    "Power plant production and placement",
+    "Barracks production and placement",
+    "GI infantry production",
+    "Explicit tank move",
+    "Explicit newly produced infantry move"
+  ],
+  "credits_after_power_plant": 9200,
+  "credits_after_barracks": 8700,
+  "credits_after_refinery_queue": 6700,
+  "credits_after_GI": 6500,
+  "tank_move": {
+    "from": [
+      250,
+      287
+    ],
+    "destination": [
+      420,
+      340
+    ],
+    "observed_near": [
+      400,
+      331
+    ]
+  },
+  "produced_GI": {
+    "initial_position": [
+      60,
+      285
+    ],
+    "move_destination": [
+      320,
+      365
+    ],
+    "observed_near": [
+      300,
+      345
+    ]
+  },
+  "images": [
+    ".local/performance/gameplay-production-2/movement-and-ready.png",
+    ".local/performance/gameplay-production-2/barracks-built.png",
+    ".local/performance/gameplay-production-2/gi-produced.png",
+    ".local/performance/gameplay-production-2/gi-moved-and-refinery-ready.png"
+  ],
+  "mining_verified": false,
+  "note": "Session observation limit ended before refinery placement; economy check continues in separate session.",
+  "economy_followup": {
+    "session": "gameplay-economy",
+    "mining_verified": false,
+    "reason": "Computer defeated player before successful refinery placement and mining return",
+    "graceful_exit_via_UI": false,
+    "process_exit_code": -15,
+    "process_pid": 34477,
+    "exit_note": "Clicked quit confirmation near observation deadline; benchmark recorded SIGTERM, so normal process exit is unverified."
+  }
+}

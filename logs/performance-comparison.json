@@ -1,0 +1,90 @@
+{
+  "scope": "Single local runs; same configured game speed. OS cache and spawn RNG not controlled. CPU is per logical core.",
+  "results": [
+    {
+      "label": "debug-fixed-1",
+      "profile": "debug",
+      "idle_pacing": 0,
+      "skirmish_game_speed_ini": 2,
+      "transitions": [
+        {
+          "stage": "menu",
+          "seconds": 14.651056125061586
+        },
+        {
+          "stage": "single",
+          "seconds": 21.810297082876787
+        },
+        {
+          "stage": "skirmish",
+          "seconds": 29.48305504093878
+        },
+        {
+          "stage": "battle",
+          "seconds": 45.25893195788376
+        }
+      ],
+      "battle_present_callback_fps_median": 31.1587147030185,
+      "battle_logic_fps_median": 31.17389926184063,
+      "battle_cpu_percent_median": 42.94504596314533,
+      "max_rss_bytes": 273186816
+    },
+    {
+      "label": "release-fixed-1",
+      "profile": "release",
+      "idle_pacing": 0,
+      "skirmish_game_speed_ini": 2,
+      "transitions": [
+        {
+          "stage": "menu",
+          "seconds": 14.00354624981992
+        },
+        {
+          "stage": "single",
+          "seconds": 21.544834999833256
+        },
+        {
+          "stage": "skirmish",
+          "seconds": 28.243890082929283
+        },
+        {
+          "stage": "battle",
+          "seconds": 41.77891745790839
+        }
+      ],
+      "battle_present_callback_fps_median": 31.25,
+      "battle_logic_fps_median": 31.25,
+      "battle_cpu_percent_median": 36.20203917165925,
+      "max_rss_bytes": 245972992
+    },
+    {
+      "label": "release-paced-fixed-1",
+      "profile": "release",
+      "idle_pacing": 1,
+      "skirmish_game_speed_ini": 2,
+      "transitions": [
+        {
+          "stage": "menu",
+          "seconds": 14.336476583965123
+        },
+        {
+          "stage": "single",
+          "seconds": 21.22602591686882
+        },
+        {
+          "stage": "skirmish",
+          "seconds": 28.034537333995104
+        },
+        {
+          "stage": "battle",
+          "seconds": 41.29013987490907
+        }
+      ],
+      "battle_present_callback_fps_median": 31.189083820662766,
+      "battle_logic_fps_median": 31.219541910331383,
+      "battle_cpu_percent_median": 38.08467453708298,
+      "max_rss_bytes": 246005760
+    }
+  ],
+  "decision": "Use O2 with API trace disabled. Leave optional idle pacing disabled: no fixed-speed CPU benefit and maximum-speed throughput regressed."
+}

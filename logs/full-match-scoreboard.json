@@ -1,0 +1,31 @@
+{
+  "match_completed": true,
+  "evidence": "Visually inspected actual skirmish score screen after battle, not a process exit or surrender action",
+  "image": ".local/sessions/load-roundtrip/battle-outcome.png",
+  "image_sha256": "5078eb135f840b7018d279dd7848e9a5692d59b929bfce110826bd24ecb70a01",
+  "scoreboard": {
+    "game": 1,
+    "displayed_duration": "00:04:29",
+    "computer": {
+      "kills": 8,
+      "losses": 8,
+      "built": 39,
+      "score": 22398
+    },
+    "player": {
+      "kills": 8,
+      "losses": 18,
+      "built": 1,
+      "score": 1000
+    }
+  },
+  "player_construction_verified": [
+    "MCV deployment",
+    "Power plant production and placement"
+  ],
+  "remaining_functional_checks": [
+    "Player refinery and mining"
+  ],
+  "native_process_pid": 30438,
+  "additional_functional_evidence": "logs/gameplay-functional-checks.json"
+}

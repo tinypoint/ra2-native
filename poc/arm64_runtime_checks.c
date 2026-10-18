@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "win32hle.h"
 #include "pe_loader.h"
 extern uint32_t ra2_blowfish_create(const uint8_t *,uint32_t *);
@@ -42,6 +43,56 @@ static uint32_t resolve(const char *name) {
     if (hle_resolve(name)) implemented++;else stubs++;
     return hle_resolve_or_stub(name);
 }
+static uint32_t com_api(uint32_t obj,int slot,int n,const uint32_t *args) {
+    uint32_t values[10]={obj};for(int i=0;i<n;i++)values[i+1]=args[i];
+    return hle_call_guest(MEM32(MEM32(obj)+slot*4),n+1,values);
+}
+static uint16_t *widecopy(const char *text) {
+    size_t n=strlen(text);uint16_t *w=gm_calloc(n+1,2);
+    for(size_t i=0;i<n;i++)w[i]=(uint8_t)text[i];return w;
+}
+static void storage_checks(void) {
+    char name[96];snprintf(name,sizeof name,"C:\\.native-storage-%ld.cfb",(long)getpid());
+    uint16_t *path=widecopy(name),*sub=widecopy("Scenario"),*small=widecopy("Header"),*big=widecopy("Data");
+    uint32_t *out=gm_calloc(4,4);uint32_t create[]={gm_va(path),0x1012,0,gm_va(out)};
+    check("StgCreateDocfile returns guest COM",api("StgCreateDocfile",4,create)==0 && out[0]);
+    uint32_t root=out[0],nested=0,stream=0;
+    if(root){
+        uint8_t *clsid=gm_alloc(16);for(int i=0;i<16;i++)clsid[i]=(uint8_t)(i+1);
+        uint32_t *stat=gm_calloc(18,4),class_args[]={gm_va(clsid)},stat_args[]={gm_va(stat),1};
+        check("IStorage SetClass",com_api(root,15,1,class_args)==0);
+        check("PE32 STATSTG CLSID layout",com_api(root,17,2,stat_args)==0 && !memcmp((uint8_t*)stat+48,clsid,16) && stat[0]==0);
+        gm_free(clsid);gm_free(stat);
+        uint32_t args[]={gm_va(sub),0x12,0,0,gm_va(out+1)};
+        check("IStorage creates nested storage",com_api(root,5,5,args)==0 && out[1]);nested=out[1];
+        args[0]=gm_va(small);args[4]=gm_va(out+2);
+        check("IStorage creates small stream",com_api(nested,3,5,args)==0 && out[2]);stream=out[2];
+        char *hello=gm_strdup("ARM64 CFB stream");uint32_t write[]={gm_va(hello),17,gm_va(out+3)};
+        check("IStream writes guest small payload",com_api(stream,4,3,write)==0 && out[3]==17);com_api(stream,2,0,NULL);
+        uint8_t *data=gm_alloc(10000),*back=gm_alloc(10000);for(int i=0;i<10000;i++)data[i]=(uint8_t)(i*7);
+        args[0]=gm_va(big);check("IStorage creates regular FAT stream",com_api(nested,3,5,args)==0 && out[2]);stream=out[2];
+        write[0]=gm_va(data);write[1]=10000;check("IStream writes large payload",com_api(stream,4,3,write)==0 && out[3]==10000);
+        com_api(stream,2,0,NULL);com_api(nested,2,0,NULL);uint32_t commit_args[]={0};
+        check("IStorage Commit writes compound file",com_api(root,9,1,commit_args)==0);com_api(root,2,0,NULL);
+        uint32_t open[]={gm_va(path),0,0x10,0,0,gm_va(out)};
+        check("StgOpenStorage reopens committed disk file",api("StgOpenStorage",6,open)==0 && out[0]);root=out[0];
+        uint32_t open_sub[]={gm_va(sub),0,0x10,0,0,gm_va(out+1)};
+        check("IStorage reopens nested storage",com_api(root,6,6,open_sub)==0 && out[1]);nested=out[1];
+        uint32_t open_stream[]={gm_va(small),0,0x10,0,gm_va(out+2)};
+        check("IStorage reopens mini stream",com_api(nested,4,5,open_stream)==0 && out[2]);stream=out[2];
+        uint32_t read[]={gm_va(back),10000,gm_va(out+3)};
+        check("small stream round trip and EOF status",com_api(stream,3,3,read)==1 && out[3]==17 && !memcmp(back,hello,17));com_api(stream,2,0,NULL);
+        open_stream[0]=gm_va(big);check("IStorage reopens big stream",com_api(nested,4,5,open_stream)==0 && out[2]);stream=out[2];
+        check("large stream disk round trip",com_api(stream,3,3,read)==0 && out[3]==10000 && !memcmp(back,data,10000));
+        check("read-only structured storage rejects Write",com_api(stream,4,3,write)==0x80030005);
+        com_api(stream,2,0,NULL);com_api(nested,2,0,NULL);com_api(root,2,0,NULL);
+        gm_free(hello);gm_free(data);gm_free(back);
+    }
+    char *ansi=gm_strdup(name);uint32_t remove[]={gm_va(ansi)};check("compound test file removed",api("DeleteFileA",1,remove)==1);gm_free(ansi);
+    uint16_t *bad=widecopy("C:\\.native-storage-missing-dir\\no-file.cfb");create[0]=gm_va(bad);out[0]=0xdeadbeef;
+    check("StgCreateDocfile reports actual disk failure",api("StgCreateDocfile",4,create)==0x8003001d && out[0]==0);
+    gm_free(bad);gm_free(out);gm_free(path);gm_free(sub);gm_free(small);gm_free(big);
+}
 typedef struct {uint32_t tib,stack;int okay;} thread_result;
 static void *thread_check(void *arg) {
     thread_result *r=arg;
@@ -66,6 +117,7 @@ int main(int argc,char **argv) {
     win32hle_register(win32hle_winmm);
     win32hle_register(win32hle_wsock32);
     win32hle_register(win32hle_ole32);
+    win32hle_register(win32hle_storage);
     win32hle_register(win32hle_advapi32);
     win32hle_register(win32hle_user32);win32hle_register(win32hle_ddraw);
     win32hle_register(win32hle_gdi32);win32hle_register(win32hle_gdidc);
@@ -134,6 +186,25 @@ int main(int argc,char **argv) {
     check("Darwin file timestamps translate",api("GetFileTime",4,time_args)==1 && times[5]!=0);
     uint32_t close_args[]={file};check("CloseHandle",api("CloseHandle",1,close_args)==1);
     hle_free(times);hle_free(bytes);hle_free(written);gm_free(path);
+    char *persist_path=gm_strdup("C:\\.native-hle-write-check.tmp");
+    uint32_t persist_open[]={gm_va(persist_path),0xc0000000,0,0,1,0x80,0};
+    uint32_t persisted=api("CreateFileA",7,persist_open);
+    check("write fixture created without overwriting",persisted!=0xffffffff && persisted!=0);
+    if(persisted!=0xffffffff && persisted) {
+        char *payload=gm_strdup("ARM64 write/read");uint32_t *count=gm_calloc(1,4);
+        uint32_t write_args[]={persisted,gm_va(payload),17,gm_va(count),0};
+        check("WriteFile writes full guest payload",api("WriteFile",5,write_args)==1 && *count==17);
+        uint32_t sync_args[]={persisted};check("FlushFileBuffers syncs native file",api("FlushFileBuffers",1,sync_args)==1);
+        api("CloseHandle",1,sync_args);persist_open[1]=0x80000000;persist_open[4]=3;
+        persisted=api("CreateFileA",7,persist_open);memset(payload,0,17);write_args[0]=persisted;
+        check("disk payload survives close and reopen",api("ReadFile",5,write_args)==1 && *count==17 && !memcmp(payload,"ARM64 write/read",17));
+        sync_args[0]=persisted;api("CloseHandle",1,sync_args);uint32_t delete_args[]={gm_va(persist_path)};
+        check("temporary disk fixture removed",api("DeleteFileA",1,delete_args)==1);gm_free(payload);gm_free(count);
+    }
+    uint32_t bad_sync[]={0xffffffff};
+    check("FlushFileBuffers rejects invalid handle",api("FlushFileBuffers",1,bad_sync)==0 && api("GetLastError",0,NULL)==6);
+    gm_free(persist_path);
+    storage_checks();
     uint8_t *wsa=hle_alloc(400);uint32_t wsa_args[]={0x101,gm_va(wsa)};
     check("ordinal WSAStartup resolves",hle_resolve("wsock32.dll#115")==hle_resolve("WSAStartup") ||
           hle_resolve("wsock32.dll#115")!=0);

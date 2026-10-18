@@ -1,0 +1,577 @@
+{
+  "label": "release-fixed-1",
+  "profile": "release",
+  "idle_pacing": 0,
+  "skirmish_game_speed_ini": 2,
+  "binary_sha256": "3777f77b6d20f85cc65fd1a9f526efe8478e4fac6feb092b989c503eebf474f7",
+  "trace_enabled": false,
+  "capture_interval_ms": 500,
+  "planned_battle_seconds": 15,
+  "stop_reason": "battle_observation_complete",
+  "process_exit_code": -15,
+  "stage_detection": "previously inspected title masks and battlefield blue command bar; inspect saved frames",
+  "transitions": [
+    {
+      "stage": "menu",
+      "seconds": 14.00354624981992
+    },
+    {
+      "stage": "single",
+      "seconds": 21.544834999833256
+    },
+    {
+      "stage": "skirmish",
+      "seconds": 28.243890082929283
+    },
+    {
+      "stage": "battle",
+      "seconds": 41.77891745790839
+    }
+  ],
+  "wall_seconds": 56.889379707863554,
+  "cpu_user_seconds": 15.977235,
+  "cpu_system_seconds": 3.556704,
+  "max_rss_bytes": 245972992,
+  "battle_present_callback_fps_median": 31.25,
+  "battle_cpu_percent_median": 36.20203917165925,
+  "samples": [
+    {
+      "seconds": 0.0027691659051924944,
+      "cpu_seconds": 0.0,
+      "rss_bytes": 294912,
+      "expected_stage": "menu"
+    },
+    {
+      "seconds": 1.114767499966547,
+      "cpu_seconds": 0.16,
+      "rss_bytes": 111886336,
+      "expected_stage": "menu"
+    },
+    {
+      "seconds": 2.3584209578111768,
+      "cpu_seconds": 0.16,
+      "rss_bytes": 111886336,
+      "expected_stage": "menu"
+    },
+    {
+      "seconds": 3.5880181659013033,
+      "cpu_seconds": 0.16,
+      "rss_bytes": 111886336,
+      "expected_stage": "menu"
+    },
+    {
+      "seconds": 4.827524040825665,
+      "cpu_seconds": 0.16,
+      "rss_bytes": 111886336,
+      "expected_stage": "menu"
+    },
+    {
+      "seconds": 6.001228665933013,
+      "cpu_seconds": 0.47,
+      "rss_bytes": 152453120,
+      "expected_stage": "menu"
+    },
+    {
+      "seconds": 7.108959665987641,
+      "cpu_seconds": 1.59,
+      "rss_bytes": 163758080,
+      "expected_stage": "menu"
+    },
+    {
+      "seconds": 8.291103957919404,
+      "cpu_seconds": 2.78,
+      "rss_bytes": 163774464,
+      "expected_stage": "menu"
+    },
+    {
+      "seconds": 9.493474499788135,
+      "cpu_seconds": 4.0,
+      "rss_bytes": 163790848,
+      "expected_stage": "menu"
+    },
+    {
+      "seconds": 10.542204165831208,
+      "cpu_seconds": 5.05,
+      "rss_bytes": 163790848,
+      "expected_stage": "menu"
+    },
+    {
+      "seconds": 11.735002707922831,
+      "cpu_seconds": 5.36,
+      "rss_bytes": 169148416,
+      "expected_stage": "menu"
+    },
+    {
+      "seconds": 12.967215957818553,
+      "cpu_seconds": 5.4,
+      "rss_bytes": 169164800,
+      "expected_stage": "menu"
+    },
+    {
+      "seconds": 14.00354624981992,
+      "cpu_seconds": 6.09,
+      "rss_bytes": 174768128,
+      "expected_stage": "menu"
+    },
+    {
+      "seconds": 15.194396582897753,
+      "cpu_seconds": 7.3,
+      "rss_bytes": 174850048,
+      "expected_stage": "menu"
+    },
+    {
+      "seconds": 16.393017415888608,
+      "cpu_seconds": 7.74,
+      "rss_bytes": 173768704,
+      "expected_stage": "single"
+    },
+    {
+      "seconds": 17.615920374868438,
+      "cpu_seconds": 7.78,
+      "rss_bytes": 173785088,
+      "expected_stage": "single"
+    },
+    {
+      "seconds": 18.625333165982738,
+      "cpu_seconds": 7.85,
+      "rss_bytes": 174866432,
+      "expected_stage": "single"
+    },
+    {
+      "seconds": 19.87223804090172,
+      "cpu_seconds": 7.89,
+      "rss_bytes": 174882816,
+      "expected_stage": "single"
+    },
+    {
+      "seconds": 20.881189124891534,
+      "cpu_seconds": 7.99,
+      "rss_bytes": 175964160,
+      "expected_stage": "single"
+    },
+    {
+      "seconds": 22.099177124910057,
+      "cpu_seconds": 9.23,
+      "rss_bytes": 175964160,
+      "expected_stage": "single"
+    },
+    {
+      "seconds": 23.302599916001782,
+      "cpu_seconds": 9.74,
+      "rss_bytes": 174702592,
+      "expected_stage": "skirmish"
+    },
+    {
+      "seconds": 24.548041624948382,
+      "cpu_seconds": 9.78,
+      "rss_bytes": 174702592,
+      "expected_stage": "skirmish"
+    },
+    {
+      "seconds": 25.788969790795818,
+      "cpu_seconds": 9.93,
+      "rss_bytes": 175800320,
+      "expected_stage": "skirmish"
+    },
+    {
+      "seconds": 26.79059641598724,
+      "cpu_seconds": 9.96,
+      "rss_bytes": 175800320,
+      "expected_stage": "skirmish"
+    },
+    {
+      "seconds": 27.795029165921733,
+      "cpu_seconds": 10.19,
+      "rss_bytes": 177111040,
+      "expected_stage": "skirmish"
+    },
+    {
+      "seconds": 28.930346915964037,
+      "cpu_seconds": 11.35,
+      "rss_bytes": 177209344,
+      "expected_stage": "skirmish"
+    },
+    {
+      "seconds": 29.98134637484327,
+      "cpu_seconds": 12.2,
+      "rss_bytes": 175980544,
+      "expected_stage": "battle"
+    },
+    {
+      "seconds": 31.204261540900916,
+      "cpu_seconds": 12.24,
+      "rss_bytes": 175980544,
+      "expected_stage": "battle"
+    },
+    {
+      "seconds": 32.21081024990417,
+      "cpu_seconds": 12.27,
+      "rss_bytes": 175980544,
+      "expected_stage": "battle"
+    },
+    {
+      "seconds": 33.38443183293566,
+      "cpu_seconds": 12.54,
+      "rss_bytes": 195641344,
+      "expected_stage": "battle"
+    },
+    {
+      "seconds": 34.39709454099648,
+      "cpu_seconds": 12.57,
+      "rss_bytes": 195641344,
+      "expected_stage": "battle"
+    },
+    {
+      "seconds": 35.40539529081434,
+      "cpu_seconds": 12.6,
+      "rss_bytes": 195641344,
+      "expected_stage": "battle"
+    },
+    {
+      "seconds": 36.59459549980238,
+      "cpu_seconds": 12.85,
+      "rss_bytes": 212402176,
+      "expected_stage": "battle"
+    },
+    {
+      "seconds": 37.601755999960005,
+      "cpu_seconds": 13.13,
+      "rss_bytes": 223576064,
+      "expected_stage": "battle"
+    },
+    {
+      "seconds": 38.62398983282037,
+      "cpu_seconds": 13.48,
+      "rss_bytes": 234110976,
+      "expected_stage": "battle"
+    },
+    {
+      "seconds": 39.82524325000122,
+      "cpu_seconds": 13.63,
+      "rss_bytes": 236421120,
+      "expected_stage": "battle"
+    },
+    {
+      "seconds": 40.83285441598855,
+      "cpu_seconds": 13.74,
+      "rss_bytes": 236634112,
+      "expected_stage": "battle"
+    },
+    {
+      "seconds": 42.034553499892354,
+      "cpu_seconds": 14.13,
+      "rss_bytes": 244039680,
+      "expected_stage": "battle"
+    },
+    {
+      "seconds": 43.142608708003536,
+      "cpu_seconds": 14.55,
+      "rss_bytes": 244498432,
+      "expected_stage": "battle"
+    },
+    {
+      "seconds": 44.14428429096006,
+      "cpu_seconds": 14.95,
+      "rss_bytes": 244662272,
+      "expected_stage": "battle"
+    },
+    {
+      "seconds": 45.385257749818265,
+      "cpu_seconds": 15.43,
+      "rss_bytes": 244645888,
+      "expected_stage": "battle"
+    },
+    {
+      "seconds": 46.58387120789848,
+      "cpu_seconds": 15.88,
+      "rss_bytes": 244645888,
+      "expected_stage": "battle"
+    },
+    {
+      "seconds": 47.750600749859586,
+      "cpu_seconds": 16.3,
+      "rss_bytes": 244727808,
+      "expected_stage": "battle"
+    },
+    {
+      "seconds": 48.851421957835555,
+      "cpu_seconds": 16.71,
+      "rss_bytes": 244727808,
+      "expected_stage": "battle"
+    },
+    {
+      "seconds": 49.95311674987897,
+      "cpu_seconds": 17.13,
+      "rss_bytes": 245972992,
+      "expected_stage": "battle"
+    },
+    {
+      "seconds": 51.180870457785204,
+      "cpu_seconds": 17.56,
+      "rss_bytes": 244744192,
+      "expected_stage": "battle"
+    },
+    {
+      "seconds": 52.20291233295575,
+      "cpu_seconds": 17.93,
+      "rss_bytes": 244744192,
+      "expected_stage": "battle"
+    },
+    {
+      "seconds": 53.38258620793931,
+      "cpu_seconds": 18.37,
+      "rss_bytes": 244744192,
+      "expected_stage": "battle"
+    },
+    {
+      "seconds": 54.56197537481785,
+      "cpu_seconds": 18.78,
+      "rss_bytes": 244744192,
+      "expected_stage": "battle"
+    },
+    {
+      "seconds": 55.56496699992567,
+      "cpu_seconds": 19.14,
+      "rss_bytes": 244744192,
+      "expected_stage": "battle"
+    },
+    {
+      "seconds": 56.576113832881674,
+      "cpu_seconds": 19.5,
+      "rss_bytes": 244744192,
+      "expected_stage": "battle"
+    }
+  ],
+  "display_metrics": [
+    {
+      "monotonic_ms": 1304135924,
+      "present_callbacks": 1,
+      "interval_ms": 0,
+      "interval_frames": 1,
+      "host_elapsed_ms": 5415,
+      "game_frame": 0
+    },
+    {
+      "monotonic_ms": 1304143840,
+      "present_callbacks": 4,
+      "interval_ms": 7916,
+      "interval_frames": 3,
+      "host_elapsed_ms": 13331,
+      "game_frame": 0
+    },
+    {
+      "monotonic_ms": 1304144846,
+      "present_callbacks": 71,
+      "interval_ms": 1006,
+      "interval_frames": 67,
+      "host_elapsed_ms": 14337,
+      "game_frame": 0
+    },
+    {
+      "monotonic_ms": 1304145851,
+      "present_callbacks": 138,
+      "interval_ms": 1005,
+      "interval_frames": 67,
+      "host_elapsed_ms": 15342,
+      "game_frame": 0
+    },
+    {
+      "monotonic_ms": 1304148677,
+      "present_callbacks": 156,
+      "interval_ms": 2826,
+      "interval_frames": 18,
+      "host_elapsed_ms": 18168,
+      "game_frame": 0
+    },
+    {
+      "monotonic_ms": 1304151320,
+      "present_callbacks": 157,
+      "interval_ms": 2643,
+      "interval_frames": 1,
+      "host_elapsed_ms": 20811,
+      "game_frame": 0
+    },
+    {
+      "monotonic_ms": 1304152325,
+      "present_callbacks": 224,
+      "interval_ms": 1005,
+      "interval_frames": 67,
+      "host_elapsed_ms": 21816,
+      "game_frame": 0
+    },
+    {
+      "monotonic_ms": 1304155360,
+      "present_callbacks": 275,
+      "interval_ms": 3035,
+      "interval_frames": 51,
+      "host_elapsed_ms": 24851,
+      "game_frame": 0
+    },
+    {
+      "monotonic_ms": 1304158106,
+      "present_callbacks": 276,
+      "interval_ms": 2746,
+      "interval_frames": 1,
+      "host_elapsed_ms": 27597,
+      "game_frame": 0
+    },
+    {
+      "monotonic_ms": 1304159112,
+      "present_callbacks": 343,
+      "interval_ms": 1006,
+      "interval_frames": 67,
+      "host_elapsed_ms": 28603,
+      "game_frame": 0
+    },
+    {
+      "monotonic_ms": 1304160117,
+      "present_callbacks": 410,
+      "interval_ms": 1005,
+      "interval_frames": 67,
+      "host_elapsed_ms": 29608,
+      "game_frame": 0
+    },
+    {
+      "monotonic_ms": 1304162756,
+      "present_callbacks": 420,
+      "interval_ms": 2639,
+      "interval_frames": 10,
+      "host_elapsed_ms": 32247,
+      "game_frame": 0
+    },
+    {
+      "monotonic_ms": 1304171540,
+      "present_callbacks": 421,
+      "interval_ms": 8784,
+      "interval_frames": 1,
+      "host_elapsed_ms": 41031,
+      "game_frame": 0
+    },
+    {
+      "monotonic_ms": 1304172566,
+      "present_callbacks": 452,
+      "interval_ms": 1026,
+      "interval_frames": 31,
+      "host_elapsed_ms": 42057,
+      "game_frame": 31
+    },
+    {
+      "monotonic_ms": 1304173585,
+      "present_callbacks": 484,
+      "interval_ms": 1019,
+      "interval_frames": 32,
+      "host_elapsed_ms": 43076,
+      "game_frame": 63
+    },
+    {
+      "monotonic_ms": 1304174611,
+      "present_callbacks": 516,
+      "interval_ms": 1026,
+      "interval_frames": 32,
+      "host_elapsed_ms": 44102,
+      "game_frame": 95
+    },
+    {
+      "monotonic_ms": 1304175640,
+      "present_callbacks": 548,
+      "interval_ms": 1029,
+      "interval_frames": 32,
+      "host_elapsed_ms": 45131,
+      "game_frame": 127
+    },
+    {
+      "monotonic_ms": 1304176662,
+      "present_callbacks": 580,
+      "interval_ms": 1022,
+      "interval_frames": 32,
+      "host_elapsed_ms": 46153,
+      "game_frame": 159
+    },
+    {
+      "monotonic_ms": 1304177686,
+      "present_callbacks": 612,
+      "interval_ms": 1024,
+      "interval_frames": 32,
+      "host_elapsed_ms": 47177,
+      "game_frame": 191
+    },
+    {
+      "monotonic_ms": 1304178711,
+      "present_callbacks": 644,
+      "interval_ms": 1025,
+      "interval_frames": 32,
+      "host_elapsed_ms": 48202,
+      "game_frame": 223
+    },
+    {
+      "monotonic_ms": 1304179734,
+      "present_callbacks": 676,
+      "interval_ms": 1023,
+      "interval_frames": 32,
+      "host_elapsed_ms": 49225,
+      "game_frame": 255
+    },
+    {
+      "monotonic_ms": 1304180755,
+      "present_callbacks": 708,
+      "interval_ms": 1021,
+      "interval_frames": 32,
+      "host_elapsed_ms": 50246,
+      "game_frame": 287
+    },
+    {
+      "monotonic_ms": 1304181778,
+      "present_callbacks": 740,
+      "interval_ms": 1023,
+      "interval_frames": 32,
+      "host_elapsed_ms": 51269,
+      "game_frame": 319
+    },
+    {
+      "monotonic_ms": 1304182802,
+      "present_callbacks": 772,
+      "interval_ms": 1024,
+      "interval_frames": 32,
+      "host_elapsed_ms": 52293,
+      "game_frame": 351
+    },
+    {
+      "monotonic_ms": 1304183827,
+      "present_callbacks": 804,
+      "interval_ms": 1025,
+      "interval_frames": 32,
+      "host_elapsed_ms": 53318,
+      "game_frame": 383
+    },
+    {
+      "monotonic_ms": 1304184854,
+      "present_callbacks": 836,
+      "interval_ms": 1027,
+      "interval_frames": 32,
+      "host_elapsed_ms": 54345,
+      "game_frame": 415
+    },
+    {
+      "monotonic_ms": 1304185882,
+      "present_callbacks": 868,
+      "interval_ms": 1028,
+      "interval_frames": 32,
+      "host_elapsed_ms": 55373,
+      "game_frame": 447
+    },
+    {
+      "monotonic_ms": 1304186897,
+      "present_callbacks": 900,
+      "interval_ms": 1015,
+      "interval_frames": 32,
+      "host_elapsed_ms": 56388,
+      "game_frame": 479
+    }
+  ],
+  "game_logic_fps_measured": true,
+  "game_frame_counter_va": "0xA40D2C",
+  "battle_logic_fps_median": 31.25,
+  "cpu_percent_basis": "100 percent is one logical CPU",
+  "image_detection_resolution_seconds": 0.6,
+  "game_completed": false
+}

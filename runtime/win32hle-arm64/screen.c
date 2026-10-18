@@ -291,9 +291,10 @@ static void update_cursor(void) {
 }
 
 void hle_screen_pump(void) {
-    SDL_Event e;
+    SDL_Event e;int had_input=0;
     if (g_win) update_cursor();
     while (g_win && SDL_PollEvent(&e)) {
+        had_input=1;
         switch (e.type) {
         case SDL_QUIT: {
             uint32_t h = hle_first_hwnd();
@@ -346,7 +347,15 @@ void hle_screen_pump(void) {
         default: break;
         }
     }
+    unsigned before=g_shown_seq;
     present();
+    /* Optional cooperative pacing while the guest only polls messages/time.
+       Do not change the guest clock or hold the machine lock while sleeping. */
+    static int pace=-1;
+    if(pace<0){const char *v=getenv("RA2_IDLE_PACING");pace=v&&atoi(v)!=0;}
+    if(pace&&g_win&&!had_input&&before==g_shown_seq) {
+        hle_block_begin();SDL_Delay(1);hle_block_end();
+    }
 }
 
 /* The guest moved the cursor (SetCursorPos): move the real one with it. */

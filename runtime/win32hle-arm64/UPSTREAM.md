@@ -19,3 +19,5 @@ GDI DIB storage and macOS system font selection, Cocoa/Metal presentation
 through SDL2, CoreAudio mixing, and FFmpeg-backed Bink objects. All guest-visible
 buffers and nested callback pointers use guest VAs; host decoder objects remain
 64-bit pointers in private state. FFmpeg and SDL binaries stay in .local.
+
+Structured storage is also adapted from the pinned upstream storage.c. Guest COM objects and STATSTG buffers use guest addresses; private file state stays native. PE32 STATSTG CLSID offset is 48. Commits write a same-directory temporary file, fsync and rename; failures return errors. This is a CFB subset, not a claim of complete Windows storage compatibility.
