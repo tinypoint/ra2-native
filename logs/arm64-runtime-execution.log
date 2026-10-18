@@ -1,0 +1,9 @@
+$ /Users/zz/Projects/ra2-native/.local/arm64-runtime/runtime_checks /Users/zz/Projects/ra2-native/game/ra2-upload-41bbcc83/game.exe
+{"checks":100,"failed":0,"implemented_imports":362,"explicit_unimplemented_imports":6,"host_page_size":16384}
+[pe] /Users/zz/Projects/ra2-native/game/ra2-upload-41bbcc83/game.exe mapped at 0x00400000, span 0x743000
+[pe] guest allocation @ 0x00400000 failed
+[pe] bound 368 imports, 0 unresolved
+[ddraw] SetDisplayMode(640x480x16)
+[dsound] dummy, 44100 Hz
+
+exit_code=0

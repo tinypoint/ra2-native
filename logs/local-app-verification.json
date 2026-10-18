@@ -1,0 +1,14 @@
+{
+  "method": "LaunchServices open -W -n with a 15-second probe watchdog",
+  "launch_services_exit_code": 0,
+  "game_stopped_by_watchdog": true,
+  "game_menu_verified": true,
+  "image": ".local/native-boot/app-frame.png",
+  "image_sha256": "d8a8a9851ed6cb59c9705b90645e4f7b90dd589a4778d7a4aade17a9b298ea74",
+  "binary_sha256": "37db16d2f4d08494cf86246d2598e620127bd02944b000d2ee751fe758c6e404",
+  "architecture": "arm64",
+  "signature": "ad-hoc, not notarized",
+  "game_assets_inside_bundle": false,
+  "game_assets_directory": "game/ra2-upload-41bbcc83",
+  "full_match_verified": false
+}

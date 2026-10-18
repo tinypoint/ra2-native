@@ -1,0 +1,134 @@
+[
+  {
+    "file": "runtime/win32hle-arm64/advapi32.c",
+    "upstream_commit": "bd26806fbd4714d670d2dee75973c5eaff64674c",
+    "upstream_sha256": "bbab0116863a39f0fdd0d3d99c5134d740616c993663465913fcead13a8cf44f",
+    "adapted_sha256": "bbab0116863a39f0fdd0d3d99c5134d740616c993663465913fcead13a8cf44f"
+  },
+  {
+    "file": "runtime/win32hle-arm64/bink.c",
+    "upstream_commit": "bd26806fbd4714d670d2dee75973c5eaff64674c",
+    "upstream_sha256": "ca65bab90bcc1e1b0d12b87afa52c440011a6e065451494cd05f3d63b2d1b10f",
+    "adapted_sha256": "a8d4a552f891234d87c0fec250a9ce883d36e962438cf821968e46993230ba66"
+  },
+  {
+    "file": "runtime/win32hle-arm64/ddraw.c",
+    "upstream_commit": "bd26806fbd4714d670d2dee75973c5eaff64674c",
+    "upstream_sha256": "5612534cc7f762aeb706463a142ef819fd5588f13e0cd35264a85ef229039b65",
+    "adapted_sha256": "58f9e9213f19be0f84f576751e48d3193a5a67b44c976f74f74a3caad8659340"
+  },
+  {
+    "file": "runtime/win32hle-arm64/dsound.c",
+    "upstream_commit": "bd26806fbd4714d670d2dee75973c5eaff64674c",
+    "upstream_sha256": "ab00af30ba84befef263db62f10249c4d8f46ed3756b04aedd285b3412150b64",
+    "adapted_sha256": "b4c1d18f081803dcc5e3859600db6fff3b8c769cb9e9e9be656d787906bcd9f6"
+  },
+  {
+    "file": "runtime/win32hle-arm64/gdi32.c",
+    "upstream_commit": "bd26806fbd4714d670d2dee75973c5eaff64674c",
+    "upstream_sha256": "9492849044187dc75f8df079d28bb758eba52d90d09c0e6794e793e00b3106be",
+    "adapted_sha256": "b0099cf2a1d22f2171392ec0e31637fbb54e6936fe8fc84c6f03183baec78aa3"
+  },
+  {
+    "file": "runtime/win32hle-arm64/gdidc.c",
+    "upstream_commit": "bd26806fbd4714d670d2dee75973c5eaff64674c",
+    "upstream_sha256": "f2be5fe4e23e8a7303a1517e2ed1120955594bafd41bd3413b464c6ae257d53f",
+    "adapted_sha256": "4d8ea073fe1030989754c06f546064d34cdcaedfd7810390e2913cbd107c44ee"
+  },
+  {
+    "file": "runtime/win32hle-arm64/hle_path.c",
+    "upstream_commit": "bd26806fbd4714d670d2dee75973c5eaff64674c",
+    "upstream_sha256": "1ab1e3ee0b7f64a07b53c1d781767f43153d2ffe0f579a8219799e80814bb043",
+    "adapted_sha256": "1ab1e3ee0b7f64a07b53c1d781767f43153d2ffe0f579a8219799e80814bb043"
+  },
+  {
+    "file": "runtime/win32hle-arm64/host_lite.c",
+    "upstream_commit": "bd26806fbd4714d670d2dee75973c5eaff64674c",
+    "upstream_sha256": "68ab588db6816d6c505198ca7abdc39918e20569878fa503cdb57d2113158980",
+    "adapted_sha256": "0056815ff9de10b4e5d71aa456d8803265e0860f6b4de3ba87684c992fabd360"
+  },
+  {
+    "file": "runtime/win32hle-arm64/kernel32.c",
+    "upstream_commit": "bd26806fbd4714d670d2dee75973c5eaff64674c",
+    "upstream_sha256": "c0d839a44df1e994430214de086ff24435e7e2e9e046c19c9948097e89a86680",
+    "adapted_sha256": "b23a4ff41623f2e9e1ad8e0bbac54718a919b4a4a3efd50d82caaa86c906c8f4"
+  },
+  {
+    "file": "runtime/win32hle-arm64/kernel32_crt.c",
+    "upstream_commit": "bd26806fbd4714d670d2dee75973c5eaff64674c",
+    "upstream_sha256": "1ff131a32188d2673816828b1acc0220a3945e3341f7d57333d1d3df00c4cb6f",
+    "adapted_sha256": "1673aa4bb52574a0275e80bfa49d64992bd8e526a1dc3da39d20e24f053e84be"
+  },
+  {
+    "file": "runtime/win32hle-arm64/kernel32_ext.c",
+    "upstream_commit": "bd26806fbd4714d670d2dee75973c5eaff64674c",
+    "upstream_sha256": "aa1a4c2114a8c99d594050379948291b48bf774f85a89d6182d55a80d52fb970",
+    "adapted_sha256": "89d0ccfe787ddabfa7a6f9eb2b6a9fc97e519d330c91ccc07620e4565df88827"
+  },
+  {
+    "file": "runtime/win32hle-arm64/module.c",
+    "upstream_commit": "bd26806fbd4714d670d2dee75973c5eaff64674c",
+    "upstream_sha256": "bec7e2edcda5171310586f4c26876358fc3e60524eec64d1203056614307b448",
+    "adapted_sha256": "e84eff65b114ece5b4dd57cfd85709091fec1d97afe014a7208f3e2dc2d5da3c"
+  },
+  {
+    "file": "runtime/win32hle-arm64/ole32.c",
+    "upstream_commit": "bd26806fbd4714d670d2dee75973c5eaff64674c",
+    "upstream_sha256": "be181dd89e21201ade2f885803126b30e13bc99e53421fbc2671f9b5cb878a7e",
+    "adapted_sha256": "1742221ca1c6c904aac7f026085929559579ad61c8ea9be183204275560a124f"
+  },
+  {
+    "file": "runtime/win32hle-arm64/pe_format.h",
+    "upstream_commit": "bd26806fbd4714d670d2dee75973c5eaff64674c",
+    "upstream_sha256": "81b7a434e2c107ccaea6e1befd6b957f63a997672de2007e44ca034b494963eb",
+    "adapted_sha256": "81b7a434e2c107ccaea6e1befd6b957f63a997672de2007e44ca034b494963eb"
+  },
+  {
+    "file": "runtime/win32hle-arm64/pe_loader.c",
+    "upstream_commit": "bd26806fbd4714d670d2dee75973c5eaff64674c",
+    "upstream_sha256": "695dec2a9dd03f7782bcc793e91042202a42c0072bb615e4376bb2ca5239ed35",
+    "adapted_sha256": "751cefbecc6972fbdea2d495267a24620f5439b2c680aaaea762f60da7a2d58a"
+  },
+  {
+    "file": "runtime/win32hle-arm64/pe_loader.h",
+    "upstream_commit": "bd26806fbd4714d670d2dee75973c5eaff64674c",
+    "upstream_sha256": "63be48620966ddb9102b9e77f1ba3e8844dc16b164b9da15552edd5e10cc375b",
+    "adapted_sha256": "63be48620966ddb9102b9e77f1ba3e8844dc16b164b9da15552edd5e10cc375b"
+  },
+  {
+    "file": "runtime/win32hle-arm64/screen.c",
+    "upstream_commit": "bd26806fbd4714d670d2dee75973c5eaff64674c",
+    "upstream_sha256": "e8639bec5d084b43e8eb795d18677bfc8b0360af40ec54c0cf6460fbdb689fbc",
+    "adapted_sha256": "e8639bec5d084b43e8eb795d18677bfc8b0360af40ec54c0cf6460fbdb689fbc"
+  },
+  {
+    "file": "runtime/win32hle-arm64/user32.c",
+    "upstream_commit": "bd26806fbd4714d670d2dee75973c5eaff64674c",
+    "upstream_sha256": "bfd047d5eaae540757b40e983e9c9f19e34c42adc0b15996ba1f2c89b335f6d3",
+    "adapted_sha256": "98a06e2259257a4dac1ec2ce0a605d732d1124efff44ca0a5eafdaf46fbf29ca"
+  },
+  {
+    "file": "runtime/win32hle-arm64/win32hle.h",
+    "upstream_commit": "bd26806fbd4714d670d2dee75973c5eaff64674c",
+    "upstream_sha256": "b31876d2ea45053ad4e37af48fd259969733bb1d4a14af0e2e2e38433668a08d",
+    "adapted_sha256": "99c0df6852942542f7b2f1d3d3409265fd2b4fbc52ac9fbdde3eac72b6c89d91"
+  },
+  {
+    "file": "runtime/win32hle-arm64/winmm.c",
+    "upstream_commit": "bd26806fbd4714d670d2dee75973c5eaff64674c",
+    "upstream_sha256": "98fdeede984db72c3622544f4f514caa0dd48598f5add4d1b474d6afd2c55f91",
+    "adapted_sha256": "1820819be5d04b0a814c7c607fce6f7d7922899bbac278a96c61ba52509b6fb7"
+  },
+  {
+    "file": "runtime/win32hle-arm64/wsock32.c",
+    "upstream_commit": "bd26806fbd4714d670d2dee75973c5eaff64674c",
+    "upstream_sha256": "e3e2b334d1e14a801e611544af29195d8c34ad4c2a463644aa7572e3b8c935b1",
+    "adapted_sha256": "84173a27e25d91e9cf2de3ad25317c9e12af453d2c1d13b085adb652d25a57ff"
+  },
+  {
+    "file": "runtime/ra2/blowfish.c",
+    "upstream_commit": "ffc982534951acec02211cc79f9ed1a734bddc16",
+    "upstream_sha256": "45c4a6ed6a332cc861fba1a0cfb017b97dcc15f40af1f55e58e6dfdfeeafa665",
+    "adapted_sha256": "eb8ada3237deb95b87b8a35d11143073ef0510212d69eb1468dfe0e386073194"
+  }
+]

@@ -20,7 +20,8 @@
 - pefile 2024.8.26：本地 wheel 的 LICENSE 为 MIT。
 - Unicorn 2.1.4：**wheel 的 License 字段写 BSD，但其描述写 GPLv2**；[对应标签的官方 COPYING](https://github.com/unicorn-engine/unicorn/blob/2.1.4/COPYING) 是 GPLv2。不能只相信包的摘要字段。当前仅作为研究脚本中的 x86 参考，不链接或打包进被测 ARM64 C 程序。
 - CMake 4.4.4：wheel 有 Apache 2.0、BSD 3 及其内嵌组件许可文件；Ninja 1.13.2 的元数据为 Apache-2.0。这两者为本地构建工具，未打包到游戏。
-- SDL2、SDL2_ttf、ffmpeg：本轮没有安装或打包，未来选定确切版本、构建选项与分发形式后再核查；不能仅按库名给最终发布结论。
+- SDL2 2.32.10、SDL2_ttf 2.24.0：从官方 release 下载 framework，仅放在忽略的 `.local/Frameworks`，保留其内附许可。下载散列固定在 bootstrap 脚本；framework 包含 ARM64。
+- FFmpeg 7.1.5：从官方源代码构建，仅启用 Bink 解码、demux 和 resample 等必要组件；configure 报 LGPL 2.1 or later，未启用 GPL/nonfree。静态链接只用于本地研究，源码、许可证与构建留在 `.local/`。若未来分发，须单独满足静态链接重链接/源码等义务和内嵌依赖许可；当前没有分发二进制。
 
 ## 游戏获取调查
 

@@ -1,0 +1,32 @@
+[screen] cocoa, renderer metal, scaling sharp (F12), fullscreen F11
+[pe] /Users/zz/Projects/ra2-native/game/ra2-upload-41bbcc83/game.exe mapped at 0x00400000, span 0x743000
+[pe] bound 368 imports, 0 unresolved
+[native-boot] platform launcher objects established; game checks unmodified
+[native-boot] entering actual game CRT entry 00785aa0 as ARM64
+[module] GetProcAddress(kernel32.dll, GetDiskFreeSpaceExA): not answered
+[ddraw] SetDisplayMode(640x480x16)
+[ddraw] CreateSurface 640x480 16 bpp caps 0xA00 primary -> 0x11104000
+[native-boot] captured guest frame=1 640x480 16bpp
+[dsound] coreaudio, 44100 Hz
+[module] GetProcAddress(kernel32.dll, GetDiskFreeSpaceExA): not answered
+[bink] 472x450, 431 frames at 15/1 fps
+[native-boot] captured guest frame=30 640x480 16bpp
+[native-boot] captured guest frame=60 640x480 16bpp
+[native-boot] captured guest frame=90 640x480 16bpp
+[native-boot] captured guest frame=120 640x480 16bpp
+[native-boot] captured guest frame=150 640x480 16bpp
+[native-boot] captured guest frame=180 640x480 16bpp
+[native-boot] captured guest frame=210 640x480 16bpp
+[native-boot] captured guest frame=240 640x480 16bpp
+[native-boot] captured guest frame=270 640x480 16bpp
+[native-boot] captured guest frame=300 640x480 16bpp
+[native-boot] captured guest frame=330 640x480 16bpp
+[native-boot] captured guest frame=360 640x480 16bpp
+[native-boot] captured guest frame=390 640x480 16bpp
+[native-boot] captured guest frame=420 640x480 16bpp
+[native-boot] captured guest frame=450 640x480 16bpp
+[native-boot] captured guest frame=480 640x480 16bpp
+[native-boot] captured guest frame=510 640x480 16bpp
+[native-boot] captured guest frame=540 640x480 16bpp
+[native-boot] captured guest frame=570 640x480 16bpp
+[native-boot] watchdog guest=00522ed0 last_import=PeekMessageA

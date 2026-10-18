@@ -1,0 +1,6 @@
+.local/native-boot/ra2-native-boot:
+	/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 5027.0.69)
+	/System/Library/Frameworks/Security.framework/Versions/A/Security (compatibility version 1.0.0, current version 62460.1.2)
+	@rpath/SDL2.framework/Versions/A/SDL2 (compatibility version 3201.0.0, current version 3201.10.0)
+	@rpath/SDL2_ttf.framework/Versions/A/SDL2_ttf (compatibility version 2401.0.0, current version 2401.0.0)
+	/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1359.0.0)

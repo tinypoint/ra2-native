@@ -1,0 +1,4 @@
+$ /usr/bin/file /Users/zz/Projects/ra2-native/.local/arm64-runtime/runtime_checks
+/Users/zz/Projects/ra2-native/.local/arm64-runtime/runtime_checks: Mach-O 64-bit executable arm64
+
+exit_code=0

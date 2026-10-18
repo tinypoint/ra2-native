@@ -1,0 +1,14 @@
+compiled 10/130, failures=0
+compiled 20/130, failures=0
+compiled 30/130, failures=0
+compiled 40/130, failures=0
+compiled 50/130, failures=0
+compiled 60/130, failures=0
+compiled 70/130, failures=0
+compiled 80/130, failures=0
+compiled 90/130, failures=0
+compiled 100/130, failures=0
+compiled 110/130, failures=0
+compiled 120/130, failures=0
+compiled 130/130, failures=0
+ARM64 boot probe built; rebuilt=1, elapsed=0.5s

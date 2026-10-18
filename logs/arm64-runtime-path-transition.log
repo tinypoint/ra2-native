@@ -1,0 +1,10 @@
+$ /Users/zz/Projects/ra2-native/.local/arm64-runtime/runtime_checks /Users/zz/Projects/ra2-native/game/ra2-upload-41bbcc83/game.exe
+{"checks":76,"failed":3,"implemented_imports":223,"explicit_unimplemented_imports":145,"host_page_size":16384}
+[pe] /Users/zz/Projects/ra2-native/game/ra2-upload-41bbcc83/game.exe mapped at 0x00400000, span 0x743000
+[pe] guest allocation @ 0x00400000 failed
+[pe] bound 368 imports, 0 unresolved
+FAIL CreateFileA resolves native path
+FAIL ReadFile writes guest buffer and count
+FAIL Darwin file timestamps translate
+
+exit_code=1

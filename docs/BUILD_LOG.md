@@ -82,3 +82,9 @@ RECOMP_CC=/usr/bin/clang .venv/bin/python vendor/pcrecomp/tools/lift/difftest.py
 结果：退出 0；10 个真实函数，110/110 测试一致。完整结果 `logs/real-game-results.json`；编译与架构日志 `logs/real_game_*.log`；RTTI 来源日志 `logs/real-game-rtti.log`。程序自动生成并保存来源元数据，游戏字节与生成代码仍不纳入 Git。
 
 该成功只对应真实函数隔离测试，不改变先前 NaN 差异和 HLE 编译失败，也不证明完整游戏已可玩。原生宿主的这次运行没有执行安装包和原版 x86 程序作为 macOS 宿主代码。
+
+## 完整 ARM64 运行时与主菜单
+
+后续已实现统一 guest arena 和实际 HLE 移植，将 23116 个函数编译进 ARM64 Mach-O。SDL2/SDL2_ttf 的官方 framework 和 FFmpeg Bink 最小静态库仅安装到 `.local/`。100 项运行时检查通过，实际主菜单输出已目视确认。完整命令、版本、退出码和边界见 [NATIVE_RUNTIME](NATIVE_RUNTIME.md)；此前配置/编译失败记录作为历史证据保留。
+
+本机 `.app` 打包记录：`logs/local-app-package.log`。框架 rpath 改为 bundle 相对地址，`codesign --verify --deep --strict` 通过；签名为本地 ad-hoc，未公证、未发布，原版资源目录在 bundle 外。

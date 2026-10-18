@@ -1,0 +1,25 @@
+[pe] /Users/zz/Projects/ra2-native/game/ra2-upload-41bbcc83/game.exe mapped at 0x00400000, span 0x743000
+[pe] bound 368 imports, 0 unresolved
+[native-boot] entering actual game CRT entry 00785aa0 as ARM64
+[hle] GetVersion
+[hle] HeapCreate
+[hle] HeapAlloc
+[hle] InitializeCriticalSection
+[hle] InitializeCriticalSection
+[hle] InitializeCriticalSection
+[hle] InitializeCriticalSection
+[hle] TlsAlloc
+[hle] EnterCriticalSection
+[hle] HeapAlloc
+[hle] VirtualAlloc
+[hle] VirtualAlloc
+[hle] LeaveCriticalSection
+[hle] TlsSetValue
+[hle] GetCurrentThreadId
+[hle] HeapAlloc
+[hle] GetStartupInfoA
+[hle] GetStdHandle
+[win32hle] FATAL: unimplemented import GetStdHandle (0x7F000A80) called from guest 0x0078B3F4
+[native-boot] signal=6 address=0x185de1650 guest=0078b3f4 last_import=GetStdHandle esp=10403ee0
+
+exit_code=134
