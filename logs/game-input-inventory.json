@@ -1,0 +1,174 @@
+[
+  {
+    "name": "Binkw32.dll",
+    "size": 286208,
+    "sha256": "1fd7ef7873c8a3be7e2f127b306d0d24d7d88e20cf9188894eff87b5af0d495f",
+    "image_base": "0x10000000",
+    "entry": "0x1002c59c",
+    "timestamp": "2000-07-11T20:14:11+00:00",
+    "sections": [
+      ".text",
+      ".rdata",
+      ".data",
+      ".rsrc",
+      ".reloc"
+    ],
+    "version_strings": {
+      "CompanyName": "RAD Game Tools, Inc.",
+      "FileDescription": "Bink Video",
+      "FileVersion": "1.0q",
+      "LegalCopyright": "Copyright (C) 1994-2000, RAD Game Tools, Inc.",
+      "LegalTrademarks": "Bink is a trademark of RAD Game Tools, Inc.",
+      "ProductName": "Bink",
+      "ProductVersion": "1.0q",
+      "Comments": "Thank you for using Bink!"
+    }
+  },
+  {
+    "name": "Blowfish.dll",
+    "size": 225331,
+    "sha256": "68e4896b1fc0e5828162fbefe1bfb2cc7a1dd4ac34957b5b0194550e36fe7992",
+    "image_base": "0x11000000",
+    "entry": "0x11003a40",
+    "timestamp": "1999-07-12T23:08:13+00:00",
+    "sections": [
+      ".text",
+      ".rdata",
+      ".data",
+      ".idata",
+      ".reloc"
+    ],
+    "version_strings": {}
+  },
+  {
+    "name": "EB1.mmx",
+    "size": 84776,
+    "sha256": "ad8fe28176c00d2a007045ebcf81870c24f94c4619640c60272d54d880713b3b"
+  },
+  {
+    "name": "EB2.mmx",
+    "size": 221784,
+    "sha256": "3f13fce5b69bf0c924730fce66eb65ffc9e3ff65d17be95e7c374b40a3fb5ece"
+  },
+  {
+    "name": "EB3.mmx",
+    "size": 192376,
+    "sha256": "89ebe3f58975c975950e3e781679e48c089fc8317affb10fb3e6e1f2641fac47"
+  },
+  {
+    "name": "EB4.mmx",
+    "size": 157784,
+    "sha256": "919f74c5595171883a348fcfdc35e0f9e4d780d7b712234691b12cfa1ecef82f"
+  },
+  {
+    "name": "EB5.mmx",
+    "size": 99016,
+    "sha256": "4742cbc66c6a6ab8167709c4409b49ac11fbf99a3944fa1ab4f3376ff5095d0c"
+  },
+  {
+    "name": "Game.dat",
+    "size": 112,
+    "sha256": "6d87061c34b2d8fcaa459d8e410411bf5eb37f4aa9e911bbabb90fd75180ed7a",
+    "pe": false
+  },
+  {
+    "name": "Maps01.mix",
+    "size": 3823604,
+    "sha256": "b9093c9ef7efc1d24c6259196fbe90c8b78a15d0af27c93c12e1c755e5196d74"
+  },
+  {
+    "name": "Maps02.mix",
+    "size": 3170324,
+    "sha256": "8ff61284f726a67760563c7a278c9034ff44baa5ca86a6790eddeb273301b11f"
+  },
+  {
+    "name": "Multi.mix",
+    "size": 18666588,
+    "sha256": "c040bcede176677d0faba2f868be6d527ffa2d47e0fff2e048025c0aea629cfc"
+  },
+  {
+    "name": "Ra2.exe",
+    "size": 129024,
+    "sha256": "596ac84633bcc898ea5a7d55ccf5360f1d89cfb9266db1f18ec1fabec51a0d73",
+    "image_base": "0x400000",
+    "entry": "0x40787f",
+    "timestamp": "2000-09-24T02:20:34+00:00",
+    "sections": [
+      ".text",
+      ".rdata",
+      ".data",
+      ".rsrc",
+      "stxt774",
+      "stxt371"
+    ],
+    "version_strings": {}
+  },
+  {
+    "name": "Theme.mix",
+    "size": 5,
+    "sha256": "bb6a385e3cc6a9104c13498926037cd697e6dd2ca3982a4d4e5812573405151f"
+  },
+  {
+    "name": "Wdt.mix",
+    "size": 6181704,
+    "sha256": "b0fba59c882925fde9925fe9a82d898d342876f6daeb2a1d70b61df96d17fffb"
+  },
+  {
+    "name": "amazon.mmx",
+    "size": 151656,
+    "sha256": "7ec7096787bd55550ab26db57a30b665d02a78d709e362e9dc9b66411411d7d0"
+  },
+  {
+    "name": "game.exe",
+    "size": 4485392,
+    "sha256": "fe67fdac5073530a79baec14c4e072b5e7e4c0c462cee9659870c5330e9e6e3e",
+    "image_base": "0x400000",
+    "entry": "0x785aa0",
+    "timestamp": "2001-06-06T23:25:33+00:00",
+    "sections": [
+      ".text",
+      ".rdata",
+      ".data",
+      ".rsrc"
+    ],
+    "version_strings": {
+      "Comments": "",
+      "CompanyName": "Westwood Studios",
+      "FileDescription": "Main executable for Red Alert 2",
+      "FileVersion": "1.08",
+      "InternalName": "Sun",
+      "LegalCopyright": "Copyright © 1999 Westwood Studios",
+      "LegalTrademarks": "Command & Conquer is a trademark of Westwood Studios",
+      "OriginalFilename": "Sun.exe",
+      "PrivateBuild": "",
+      "ProductName": "Command & Conquer : Red Alert 2",
+      "ProductVersion": "1.08",
+      "SpecialBuild": ""
+    }
+  },
+  {
+    "name": "invasion.mmx",
+    "size": 146888,
+    "sha256": "fcee76aec1c2b84e98fb49a502bd48f1237e0ea8a81ad6dae9472be36acf8960"
+  },
+  {
+    "name": "language.mix",
+    "size": 52913656,
+    "sha256": "870c3bcc596e8690c55077a4c651f88d0dbc35f2a786c6c4891df8ffdb9ce192"
+  },
+  {
+    "name": "movies01.mix",
+    "size": 5,
+    "sha256": "bb6a385e3cc6a9104c13498926037cd697e6dd2ca3982a4d4e5812573405151f"
+  },
+  {
+    "name": "movies02.mix",
+    "size": 5,
+    "sha256": "bb6a385e3cc6a9104c13498926037cd697e6dd2ca3982a4d4e5812573405151f"
+  },
+  {
+    "name": "ra2.mix",
+    "size": 281888480,
+    "sha256": "896a8b64f9f1bb8ad5e0bc64fc0b8ea8c84112494761ea1a43478d10c5ef9914"
+  }
+]

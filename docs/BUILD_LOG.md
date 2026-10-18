@@ -68,3 +68,17 @@ RECOMP_CC=/usr/bin/clang .venv/bin/python vendor/pcrecomp/tools/lift/difftest.py
 没有真实游戏文件，因此任务书中“选取真实 lifted game function”的实验、完整游戏启动和两个平台的游戏结果对照未完成；本次成功项均限于合成或上游语义测试。未测试画面、帧率、CPU、内存峰值、音效、存档、战役、遭遇战、联机、MOD 或可安装 .app。
 
 所有失败保持可见；本批没有为了让结果变绿修改上游代码。下一步计划见 ROADMAP。
+
+## 后续实验 5：上传输入与真实游戏函数（同日）
+
+用户上传 `红警1.06原版.exe` 后关闭临时上传服务，静态解包得到 game.exe 与部分资源。实际提取和输入核验见 [REAL_GAME_POC](REAL_GAME_POC.md)，此前“无文件”限制是历史状态。
+
+```sh
+.venv/bin/python vendor/pcrecomp/tools/pe/pe_analyze.py \
+  game/ra2-upload-41bbcc83/game.exe --json logs/game-pe-analysis.json --hash
+.venv/bin/python poc/run_real_game_checks.py --exe game/ra2-upload-41bbcc83/game.exe
+```
+
+结果：退出 0；10 个真实函数，110/110 测试一致。完整结果 `logs/real-game-results.json`；编译与架构日志 `logs/real_game_*.log`；RTTI 来源日志 `logs/real-game-rtti.log`。程序自动生成并保存来源元数据，游戏字节与生成代码仍不纳入 Git。
+
+该成功只对应真实函数隔离测试，不改变先前 NaN 差异和 HLE 编译失败，也不证明完整游戏已可玩。原生宿主的这次运行没有执行安装包和原版 x86 程序作为 macOS 宿主代码。

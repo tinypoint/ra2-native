@@ -1,0 +1,3 @@
+$ /Users/zz/Projects/ra2-native/poc/generated_game/real_game_global /Users/zz/Projects/ra2-native/poc/generated_game/pe_image.bin /Users/zz/Projects/ra2-native/poc/generated_game/case-input.bin 0x6d3ea0 /Users/zz/Projects/ra2-native/poc/generated_game/case-output.bin
+
+exit_code=0

@@ -2,6 +2,8 @@
 
 日期：2026-10-18（Asia/Shanghai）。范围：用户明确优先的 macOS ARM64 原生路线。证据分为源码观察、本机实测、作者声明；三者不互相替代。
 
+后续输入进展：已静态提取用户上传的 RA2 重打包安装器，并从其中的 game.exe 转换、验证 10 个真实函数，110/110 受控测试通过。详见 [REAL_GAME_POC](REAL_GAME_POC.md)。以下“没有独立验证游戏功能”仍然成立：本次没有启动游戏或完成一局。
+
 ## redalert2-recomp
 
 - 地址：https://github.com/sp00nznet/redalert2-recomp

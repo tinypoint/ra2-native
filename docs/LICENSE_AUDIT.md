@@ -7,7 +7,7 @@
 | pcrecomp 自有工具与运行时 | 固定提交的 `LICENSE` 为 MIT；Scope 明确区分转换目标 | 原样下载到忽略的 vendor；未发布、未将其误标为本项目原创 |
 | redalert2-recomp 自有代码 | `LICENSE:1` 起 MIT；`:25` 起范围说明 | 记录许可文本和来源，未改上游 |
 | redalert2-recomp 许可证异常 | `LICENSE:27`、`:29` 写成 The Movies / Lionhead / Activision | 看起来存在模板遗留；不能自行代替维护者更正或认定全部来源已核清 |
-| 游戏可执行文件、DLL、数据 | 未取得；上游明确要求自备副本 | 不纳入 Git，不下载来源未核实的整合包 |
+| 游戏可执行文件、DLL、数据 | 后续由用户上传一个第三方重打包安装器；已静态提取，来源与授权未核实 | 不纳入 Git，不对外发布；没有执行安装器或附加程序 |
 | 从真实游戏生成的 C / ARM64 二进制 | 两个上游 LICENSE 均说明 MIT 不覆盖转换目标 | 不推导为 MIT；未来发布方案需单独核查，用户导入资产不自动解决游戏逻辑代码的分发问题 |
 | 本轮原创合成 x86 fixture 和桥接宿主 | `poc/run_native_checks.py` 的 FIXTURES、`poc/bridge_host.c` | 没有从 RA2/YR 提取；明确标记为合成测试 |
 | 上游差分用例与自动生成物 | 直接调用固定提交的 `tools/lift/difftest.py` | 保留上游来源；生成物不纳入 Git，不把 371 个用例称为本项目原创 |
@@ -24,9 +24,9 @@
 
 ## 游戏获取调查
 
-本次网络检索确认 [Steam 官方商店页面](https://store.steampowered.com/app/2229850/) 和 [EA 官方合集页面](https://www.ea.com/games/command-and-conquer/command-and-conquer-the-ultimate-collection)。没有自动购买、登录或下载游戏。未找到并核实可供当前 PoC 使用的官方免费完整目标版本；此表述不声称互联网上不存在任何试玩包。
+前期网络检索确认 [Steam 官方商店页面](https://store.steampowered.com/app/2229850/) 和 [EA 官方合集页面](https://www.ea.com/games/command-and-conquer/command-and-conquer-the-ultimate-collection)。没有自动购买、登录或从网站下载游戏。后来由用户通过临时局域网服务上传安装器；文件来源状态与资源缺失详见 REAL_GAME_POC。没有把上传行为视为官方来源或再分发授权的证明。
 
-后续需要官方安装目录中的指定版本输入。若采用试玩版，必须另行确认其授权、PE 版本、函数地址及支持内容，不能当成 Steam/EA 版 `game.exe 1.006` / `gamemd.exe 1.001` 直接使用。
+当前上传输入可用于本地隔离函数研究，但未经官方副本全字节对照；不能当成 Steam/EA 的字节相同版本直接套用全部固定地址补丁。真实函数的生成代码和 ARM64 二进制放在 `poc/generated_game/` 并从 Git 排除。
 
 ## 尚未完成
 

@@ -1,0 +1,23 @@
+
+7-Zip (z) 26.04 (arm64) : Copyright (c) 1999-2026 Igor Pavlov : 2026-10-05
+ 64-bit arm_v:8.5-A locale=C.UTF-8 Threads:10 OPEN_MAX:65535, ASM
+
+Scanning the drive for archives:
+1 file, 139730908 bytes (134 MiB)
+
+Extracting archive: incoming/红警1.06原版.exe
+--
+Path = incoming/红警1.06原版.exe
+Type = Nsis
+Physical Size = 139730908
+Method = LZMA:23
+Solid = -
+Headers Size = 28267
+Embedded Stub Size = 47104
+SubType = NSIS-2
+
+Everything is Ok
+
+Files: 21
+Size:       372824718
+Compressed: 139730908

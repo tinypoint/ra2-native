@@ -1,0 +1,167 @@
+
+========================================================================
+  PE Analysis: game.exe
+  Path: /Users/zz/Projects/ra2-native/game/ra2-upload-41bbcc83/game.exe
+  Size: 4,485,392 bytes
+========================================================================
+
+  MD5:           a94eb2509f859ca2e497e8f63fdef38c
+  SHA1:          55fbd32e478562a8240809fc594f3b103673ad2f
+  Machine:       i386
+  Format:        PE32 (EXE)
+  Image Base:    0x00400000
+  Entry Point:   0x00785AA0 (RVA 0x00385AA0)
+  Linker:        6.00
+  Subsystem:     Windows GUI
+  Timestamp:     2001-06-06 23:25:33 UTC (0x3B1EBBED)
+  Overlay:       272 bytes
+  Code Range:    0x00401000 - 0x0079A000 (3,772,416 bytes)
+  Data Range:    0x0079A000 - 0x00B2C9C4 (3,746,244 bytes)
+
+  Sections (4):
+    .text     VA 0x00001000  VSize 0x00399000  Raw 0x00001000  RSize 0x00399000  [CODE|EXEC|READ]
+    .rdata    VA 0x0039A000  VSize 0x0002F000  Raw 0x0039A000  RSize 0x0002F000  [IDATA|READ]
+    .data     VA 0x003C9000  VSize 0x003639C4  Raw 0x003C9000  RSize 0x00068000  [IDATA|READ|WRITE]
+    .rsrc     VA 0x0072D000  VSize 0x00016000  Raw 0x00431000  RSize 0x00016000  [IDATA|READ]
+
+  Imports: 368 functions from 15 DLLs
+
+    ADVAPI32.dll (9 functions):
+      0x0079A000  RegQueryInfoKeyA
+      0x0079A004  RegCloseKey
+      0x0079A008  RegQueryValueExA
+      0x0079A00C  RegOpenKeyExA
+      0x0079A010  RegDeleteValueA
+      0x0079A014  RegSetValueExA
+      0x0079A018  RegCreateKeyExA
+      0x0079A01C  RegEnumKeyExA
+      0x0079A020  RegDeleteKeyA
+
+    COMCTL32.dll (7 functions):
+      0x0079A028  ImageList_DragShowNolock
+      0x0079A02C  ordinal 17
+      0x0079A030  ImageList_DragMove
+      0x0079A034  ImageList_DragEnter
+      0x0079A038  ImageList_BeginDrag
+      0x0079A03C  ImageList_Destroy
+      0x0079A040  ImageList_EndDrag
+
+    DDRAW.dll (1 functions):
+      0x0079A048  DirectDrawCreate
+
+    DSOUND.dll (1 functions):
+      0x0079A050  ordinal 1
+
+    GDI32.dll (22 functions):
+      0x0079A058  DeleteObject
+      0x0079A05C  CreateFontIndirectA
+      0x0079A060  GetDeviceCaps
+      0x0079A064  SelectObject
+      0x0079A068  SetTextColor
+      0x0079A06C  SetBkColor
+      0x0079A070  TextOutA
+      0x0079A074  CreateSolidBrush
+      0x0079A078  GetTextColor
+      0x0079A07C  SetBkMode
+      ... and 12 more
+
+    IMM32.dll (5 functions):
+      0x0079A0B4  ImmNotifyIME
+      0x0079A0B8  ImmGetContext
+      0x0079A0BC  ImmGetCompositionStringA
+      0x0079A0C0  ImmSetOpenStatus
+      0x0079A0C4  ImmGetCandidateListA
+
+    KERNEL32.dll (160 functions):
+      0x0079A0CC  GetTickCount
+      0x0079A0D0  GetSystemTime
+      0x0079A0D4  GlobalMemoryStatus
+      0x0079A0D8  VirtualQuery
+      0x0079A0DC  GetTimeFormatA
+      0x0079A0E0  GetDateFormatA
+      0x0079A0E4  FileTimeToSystemTime
+      0x0079A0E8  FileTimeToLocalFileTime
+      0x0079A0EC  SystemTimeToFileTime
+      0x0079A0F0  CompareFileTime
+      ... and 150 more
+
+    OLEAUT32.dll (11 functions):
+      0x0079A350  GetErrorInfo
+      0x0079A354  RevokeActiveObject
+      0x0079A358  LoadTypeLib
+      0x0079A35C  SysFreeString
+      0x0079A360  SysAllocString
+      0x0079A364  RegisterActiveObject
+      0x0079A368  SetErrorInfo
+      0x0079A36C  VariantChangeType
+      0x0079A370  CreateErrorInfo
+      0x0079A374  VariantClear
+      ... and 1 more
+
+    SHELL32.dll (1 functions):
+      0x0079A380  FindExecutableA
+
+    USER32.dll (96 functions):
+      0x0079A388  DefWindowProcA
+      0x0079A38C  SetFocus
+      0x0079A390  GetMenu
+      0x0079A394  WindowFromPoint
+      0x0079A398  GetWindowRect
+      0x0079A39C  GetActiveWindow
+      0x0079A3A0  ToAscii
+      0x0079A3A4  ChildWindowFromPointEx
+      0x0079A3A8  GetCursorPos
+      0x0079A3AC  GetKeyState
+      ... and 86 more
+
+    VERSION.dll (3 functions):
+      0x0079A50C  VerQueryValueA
+      0x0079A510  GetFileVersionInfoSizeA
+      0x0079A514  GetFileVersionInfoA
+
+    WINMM.dll (5 functions):
+      0x0079A51C  timeKillEvent
+      0x0079A520  timeEndPeriod
+      0x0079A524  timeGetTime
+      0x0079A528  timeSetEvent
+      0x0079A52C  timeBeginPeriod
+
+    WSOCK32.dll (19 functions):
+      0x0079A534  getsockopt
+      0x0079A538  ntohl
+      0x0079A53C  htons
+      0x0079A540  recvfrom
+      0x0079A544  htonl
+      0x0079A548  setsockopt
+      0x0079A54C  sendto
+      0x0079A550  ntohs
+      0x0079A554  gethostname
+      0x0079A558  WSAStartup
+      ... and 9 more
+
+    binkw32.dll (13 functions):
+      0x0079A584  _BinkSetSoundSystem@8
+      0x0079A588  _BinkOpenDirectSound@4
+      0x0079A58C  _BinkGetError@0
+      0x0079A590  _BinkOpen@8
+      0x0079A594  _BinkSetVolume@8
+      0x0079A598  _BinkClose@4
+      0x0079A59C  _BinkDDSurfaceType@4
+      0x0079A5A0  _BinkGoto@12
+      0x0079A5A4  _BinkPause@8
+      0x0079A5A8  _BinkNextFrame@4
+      ... and 3 more
+
+    ole32.dll (15 functions):
+      0x0079A5BC  StgCreateDocfile
+      0x0079A5C0  CoRevokeClassObject
+      0x0079A5C4  OleUninitialize
+      0x0079A5C8  OleInitialize
+      0x0079A5CC  CoRegisterClassObject
+      0x0079A5D0  CoDisconnectObject
+      0x0079A5D4  StringFromGUID2
+      0x0079A5D8  StgOpenStorage
+      0x0079A5DC  CoFileTimeNow
+      0x0079A5E0  StringFromCLSID
+      ... and 5 more
+Exported to logs/game-pe-analysis.json

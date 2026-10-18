@@ -1,0 +1,8 @@
+[*] game.exe
+[*] type descriptors : 977
+[*] complete object locators : 1,194
+[*] vtables          : 1,194
+[*] classes          : 944
+[*] virtual methods  : 6,324  (6,323 attributable to one class)
+[*] wrote .local/ra2-rtti.json
+[*] wrote .local/ra2-rtti-seeds.json (6,324 seeds)

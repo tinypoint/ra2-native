@@ -8,3 +8,7 @@ game/
 *.dll
 __pycache__/
 .DS_Store
+
+incoming/
+.local/
+poc/generated_game/

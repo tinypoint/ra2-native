@@ -1,0 +1,2180 @@
+
+7-Zip (z) 26.04 (arm64) : Copyright (c) 1999-2026 Igor Pavlov : 2026-10-05
+ 64-bit arm_v:8.5-A locale=C.UTF-8 Threads:10 OPEN_MAX:65535, ASM
+
+Scanning the drive for archives:
+1 file, 139730908 bytes (134 MiB)
+
+Listing archive: incoming/红警1.06原版.exe
+
+--
+Path = incoming/红警1.06原版.exe
+Type = Nsis
+Physical Size = 139730908
+Method = LZMA:23
+Solid = -
+Headers Size = 28267
+Embedded Stub Size = 47104
+SubType = NSIS-2
+
+----------
+Path = $PLUGINSDIR/InstallOptions.dll
+Size = 
+Packed Size = 7292
+Modified = 
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 0
+
+Path = $PLUGINSDIR/StartMenu.dll
+Size = 
+Packed Size = 3149
+Modified = 
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 7296
+
+Path = $PLUGINSDIR/ioSpecial.ini
+Size = 
+Packed Size = 141
+Modified = 2008-06-16 09:34:52.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 10449
+
+Path = $PLUGINSDIR/modern-wizard.bmp
+Size = 
+Packed Size = 1481
+Modified = 2008-06-16 09:34:58.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 10594
+
+Path = 1.ico
+Size = 
+Packed Size = 1769
+Modified = 2000-09-19 14:23:02.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 12079
+
+Path = Ra2.ico
+Size = 
+Packed Size = 1769
+Modified = 2000-09-19 14:23:02.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 12079
+
+Path = BWExternal.exe
+Size = 
+Packed Size = 93409
+Modified = 2014-09-27 13:45:28.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 13852
+
+Path = Binkw32.dll
+Size = 
+Packed Size = 108057
+Modified = 2000-07-27 15:22:08.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 107265
+
+Path = Blowfish.dll
+Size = 
+Packed Size = 65168
+Modified = 1999-07-12 17:42:06.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 215326
+
+Path = Blowfish.tlb
+Size = 
+Packed Size = 778
+Modified = 2000-03-10 13:20:44.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 280498
+
+Path = Drvmgt.dll
+Size = 
+Packed Size = 12953
+Modified = 2000-10-01 19:31:22.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 281280
+
+Path = EB1.mmx
+Size = 
+Packed Size = 31720
+Modified = 2000-10-06 17:06:34.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 294237
+
+Path = EB2.mmx
+Size = 
+Packed Size = 105599
+Modified = 2000-11-09 14:16:24.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 325961
+
+Path = EB3.mmx
+Size = 
+Packed Size = 83889
+Modified = 2000-10-06 17:06:58.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 431564
+
+Path = EB4.mmx
+Size = 
+Packed Size = 66645
+Modified = 2000-11-07 10:56:10.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 515457
+
+Path = EB5.mmx
+Size = 
+Packed Size = 52072
+Modified = 2000-11-07 10:30:54.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 582106
+
+Path = Game.dat
+Size = 
+Packed Size = 103
+Modified = 2014-09-27 17:54:46.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 634182
+
+Path = GameSet.dat
+Size = 
+Packed Size = 169
+Modified = 2014-09-28 14:26:08.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 634289
+
+Path = IPCProvider.dll
+Size = 
+Packed Size = 127279
+Modified = 2014-09-27 13:45:28.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 634462
+
+Path = Launcher.bmp
+Size = 
+Packed Size = 18552
+Modified = 2000-07-17 09:45:42.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 761745
+
+Path = Maps01.mix
+Size = 
+Packed Size = 1097007
+Modified = 2000-10-24 15:28:48.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 780301
+
+Path = Maps02.mix
+Size = 
+Packed Size = 922593
+Modified = 2000-10-01 18:55:18.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 1877312
+
+Path = Multi.mix
+Size = 
+Packed Size = 6269578
+Modified = 2000-10-01 18:53:38.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 2799909
+
+Path = Notes.ico
+Size = 
+Packed Size = 207
+Modified = 2000-06-27 18:00:28.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 9069491
+
+Path = Patchget.dat
+Size = 
+Packed Size = 41524
+Modified = 2000-08-24 17:00:34.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 9069702
+
+Path = Patchw.dll
+Size = 
+Packed Size = 55529
+Modified = 2000-03-15 05:21:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 9111230
+
+Path = Patchw32.dll
+Size = 
+Packed Size = 81331
+Modified = 2000-03-15 05:21:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 9166763
+
+Path = RA2.INI
+Size = 
+Packed Size = 647
+Modified = 2014-09-27 17:55:56.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 9248098
+
+Path = Ra2.dsk
+Size = 55
+Packed Size = 55
+Modified = 2000-09-11 09:52:12.0000000
+Attributes = 
+Method = Copy
+Solid = -
+Offset = 9248749
+
+Path = Ra2.exe
+Size = 
+Packed Size = 51904
+Modified = 2000-10-25 11:11:54.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 9248808
+
+Path = Ra2.lcf
+Size = 
+Packed Size = 142
+Modified = 2000-07-17 09:45:54.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 9300716
+
+Path = Ra2.tlb
+Size = 
+Packed Size = 8242
+Modified = 2000-03-10 13:20:42.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 9300862
+
+Path = Ra2theme.exe
+Size = 
+Packed Size = 2489854
+Modified = 2002-12-02 03:14:34.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 9309108
+
+Path = Readme.doc
+Size = 
+Packed Size = 9095
+Modified = 2000-09-26 18:34:54.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 11798966
+
+Path = RegSetup.bat
+Size = 
+Packed Size = 173
+Modified = 2010-06-11 11:40:04.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 11808065
+
+Path = RegSetup.exe
+Size = 
+Packed Size = 16728
+Modified = 2000-10-24 15:27:50.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 11808242
+
+Path = Setup.pif
+Size = 
+Packed Size = 211
+Modified = 2000-10-27 18:53:20.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 11824974
+
+Path = Starter.exe
+Size = 
+Packed Size = 296817
+Modified = 2014-09-27 13:45:28.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 11825189
+
+Path = StarterReport.exe
+Size = 
+Packed Size = 124818
+Modified = 2014-09-27 13:45:28.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 12122010
+
+Path = StarterUpgrade.exe
+Size = 
+Packed Size = 161594
+Modified = 2014-09-27 13:45:28.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 12246832
+
+Path = Theme.mix
+Size = 5
+Packed Size = 5
+Modified = 2000-10-24 00:02:00.0000000
+Attributes = 
+Method = Copy
+Solid = -
+Offset = 12408430
+
+Path = movies01.mix
+Size = 5
+Packed Size = 5
+Modified = 2000-10-24 00:02:00.0000000
+Attributes = 
+Method = Copy
+Solid = -
+Offset = 12408430
+
+Path = movies02.mix
+Size = 5
+Packed Size = 5
+Modified = 2000-10-24 00:02:00.0000000
+Attributes = 
+Method = Copy
+Solid = -
+Offset = 12408430
+
+Path = UPCommon.dll
+Size = 
+Packed Size = 119795
+Modified = 2014-09-27 13:45:28.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 12408439
+
+Path = Updater.bat
+Size = 32
+Packed Size = 32
+Modified = 2001-06-07 08:47:54.0000000
+Attributes = 
+Method = Copy
+Solid = -
+Offset = 12528238
+
+Path = UpgradePatch.exe
+Size = 
+Packed Size = 124440
+Modified = 2014-09-27 13:45:28.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 12528274
+
+Path = Wdt.mix
+Size = 
+Packed Size = 2934899
+Modified = 2000-10-01 18:54:34.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 12652718
+
+Path = WebComponent.dll
+Size = 
+Packed Size = 104678
+Modified = 2014-09-27 13:45:28.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 15587621
+
+Path = WebExternal.exe
+Size = 
+Packed Size = 47989
+Modified = 2014-09-22 12:02:32.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 15692303
+
+Path = Woldata.key
+Size = 
+Packed Size = 117
+Modified = 2000-10-24 10:21:04.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 15740296
+
+Path = amazon.mmx
+Size = 
+Packed Size = 68194
+Modified = 2000-10-06 12:41:02.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 15740417
+
+Path = class.nfo
+Size = 
+Packed Size = 1243
+Modified = 2000-10-24 12:24:30.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 15808615
+
+Path = game.exe
+Size = 
+Packed Size = 1566410
+Modified = 2001-06-09 12:20:46.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 15809862
+
+Path = invasion.mmx
+Size = 
+Packed Size = 62396
+Modified = 2000-11-08 13:50:46.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 17376276
+
+Path = language.mix
+Size = 
+Packed Size = 45590575
+Modified = 2001-05-23 10:33:50.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 17438676
+
+Path = launcher.txt
+Size = 
+Packed Size = 3567
+Modified = 2001-06-06 16:19:48.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 63029255
+
+Path = mph.exe
+Size = 
+Packed Size = 36594
+Modified = 2001-06-01 15:49:16.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 63032826
+
+Path = patch.doc
+Size = 
+Packed Size = 9947
+Modified = 2001-06-06 15:58:36.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 63069424
+
+Path = ra1.dsk
+Size = 55
+Packed Size = 55
+Modified = 2000-10-24 15:29:24.0000000
+Attributes = 
+Method = Copy
+Solid = -
+Offset = 63079375
+
+Path = ra2.mix
+Size = 
+Packed Size = 73328911
+Modified = 2001-02-01 16:05:52.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 63079434
+
+Path = secdrv.sys
+Size = 
+Packed Size = 10763
+Modified = 2001-08-13 20:46:28.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136408349
+
+Path = subtitle.txt
+Size = 
+Packed Size = 17923
+Modified = 2000-10-26 15:19:56.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136419116
+
+Path = uninst.exe
+Size = 
+Packed Size = 31116
+Modified = 2014-09-22 16:15:22.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136437043
+
+Path = upgrade.xml
+Size = 
+Packed Size = 965
+Modified = 2014-09-27 17:54:40.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136468163
+
+Path = ע.txt
+Size = 169
+Packed Size = 169
+Modified = 2014-09-27 17:57:00.0000000
+Attributes = 
+Method = Copy
+Solid = -
+Offset = 136469132
+
+Path = Rmcache/0003b8c8.mmp
+Size = 
+Packed Size = 17518
+Modified = 2000-09-14 14:36:52.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136469305
+
+Path = Rmcache/0003bf99.mmp
+Size = 
+Packed Size = 14507
+Modified = 2000-09-14 14:31:46.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136486827
+
+Path = Rmcache/0003fd84.mmp
+Size = 
+Packed Size = 18214
+Modified = 2000-09-14 14:34:58.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136501338
+
+Path = Rmcache/000401da.mmp
+Size = 
+Packed Size = 16773
+Modified = 2000-09-14 14:19:48.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136519556
+
+Path = Rmcache/000421cf.mmp
+Size = 
+Packed Size = 17847
+Modified = 2000-09-14 14:22:08.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136536333
+
+Path = Rmcache/00042ee0.mmp
+Size = 
+Packed Size = 19422
+Modified = 2000-09-14 14:28:46.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136554184
+
+Path = Rmcache/00042fcc.mmp
+Size = 
+Packed Size = 10554
+Modified = 2000-09-14 14:21:34.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136573610
+
+Path = Rmcache/00043616.mmp
+Size = 
+Packed Size = 16442
+Modified = 2000-09-14 14:35:28.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136584168
+
+Path = Rmcache/00043899.mmp
+Size = 
+Packed Size = 16353
+Modified = 2000-09-14 14:11:24.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136600614
+
+Path = Rmcache/00047a52.mmp
+Size = 
+Packed Size = 16604
+Modified = 2000-09-14 14:28:14.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136616971
+
+Path = Rmcache/00048314.mmp
+Size = 
+Packed Size = 18563
+Modified = 2000-09-14 14:23:04.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136633579
+
+Path = Rmcache/0004951d.mmp
+Size = 
+Packed Size = 14352
+Modified = 2000-09-14 14:22:20.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136652146
+
+Path = Rmcache/0004a385.mmp
+Size = 
+Packed Size = 13527
+Modified = 2000-09-14 14:33:38.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136666502
+
+Path = Rmcache/0004b1de.mmp
+Size = 
+Packed Size = 16100
+Modified = 2000-09-14 14:25:34.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136680033
+
+Path = Rmcache/0004bdf8.mmp
+Size = 
+Packed Size = 14188
+Modified = 2000-09-14 14:30:16.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136696137
+
+Path = Rmcache/0004c6a2.mmp
+Size = 
+Packed Size = 11287
+Modified = 2000-09-14 14:30:40.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136710329
+
+Path = Rmcache/0004f3d8.mmp
+Size = 
+Packed Size = 17403
+Modified = 2000-09-14 14:20:02.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136721620
+
+Path = Rmcache/000517b3.mmp
+Size = 
+Packed Size = 12909
+Modified = 2000-09-14 14:18:46.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136739027
+
+Path = Rmcache/000529ce.mmp
+Size = 
+Packed Size = 17548
+Modified = 2000-09-14 14:27:48.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136751940
+
+Path = Rmcache/000532a5.mmp
+Size = 
+Packed Size = 9574
+Modified = 2000-09-14 14:38:02.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136769492
+
+Path = Rmcache/000546b8.mmp
+Size = 
+Packed Size = 16122
+Modified = 2000-09-14 14:35:12.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136779070
+
+Path = Rmcache/00057473.mmp
+Size = 
+Packed Size = 12187
+Modified = 2000-09-14 14:17:52.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136795196
+
+Path = Rmcache/00058204.mmp
+Size = 
+Packed Size = 17388
+Modified = 2000-09-14 14:28:02.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136807387
+
+Path = Rmcache/0005904c.mmp
+Size = 
+Packed Size = 18234
+Modified = 2000-09-14 14:29:16.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136824779
+
+Path = Rmcache/000595ca.mmp
+Size = 
+Packed Size = 16732
+Modified = 2000-09-14 14:22:50.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136843017
+
+Path = Rmcache/000599bf.mmp
+Size = 
+Packed Size = 17281
+Modified = 2000-09-14 14:32:12.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136859753
+
+Path = Rmcache/0005a09f.mmp
+Size = 
+Packed Size = 16858
+Modified = 2000-09-14 14:36:38.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136877038
+
+Path = Rmcache/0005a6c5.mmp
+Size = 
+Packed Size = 9554
+Modified = 2000-09-14 14:37:34.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136893900
+
+Path = Rmcache/0005a990.mmp
+Size = 
+Packed Size = 9976
+Modified = 2000-09-14 14:24:10.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136903458
+
+Path = Rmcache/0005ad3b.mmp
+Size = 
+Packed Size = 14494
+Modified = 2000-09-14 14:25:18.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136913438
+
+Path = Rmcache/0005b4ee.mmp
+Size = 
+Packed Size = 16365
+Modified = 2000-09-14 14:35:42.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136927936
+
+Path = Rmcache/0005be61.mmp
+Size = 
+Packed Size = 14101
+Modified = 2000-09-14 14:29:46.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136944305
+
+Path = Rmcache/0005c0f6.mmp
+Size = 
+Packed Size = 19809
+Modified = 2000-09-14 14:17:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136958410
+
+Path = Rmcache/0005c628.mmp
+Size = 
+Packed Size = 15614
+Modified = 2000-09-14 14:27:32.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136978223
+
+Path = Rmcache/0005c7d0.mmp
+Size = 
+Packed Size = 11033
+Modified = 2000-09-14 14:24:54.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 136993841
+
+Path = Rmcache/0005e786.mmp
+Size = 
+Packed Size = 12388
+Modified = 2000-09-14 14:20:42.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137004878
+
+Path = Rmcache/0005ed7a.mmp
+Size = 
+Packed Size = 9665
+Modified = 2000-09-14 14:37:06.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137017270
+
+Path = Rmcache/0005f4be.mmp
+Size = 
+Packed Size = 15933
+Modified = 2000-09-14 14:29:32.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137026939
+
+Path = Rmcache/0006050f.mmp
+Size = 
+Packed Size = 18175
+Modified = 2000-09-14 14:19:02.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137042876
+
+Path = Rmcache/00061bf3.mmp
+Size = 
+Packed Size = 21083
+Modified = 2000-09-14 14:30:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137061055
+
+Path = Rmcache/00062175.mmp
+Size = 
+Packed Size = 17378
+Modified = 2000-09-14 14:21:50.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137082142
+
+Path = Rmcache/00062cb1.mmp
+Size = 
+Packed Size = 15519
+Modified = 2000-09-14 14:26:16.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137099524
+
+Path = Rmcache/00063476.mmp
+Size = 
+Packed Size = 9070
+Modified = 2000-09-14 14:24:40.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137115047
+
+Path = Rmcache/00063716.mmp
+Size = 
+Packed Size = 11583
+Modified = 2000-09-14 14:16:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137124121
+
+Path = Rmcache/00063be0.mmp
+Size = 
+Packed Size = 17903
+Modified = 2000-09-14 14:34:14.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137135708
+
+Path = Rmcache/00063c77.mmp
+Size = 
+Packed Size = 16809
+Modified = 2000-09-14 14:36:12.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137153615
+
+Path = Rmcache/00066172.mmp
+Size = 
+Packed Size = 10863
+Modified = 2000-09-14 14:15:48.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137170428
+
+Path = Rmcache/00067778.mmp
+Size = 
+Packed Size = 17155
+Modified = 2000-09-14 14:16:42.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137181295
+
+Path = Rmcache/000683fa.mmp
+Size = 
+Packed Size = 15690
+Modified = 2000-09-14 14:28:30.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137198454
+
+Path = Rmcache/0006871d.mmp
+Size = 
+Packed Size = 16268
+Modified = 2000-09-14 14:37:20.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137214148
+
+Path = Rmcache/00068725.mmp
+Size = 
+Packed Size = 17295
+Modified = 2000-09-14 14:11:42.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137230420
+
+Path = Rmcache/0006a6df.mmp
+Size = 
+Packed Size = 10132
+Modified = 2000-09-14 14:17:38.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137247719
+
+Path = Rmcache/0006a823.mmp
+Size = 
+Packed Size = 10516
+Modified = 2000-09-14 14:14:34.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137257855
+
+Path = Rmcache/0006c1ae.mmp
+Size = 
+Packed Size = 14313
+Modified = 2000-09-14 14:31:24.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137268375
+
+Path = Rmcache/0006e424.mmp
+Size = 
+Packed Size = 14039
+Modified = 2000-09-14 14:36:24.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137282692
+
+Path = Rmcache/000721bc.mmp
+Size = 
+Packed Size = 16949
+Modified = 2000-09-14 14:31:58.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137296735
+
+Path = Rmcache/000724b5.mmp
+Size = 
+Packed Size = 16241
+Modified = 2000-09-14 14:21:06.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137313688
+
+Path = Rmcache/00073051.mmp
+Size = 
+Packed Size = 9689
+Modified = 2000-09-14 14:23:42.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137329933
+
+Path = Rmcache/00074449.mmp
+Size = 
+Packed Size = 19917
+Modified = 2000-09-14 14:29:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137339626
+
+Path = Rmcache/00075793.mmp
+Size = 
+Packed Size = 17525
+Modified = 2000-09-14 14:20:16.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137359547
+
+Path = Rmcache/0007644e.mmp
+Size = 
+Packed Size = 13974
+Modified = 2000-09-14 14:31:08.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137377076
+
+Path = Rmcache/00077484.mmp
+Size = 
+Packed Size = 12022
+Modified = 2000-09-14 14:11:56.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137391054
+
+Path = Rmcache/000776b7.mmp
+Size = 
+Packed Size = 9851
+Modified = 2000-09-14 14:24:26.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137403080
+
+Path = Rmcache/0007885f.mmp
+Size = 
+Packed Size = 10711
+Modified = 2000-09-14 14:19:24.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137412935
+
+Path = Rmcache/000794b5.mmp
+Size = 
+Packed Size = 16818
+Modified = 2000-09-14 14:34:44.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137423650
+
+Path = Rmcache/000795f1.mmp
+Size = 
+Packed Size = 15764
+Modified = 2000-09-14 14:34:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137440472
+
+Path = Rmcache/0007a219.mmp
+Size = 
+Packed Size = 10922
+Modified = 2000-09-14 14:33:02.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137456240
+
+Path = Rmcache/0007ec92.mmp
+Size = 
+Packed Size = 11087
+Modified = 2000-09-14 14:30:54.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137467166
+
+Path = Rmcache/0007eda9.mmp
+Size = 
+Packed Size = 12174
+Modified = 2000-09-14 14:14:18.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137478257
+
+Path = Rmcache/0007ee19.mmp
+Size = 
+Packed Size = 16719
+Modified = 2000-09-14 14:26:02.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137490435
+
+Path = Rmcache/0007f343.mmp
+Size = 
+Packed Size = 15049
+Modified = 2000-09-14 14:35:56.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137507158
+
+Path = Rmcache/000800aa.mmp
+Size = 
+Packed Size = 7333
+Modified = 2000-09-14 14:32:42.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137522211
+
+Path = Rmcache/00082aad.mmp
+Size = 
+Packed Size = 11642
+Modified = 2000-09-14 14:33:18.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137529548
+
+Path = Rmcache/000837b8.mmp
+Size = 
+Packed Size = 12957
+Modified = 2000-09-14 14:18:08.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137541194
+
+Path = Rmcache/000842dd.mmp
+Size = 
+Packed Size = 8036
+Modified = 2000-09-14 14:32:26.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137554155
+
+Path = Rmcache/00084934.mmp
+Size = 
+Packed Size = 10731
+Modified = 2000-09-14 14:26:54.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137562195
+
+Path = Rmcache/0008493a.mmp
+Size = 
+Packed Size = 16384
+Modified = 2000-09-14 14:16:26.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137572930
+
+Path = Rmcache/0008822d.mmp
+Size = 
+Packed Size = 7907
+Modified = 2000-09-14 14:37:48.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137589318
+
+Path = Rmcache/00089864.mmp
+Size = 
+Packed Size = 17655
+Modified = 2000-09-14 14:15:14.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137597229
+
+Path = Rmcache/0008ac6a.mmp
+Size = 
+Packed Size = 18785
+Modified = 2000-09-14 14:14:58.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137614888
+
+Path = Rmcache/0008ae93.mmp
+Size = 
+Packed Size = 7550
+Modified = 2000-09-14 14:21:20.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137633677
+
+Path = Rmcache/0008dfaf.mmp
+Size = 
+Packed Size = 16950
+Modified = 2000-09-14 14:27:18.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137641231
+
+Path = Rmcache/0008e247.mmp
+Size = 
+Packed Size = 16679
+Modified = 2000-09-14 14:23:20.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137658185
+
+Path = Rmcache/0008e266.mmp
+Size = 
+Packed Size = 18797
+Modified = 2000-09-14 14:22:36.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137674868
+
+Path = Rmcache/0008e8af.mmp
+Size = 
+Packed Size = 16623
+Modified = 2000-09-14 14:34:28.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137693669
+
+Path = Rmcache/0009125c.mmp
+Size = 
+Packed Size = 16362
+Modified = 2000-09-14 14:25:50.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137710296
+
+Path = Rmcache/00093f1e.mmp
+Size = 
+Packed Size = 14505
+Modified = 2000-09-14 14:18:32.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137726662
+
+Path = Rmcache/00095381.mmp
+Size = 
+Packed Size = 11911
+Modified = 2000-09-14 14:23:58.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137741171
+
+Path = Rmcache/0009f931.mmp
+Size = 
+Packed Size = 17177
+Modified = 2000-09-14 14:26:30.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137753086
+
+Path = Rmcache/000ab99b.mmp
+Size = 
+Packed Size = 11214
+Modified = 2000-09-14 14:17:24.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137770267
+
+Path = Taunts/Tauam01.wav
+Size = 
+Packed Size = 25077
+Modified = 2000-07-03 16:05:58.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137781485
+
+Path = Taunts/Tauam02.wav
+Size = 
+Packed Size = 26708
+Modified = 2000-07-03 16:05:58.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137806566
+
+Path = Taunts/Tauam03.wav
+Size = 
+Packed Size = 35007
+Modified = 2000-07-03 16:05:58.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137833278
+
+Path = Taunts/Tauam04.wav
+Size = 
+Packed Size = 21979
+Modified = 2000-07-03 16:05:58.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137868289
+
+Path = Taunts/Tauam05.wav
+Size = 
+Packed Size = 41001
+Modified = 2000-07-03 16:05:58.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137890272
+
+Path = Taunts/Tauam06.wav
+Size = 
+Packed Size = 24301
+Modified = 2000-07-03 16:05:58.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137931277
+
+Path = Taunts/Tauam07.wav
+Size = 
+Packed Size = 21379
+Modified = 2000-07-03 16:05:58.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137955582
+
+Path = Taunts/Tauam08.wav
+Size = 
+Packed Size = 23206
+Modified = 2000-07-03 16:05:58.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 137976965
+
+Path = Taunts/Taubr01.wav
+Size = 
+Packed Size = 16466
+Modified = 2000-07-03 16:05:58.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138000175
+
+Path = Taunts/Taubr02.wav
+Size = 
+Packed Size = 16557
+Modified = 2000-07-03 16:05:58.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138016645
+
+Path = Taunts/Taubr03.wav
+Size = 
+Packed Size = 21850
+Modified = 2000-07-03 16:05:58.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138033206
+
+Path = Taunts/Taubr04.wav
+Size = 
+Packed Size = 30940
+Modified = 2000-07-03 16:05:58.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138055060
+
+Path = Taunts/Taubr05.wav
+Size = 
+Packed Size = 28290
+Modified = 2000-07-03 16:05:58.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138086004
+
+Path = Taunts/Taubr06.wav
+Size = 
+Packed Size = 11683
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138114298
+
+Path = Taunts/Taubr07.wav
+Size = 
+Packed Size = 19040
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138125985
+
+Path = Taunts/Taubr08.wav
+Size = 
+Packed Size = 17393
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138145029
+
+Path = Taunts/Taucu01.wav
+Size = 
+Packed Size = 14359
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138162426
+
+Path = Taunts/Taucu02.wav
+Size = 
+Packed Size = 12497
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138176789
+
+Path = Taunts/Taucu03.wav
+Size = 
+Packed Size = 10865
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138189290
+
+Path = Taunts/Taucu04.wav
+Size = 
+Packed Size = 24719
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138200159
+
+Path = Taunts/Taucu05.wav
+Size = 
+Packed Size = 8844
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138224882
+
+Path = Taunts/Taucu06.wav
+Size = 
+Packed Size = 13342
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138233730
+
+Path = Taunts/Taucu07.wav
+Size = 
+Packed Size = 20452
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138247076
+
+Path = Taunts/Taucu08.wav
+Size = 
+Packed Size = 20133
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138267532
+
+Path = Taunts/Taufr01.wav
+Size = 
+Packed Size = 10790
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138287669
+
+Path = Taunts/Taufr02.wav
+Size = 
+Packed Size = 17041
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138298463
+
+Path = Taunts/Taufr03.wav
+Size = 
+Packed Size = 28109
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138315508
+
+Path = Taunts/Taufr04.wav
+Size = 
+Packed Size = 21325
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138343621
+
+Path = Taunts/Taufr05.wav
+Size = 
+Packed Size = 38026
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138364950
+
+Path = Taunts/Taufr06.wav
+Size = 
+Packed Size = 20040
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138402980
+
+Path = Taunts/Taufr07.wav
+Size = 
+Packed Size = 23357
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138423024
+
+Path = Taunts/Taufr08.wav
+Size = 
+Packed Size = 27606
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138446385
+
+Path = Taunts/Tauge01.wav
+Size = 
+Packed Size = 20065
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138473995
+
+Path = Taunts/Tauge02.wav
+Size = 
+Packed Size = 23852
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138494064
+
+Path = Taunts/Tauge03.wav
+Size = 
+Packed Size = 35622
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138517920
+
+Path = Taunts/Tauge04.wav
+Size = 
+Packed Size = 39252
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138553546
+
+Path = Taunts/Tauge05.wav
+Size = 
+Packed Size = 27640
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138592802
+
+Path = Taunts/Tauge06.wav
+Size = 
+Packed Size = 21185
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138620446
+
+Path = Taunts/Tauge07.wav
+Size = 
+Packed Size = 17741
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138641635
+
+Path = Taunts/Tauge08.wav
+Size = 
+Packed Size = 18449
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138659380
+
+Path = Taunts/Tauir01.wav
+Size = 
+Packed Size = 31331
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138677833
+
+Path = Taunts/Tauir02.wav
+Size = 
+Packed Size = 12314
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138709168
+
+Path = Taunts/Tauir03.wav
+Size = 
+Packed Size = 29931
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138721486
+
+Path = Taunts/Tauir04.wav
+Size = 
+Packed Size = 37026
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138751421
+
+Path = Taunts/Tauir05.wav
+Size = 
+Packed Size = 38135
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138788451
+
+Path = Taunts/Tauir06.wav
+Size = 
+Packed Size = 12081
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138826590
+
+Path = Taunts/Tauir07.wav
+Size = 
+Packed Size = 18500
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138838675
+
+Path = Taunts/Tauir08.wav
+Size = 
+Packed Size = 49224
+Modified = 2000-07-03 16:06:00.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138857179
+
+Path = Taunts/Tauko01.wav
+Size = 
+Packed Size = 21528
+Modified = 2000-09-19 17:56:52.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138906407
+
+Path = Taunts/Tauko02.wav
+Size = 
+Packed Size = 28247
+Modified = 2000-09-19 17:56:52.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138927939
+
+Path = Taunts/Tauko03.wav
+Size = 
+Packed Size = 26899
+Modified = 2000-09-19 17:56:52.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138956190
+
+Path = Taunts/Tauko04.wav
+Size = 
+Packed Size = 33028
+Modified = 2000-09-19 17:56:52.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 138983093
+
+Path = Taunts/Tauko05.wav
+Size = 
+Packed Size = 24370
+Modified = 2000-09-19 17:56:52.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139016125
+
+Path = Taunts/Tauko06.wav
+Size = 
+Packed Size = 21353
+Modified = 2000-09-19 17:56:52.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139040499
+
+Path = Taunts/Tauko07.wav
+Size = 
+Packed Size = 18821
+Modified = 2000-09-19 17:56:54.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139061856
+
+Path = Taunts/Tauko08.wav
+Size = 
+Packed Size = 15501
+Modified = 2000-09-19 17:56:54.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139080681
+
+Path = Taunts/Tauli01.wav
+Size = 
+Packed Size = 18296
+Modified = 2000-07-03 16:06:02.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139096186
+
+Path = Taunts/Tauli02.wav
+Size = 
+Packed Size = 17324
+Modified = 2000-07-03 16:06:02.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139114486
+
+Path = Taunts/Tauli03.wav
+Size = 
+Packed Size = 17827
+Modified = 2000-07-03 16:06:02.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139131814
+
+Path = Taunts/Tauli04.wav
+Size = 
+Packed Size = 33509
+Modified = 2000-07-03 16:06:02.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139149645
+
+Path = Taunts/Tauli05.wav
+Size = 
+Packed Size = 32422
+Modified = 2000-07-03 16:06:02.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139183158
+
+Path = Taunts/Tauli06.wav
+Size = 
+Packed Size = 16352
+Modified = 2000-07-03 16:06:02.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139215584
+
+Path = Taunts/Tauli07.wav
+Size = 
+Packed Size = 38182
+Modified = 2000-07-03 16:06:02.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139231940
+
+Path = Taunts/Tauli08.wav
+Size = 
+Packed Size = 26306
+Modified = 2000-07-03 16:06:02.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139270126
+
+Path = Taunts/Tauru01.wav
+Size = 
+Packed Size = 24573
+Modified = 2000-07-03 16:06:02.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139296436
+
+Path = Taunts/Tauru02.wav
+Size = 
+Packed Size = 27697
+Modified = 2000-07-03 16:06:02.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139321013
+
+Path = Taunts/Tauru03.wav
+Size = 
+Packed Size = 31019
+Modified = 2000-07-03 16:06:02.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139348714
+
+Path = Taunts/Tauru04.wav
+Size = 
+Packed Size = 29842
+Modified = 2000-07-03 16:06:02.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139379737
+
+Path = Taunts/Tauru05.wav
+Size = 
+Packed Size = 42838
+Modified = 2000-07-03 16:06:02.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139409583
+
+Path = Taunts/Tauru06.wav
+Size = 
+Packed Size = 46784
+Modified = 2000-07-03 16:06:02.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139452425
+
+Path = Taunts/Tauru07.wav
+Size = 
+Packed Size = 29917
+Modified = 2000-07-03 16:06:02.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139499213
+
+Path = Taunts/Tauru08.wav
+Size = 
+Packed Size = 37321
+Modified = 2000-07-03 16:06:02.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139529134
+
+Path = starterimage/QuickStart.png
+Size = 
+Packed Size = 24309
+Modified = 2014-09-27 13:45:28.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139566459
+
+Path = starterimage/Thumbs.db
+Size = 
+Packed Size = 12937
+Modified = 2014-09-27 17:57:08.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139590772
+
+Path = starterimage/bkg.png
+Size = 
+Packed Size = 35749
+Modified = 2014-09-27 13:45:28.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139603713
+
+Path = starterimage/bottom.png
+Size = 
+Packed Size = 4622
+Modified = 2014-09-27 13:45:28.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139639466
+
+Path = starterimage/btn_close.png
+Size = 
+Packed Size = 2525
+Modified = 2014-09-27 13:45:28.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139644092
+
+Path = starterimage/closebtn2.png
+Size = 
+Packed Size = 2525
+Modified = 2014-09-22 12:02:32.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139644092
+
+Path = starterimage/btn_min.png
+Size = 1200
+Packed Size = 1200
+Modified = 2014-09-27 13:45:28.0000000
+Attributes = 
+Method = Copy
+Solid = -
+Offset = 139646621
+
+Path = starterimage/checkbox.png
+Size = 892
+Packed Size = 892
+Modified = 2014-09-27 13:45:28.0000000
+Attributes = 
+Method = Copy
+Solid = -
+Offset = 139647825
+
+Path = starterimage/more_down.png
+Size = 
+Packed Size = 6026
+Modified = 2014-09-27 13:45:28.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139648721
+
+Path = starterimage/more_down.png.baiduyun.uploading.cfg
+Size = 
+Packed Size = 1032
+Modified = 2014-09-22 12:02:32.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139654751
+
+Path = starterimage/more_up.png
+Size = 
+Packed Size = 6046
+Modified = 2014-09-27 13:45:28.0000000
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139655787
+
+Path = $PLUGINSDIR/nsExec.dll
+Size = 
+Packed Size = 2978
+Modified = 
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139661837
+
+Path = uninst.exe
+Size = 
+Packed Size = 8414
+Modified = 
+Attributes = 
+Method = LZMA:23
+Solid = -
+Offset = 139664819
+

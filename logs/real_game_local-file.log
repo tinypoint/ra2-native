@@ -1,0 +1,4 @@
+$ /usr/bin/file /Users/zz/Projects/ra2-native/poc/generated_game/real_game_local
+/Users/zz/Projects/ra2-native/poc/generated_game/real_game_local: Mach-O 64-bit executable arm64
+
+exit_code=0

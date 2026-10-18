@@ -1,0 +1,2777 @@
+{
+  "date": "2026-10-18T10:04:40.533822+08:00",
+  "input_sha256": "fe67fdac5073530a79baec14c4e072b5e7e4c0c462cee9659870c5330e9e6e3e",
+  "input_origin": "User-uploaded repack; original distribution provenance unverified.",
+  "scope": "Isolated actual executable functions with controlled synthetic states; game not launched.",
+  "reserved_guest_va_bytes": 4294967296,
+  "functions": [
+    {
+      "address": "0x5d4e40",
+      "class": "UnitClass",
+      "slot": 18,
+      "vtable": "0x7addf8",
+      "description": "copy_three_coordinate_fields",
+      "length": 33,
+      "body_sha256": "ee51cdaeb70cb09ad54320a9fb6a63861789593847cdebee382acfbe85a0538d"
+    },
+    {
+      "address": "0x41b320",
+      "class": "UnitClass",
+      "slot": 104,
+      "vtable": "0x7addf8",
+      "description": "signed_coordinate_to_cell",
+      "length": 61,
+      "body_sha256": "be4a22cf852f61745d790e38debe5a41aaea92d1741dcbb60518b9b409431343"
+    },
+    {
+      "address": "0x453c70",
+      "class": "BuildingClass",
+      "slot": 42,
+      "vtable": "0x79cbbc",
+      "description": "coordinate_offset",
+      "length": 43,
+      "body_sha256": "8f4b7a988f3a180fc561f2491c7d55e4b7f78c417e3c78618f92dfd6077caee5"
+    },
+    {
+      "address": "0x4cda80",
+      "class": "FootClass",
+      "slot": 269,
+      "vtable": "0x7a12a0",
+      "description": "reset_fields",
+      "length": 31,
+      "body_sha256": "88e01a3f1856566f2004ac02d205a1aa3e055853455b3f70b6072dfd0ad96049"
+    },
+    {
+      "address": "0x5950e0",
+      "class": "TechnoClass",
+      "slot": 121,
+      "vtable": "0x7acb80",
+      "description": "compare_field_with_minus_one",
+      "length": 15,
+      "body_sha256": "cad0d6edd5eef54df5410a6e9621895546ec3234e2ede659633aeb0657cd6eef"
+    },
+    {
+      "address": "0x6c16d0",
+      "class": "TechnoClass",
+      "slot": 172,
+      "vtable": "0x7acb80",
+      "description": "virtual_call_and_type_flag",
+      "length": 24,
+      "body_sha256": "623aa74b0060e709c6343148343725b9538657b6049b6be48b1e71f3c9b9f0fe"
+    },
+    {
+      "address": "0x6c12c0",
+      "class": "UnitClass",
+      "slot": 32,
+      "vtable": "0x7addf8",
+      "description": "virtual_tail_thunk",
+      "length": 8,
+      "body_sha256": "1e4bd802070638e5593c0b6087b99cfd7e4890f0a7ce0d0d984401aff9d94d6a"
+    },
+    {
+      "address": "0x705020",
+      "class": "UnitClass",
+      "slot": 33,
+      "vtable": "0x7addf8",
+      "description": "type_pointer_getter",
+      "length": 7,
+      "body_sha256": "4d76b5b7b759e5886f839055144ec06fee39f6402d6d52e6a443cfb172214931"
+    },
+    {
+      "address": "0x58deb0",
+      "class": "VectorClass@N",
+      "slot": 6,
+      "vtable": "0x7a5f8c",
+      "description": "double_element_getter",
+      "length": 13,
+      "body_sha256": "74d28ca450fa0965e7fddd58759d09744601eca9440559b970d73f4b9740ac97"
+    },
+    {
+      "address": "0x6d3ea0",
+      "class": "TechnoClass",
+      "slot": 165,
+      "vtable": "0x7acb80",
+      "description": "double_constant_getter",
+      "length": 7,
+      "body_sha256": "286d7120df1e96d0938166b350197a96f086a7890b9ed55936e775b9fbce09b9"
+    }
+  ],
+  "total": 110,
+  "passed": 110,
+  "cases": [
+    {
+      "name": "copy_three_coordinate_fields_00000000",
+      "entry": "0x5d4e40",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0x12345678",
+        "edx": "0x10003000",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "copy_three_coordinate_fields_00000001",
+      "entry": "0x5d4e40",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0x12345679",
+        "edx": "0x10003000",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "copy_three_coordinate_fields_000000ff",
+      "entry": "0x5d4e40",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0x12345687",
+        "edx": "0x10003000",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "copy_three_coordinate_fields_00000100",
+      "entry": "0x5d4e40",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0x12345778",
+        "edx": "0x10003000",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "copy_three_coordinate_fields_ffffffff",
+      "entry": "0x5d4e40",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0xedcba987",
+        "edx": "0x10003000",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "copy_three_coordinate_fields_ffffff00",
+      "entry": "0x5d4e40",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0xedcba978",
+        "edx": "0x10003000",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "copy_three_coordinate_fields_7fffffff",
+      "entry": "0x5d4e40",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0x6dcba987",
+        "edx": "0x10003000",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "copy_three_coordinate_fields_80000000",
+      "entry": "0x5d4e40",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0x92345678",
+        "edx": "0x10003000",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "signed_coordinate_to_cell_00000000",
+      "entry": "0x41b320",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF",
+        "OF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0x0",
+        "edx": "0xff",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "signed_coordinate_to_cell_00000001",
+      "entry": "0x41b320",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF",
+        "OF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0x0",
+        "edx": "0xff",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "signed_coordinate_to_cell_000000ff",
+      "entry": "0x41b320",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF",
+        "OF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0xffff0000",
+        "edx": "0xff",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "signed_coordinate_to_cell_00000100",
+      "entry": "0x41b320",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF",
+        "OF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0xffff0001",
+        "edx": "0xff",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "signed_coordinate_to_cell_ffffffff",
+      "entry": "0x41b320",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF",
+        "OF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0x0",
+        "edx": "0x0",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "signed_coordinate_to_cell_ffffff00",
+      "entry": "0x41b320",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF",
+        "OF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0xffff",
+        "edx": "0x0",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "signed_coordinate_to_cell_7fffffff",
+      "entry": "0x41b320",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF",
+        "OF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0xffff",
+        "edx": "0xff",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "signed_coordinate_to_cell_80000000",
+      "entry": "0x41b320",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF",
+        "OF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0xffff0000",
+        "edx": "0x0",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "coordinate_offset_00000000",
+      "entry": "0x453c70",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0xffffff7f",
+        "edx": "0x12345678",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "coordinate_offset_00000001",
+      "entry": "0x453c70",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0xffffff7e",
+        "edx": "0x12345679",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "coordinate_offset_000000ff",
+      "entry": "0x453c70",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0xfffffe80",
+        "edx": "0x12345687",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "coordinate_offset_00000100",
+      "entry": "0x453c70",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0xfffffe7f",
+        "edx": "0x12345778",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "coordinate_offset_ffffffff",
+      "entry": "0x453c70",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0xffffff80",
+        "edx": "0xedcba987",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "coordinate_offset_ffffff00",
+      "entry": "0x453c70",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0x7f",
+        "edx": "0xedcba978",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "coordinate_offset_7fffffff",
+      "entry": "0x453c70",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0x7fffff80",
+        "edx": "0x6dcba987",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "coordinate_offset_80000000",
+      "entry": "0x453c70",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0x7fffff7f",
+        "edx": "0x92345678",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "reset_fields_00000000",
+      "entry": "0x4cda80",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x0",
+        "ecx": "0x10001000",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "reset_fields_00000001",
+      "entry": "0x4cda80",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x0",
+        "ecx": "0x10001000",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "reset_fields_000000ff",
+      "entry": "0x4cda80",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x0",
+        "ecx": "0x10001000",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "reset_fields_00000100",
+      "entry": "0x4cda80",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x0",
+        "ecx": "0x10001000",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "reset_fields_ffffffff",
+      "entry": "0x4cda80",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x0",
+        "ecx": "0x10001000",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "reset_fields_ffffff00",
+      "entry": "0x4cda80",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x0",
+        "ecx": "0x10001000",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "reset_fields_7fffffff",
+      "entry": "0x4cda80",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x0",
+        "ecx": "0x10001000",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "reset_fields_80000000",
+      "entry": "0x4cda80",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x0",
+        "ecx": "0x10001000",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "compare_field_with_minus_one_00000000",
+      "entry": "0x5950e0",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x1",
+        "ecx": "0x10001000",
+        "edx": "0x0",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "compare_field_with_minus_one_00000001",
+      "entry": "0x5950e0",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x1",
+        "ecx": "0x10001000",
+        "edx": "0x1",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "compare_field_with_minus_one_000000ff",
+      "entry": "0x5950e0",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x1",
+        "ecx": "0x10001000",
+        "edx": "0xff",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "compare_field_with_minus_one_00000100",
+      "entry": "0x5950e0",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x1",
+        "ecx": "0x10001000",
+        "edx": "0x100",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "compare_field_with_minus_one_ffffffff",
+      "entry": "0x5950e0",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x0",
+        "ecx": "0x10001000",
+        "edx": "0xffffffff",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "compare_field_with_minus_one_ffffff00",
+      "entry": "0x5950e0",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x1",
+        "ecx": "0x10001000",
+        "edx": "0xffffff00",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "compare_field_with_minus_one_7fffffff",
+      "entry": "0x5950e0",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x1",
+        "ecx": "0x10001000",
+        "edx": "0x7fffffff",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "compare_field_with_minus_one_80000000",
+      "entry": "0x5950e0",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x1",
+        "ecx": "0x10001000",
+        "edx": "0x80000000",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "virtual_call_and_type_flag_00000000",
+      "entry": "0x6c16d0",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [
+        "0x1000effc"
+      ],
+      "native_registers": {
+        "eax": "0x0",
+        "ecx": "0x0",
+        "edx": "0x87654300",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "virtual_call_and_type_flag_00000001",
+      "entry": "0x6c16d0",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [
+        "0x1000effc"
+      ],
+      "native_registers": {
+        "eax": "0x1",
+        "ecx": "0x1",
+        "edx": "0x87654301",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "virtual_call_and_type_flag_000000ff",
+      "entry": "0x6c16d0",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [
+        "0x1000effc"
+      ],
+      "native_registers": {
+        "eax": "0x1",
+        "ecx": "0x1",
+        "edx": "0x876543ff",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "virtual_call_and_type_flag_00000100",
+      "entry": "0x6c16d0",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [
+        "0x1000effc"
+      ],
+      "native_registers": {
+        "eax": "0x0",
+        "ecx": "0x0",
+        "edx": "0x87654300",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "virtual_call_and_type_flag_ffffffff",
+      "entry": "0x6c16d0",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [
+        "0x1000effc"
+      ],
+      "native_registers": {
+        "eax": "0x1",
+        "ecx": "0x1",
+        "edx": "0x876543ff",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "virtual_call_and_type_flag_ffffff00",
+      "entry": "0x6c16d0",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [
+        "0x1000effc"
+      ],
+      "native_registers": {
+        "eax": "0x0",
+        "ecx": "0x0",
+        "edx": "0x87654300",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "virtual_call_and_type_flag_7fffffff",
+      "entry": "0x6c16d0",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [
+        "0x1000effc"
+      ],
+      "native_registers": {
+        "eax": "0x1",
+        "ecx": "0x1",
+        "edx": "0x876543ff",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "virtual_call_and_type_flag_80000000",
+      "entry": "0x6c16d0",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [
+        "0x1000effc"
+      ],
+      "native_registers": {
+        "eax": "0x0",
+        "ecx": "0x0",
+        "edx": "0x87654300",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "double_element_0",
+      "entry": "0x58deb0",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10004000",
+        "ecx": "0x0",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 1,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "double_element_1",
+      "entry": "0x58deb0",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10004000",
+        "ecx": "0x1",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x8000000000000000",
+      "native_fp_depth": 1,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "double_element_2",
+      "entry": "0x58deb0",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10004000",
+        "ecx": "0x2",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x3ff8000000000000",
+      "native_fp_depth": 1,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "double_element_3",
+      "entry": "0x58deb0",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10004000",
+        "ecx": "0x3",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0xc002000000000000",
+      "native_fp_depth": 1,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "double_element_4",
+      "entry": "0x58deb0",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10004000",
+        "ecx": "0x4",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x46293e5939a08cea",
+      "native_fp_depth": 1,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "double_element_5",
+      "entry": "0x58deb0",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10004000",
+        "ecx": "0x5",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x39b4484bfeebc2a0",
+      "native_fp_depth": 1,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "double_constant",
+      "entry": "0x6d3ea0",
+      "local_registers": false,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x12345678",
+        "ecx": "0x10001000",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 1,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "copy_three_coordinate_fields_00000000",
+      "entry": "0x5d4e40",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0x12345678",
+        "edx": "0x10003000",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "copy_three_coordinate_fields_00000001",
+      "entry": "0x5d4e40",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0x12345679",
+        "edx": "0x10003000",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "copy_three_coordinate_fields_000000ff",
+      "entry": "0x5d4e40",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0x12345687",
+        "edx": "0x10003000",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "copy_three_coordinate_fields_00000100",
+      "entry": "0x5d4e40",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0x12345778",
+        "edx": "0x10003000",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "copy_three_coordinate_fields_ffffffff",
+      "entry": "0x5d4e40",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0xedcba987",
+        "edx": "0x10003000",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "copy_three_coordinate_fields_ffffff00",
+      "entry": "0x5d4e40",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0xedcba978",
+        "edx": "0x10003000",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "copy_three_coordinate_fields_7fffffff",
+      "entry": "0x5d4e40",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0x6dcba987",
+        "edx": "0x10003000",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "copy_three_coordinate_fields_80000000",
+      "entry": "0x5d4e40",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0x92345678",
+        "edx": "0x10003000",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "signed_coordinate_to_cell_00000000",
+      "entry": "0x41b320",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF",
+        "OF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0x0",
+        "edx": "0xff",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "signed_coordinate_to_cell_00000001",
+      "entry": "0x41b320",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF",
+        "OF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0x0",
+        "edx": "0xff",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "signed_coordinate_to_cell_000000ff",
+      "entry": "0x41b320",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF",
+        "OF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0xffff0000",
+        "edx": "0xff",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "signed_coordinate_to_cell_00000100",
+      "entry": "0x41b320",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF",
+        "OF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0xffff0001",
+        "edx": "0xff",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "signed_coordinate_to_cell_ffffffff",
+      "entry": "0x41b320",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF",
+        "OF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0x0",
+        "edx": "0x0",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "signed_coordinate_to_cell_ffffff00",
+      "entry": "0x41b320",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF",
+        "OF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0xffff",
+        "edx": "0x0",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "signed_coordinate_to_cell_7fffffff",
+      "entry": "0x41b320",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF",
+        "OF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0xffff",
+        "edx": "0xff",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "signed_coordinate_to_cell_80000000",
+      "entry": "0x41b320",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF",
+        "OF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0xffff0000",
+        "edx": "0x0",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "coordinate_offset_00000000",
+      "entry": "0x453c70",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0xffffff7f",
+        "edx": "0x12345678",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "coordinate_offset_00000001",
+      "entry": "0x453c70",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0xffffff7e",
+        "edx": "0x12345679",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "coordinate_offset_000000ff",
+      "entry": "0x453c70",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0xfffffe80",
+        "edx": "0x12345687",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "coordinate_offset_00000100",
+      "entry": "0x453c70",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0xfffffe7f",
+        "edx": "0x12345778",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "coordinate_offset_ffffffff",
+      "entry": "0x453c70",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0xffffff80",
+        "edx": "0xedcba987",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "coordinate_offset_ffffff00",
+      "entry": "0x453c70",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0x7f",
+        "edx": "0xedcba978",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "coordinate_offset_7fffffff",
+      "entry": "0x453c70",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0x7fffff80",
+        "edx": "0x6dcba987",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "coordinate_offset_80000000",
+      "entry": "0x453c70",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10003000",
+        "ecx": "0x7fffff7f",
+        "edx": "0x92345678",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "reset_fields_00000000",
+      "entry": "0x4cda80",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x0",
+        "ecx": "0x10001000",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "reset_fields_00000001",
+      "entry": "0x4cda80",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x0",
+        "ecx": "0x10001000",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "reset_fields_000000ff",
+      "entry": "0x4cda80",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x0",
+        "ecx": "0x10001000",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "reset_fields_00000100",
+      "entry": "0x4cda80",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x0",
+        "ecx": "0x10001000",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "reset_fields_ffffffff",
+      "entry": "0x4cda80",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x0",
+        "ecx": "0x10001000",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "reset_fields_ffffff00",
+      "entry": "0x4cda80",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x0",
+        "ecx": "0x10001000",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "reset_fields_7fffffff",
+      "entry": "0x4cda80",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x0",
+        "ecx": "0x10001000",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "reset_fields_80000000",
+      "entry": "0x4cda80",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x0",
+        "ecx": "0x10001000",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "compare_field_with_minus_one_00000000",
+      "entry": "0x5950e0",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x1",
+        "ecx": "0x10001000",
+        "edx": "0x0",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "compare_field_with_minus_one_00000001",
+      "entry": "0x5950e0",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x1",
+        "ecx": "0x10001000",
+        "edx": "0x1",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "compare_field_with_minus_one_000000ff",
+      "entry": "0x5950e0",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x1",
+        "ecx": "0x10001000",
+        "edx": "0xff",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "compare_field_with_minus_one_00000100",
+      "entry": "0x5950e0",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x1",
+        "ecx": "0x10001000",
+        "edx": "0x100",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "compare_field_with_minus_one_ffffffff",
+      "entry": "0x5950e0",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x0",
+        "ecx": "0x10001000",
+        "edx": "0xffffffff",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "compare_field_with_minus_one_ffffff00",
+      "entry": "0x5950e0",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x1",
+        "ecx": "0x10001000",
+        "edx": "0xffffff00",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "compare_field_with_minus_one_7fffffff",
+      "entry": "0x5950e0",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x1",
+        "ecx": "0x10001000",
+        "edx": "0x7fffffff",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "compare_field_with_minus_one_80000000",
+      "entry": "0x5950e0",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x1",
+        "ecx": "0x10001000",
+        "edx": "0x80000000",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "virtual_call_and_type_flag_00000000",
+      "entry": "0x6c16d0",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [
+        "0x1000effc"
+      ],
+      "native_registers": {
+        "eax": "0x0",
+        "ecx": "0x0",
+        "edx": "0x87654300",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "virtual_call_and_type_flag_00000001",
+      "entry": "0x6c16d0",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [
+        "0x1000effc"
+      ],
+      "native_registers": {
+        "eax": "0x1",
+        "ecx": "0x1",
+        "edx": "0x87654301",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "virtual_call_and_type_flag_000000ff",
+      "entry": "0x6c16d0",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [
+        "0x1000effc"
+      ],
+      "native_registers": {
+        "eax": "0x1",
+        "ecx": "0x1",
+        "edx": "0x876543ff",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "virtual_call_and_type_flag_00000100",
+      "entry": "0x6c16d0",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [
+        "0x1000effc"
+      ],
+      "native_registers": {
+        "eax": "0x0",
+        "ecx": "0x0",
+        "edx": "0x87654300",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "virtual_call_and_type_flag_ffffffff",
+      "entry": "0x6c16d0",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [
+        "0x1000effc"
+      ],
+      "native_registers": {
+        "eax": "0x1",
+        "ecx": "0x1",
+        "edx": "0x876543ff",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "virtual_call_and_type_flag_ffffff00",
+      "entry": "0x6c16d0",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [
+        "0x1000effc"
+      ],
+      "native_registers": {
+        "eax": "0x0",
+        "ecx": "0x0",
+        "edx": "0x87654300",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "virtual_call_and_type_flag_7fffffff",
+      "entry": "0x6c16d0",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [
+        "0x1000effc"
+      ],
+      "native_registers": {
+        "eax": "0x1",
+        "ecx": "0x1",
+        "edx": "0x876543ff",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "virtual_call_and_type_flag_80000000",
+      "entry": "0x6c16d0",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [
+        "AF"
+      ],
+      "excluded_dead_return_slots": [
+        "0x1000effc"
+      ],
+      "native_registers": {
+        "eax": "0x0",
+        "ecx": "0x0",
+        "edx": "0x87654300",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 0,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "double_element_0",
+      "entry": "0x58deb0",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10004000",
+        "ecx": "0x0",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 1,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "double_element_1",
+      "entry": "0x58deb0",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10004000",
+        "ecx": "0x1",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x8000000000000000",
+      "native_fp_depth": 1,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "double_element_2",
+      "entry": "0x58deb0",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10004000",
+        "ecx": "0x2",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x3ff8000000000000",
+      "native_fp_depth": 1,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "double_element_3",
+      "entry": "0x58deb0",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10004000",
+        "ecx": "0x3",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0xc002000000000000",
+      "native_fp_depth": 1,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "double_element_4",
+      "entry": "0x58deb0",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10004000",
+        "ecx": "0x4",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x46293e5939a08cea",
+      "native_fp_depth": 1,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "double_element_5",
+      "entry": "0x58deb0",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x10004000",
+        "ecx": "0x5",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f008",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x39b4484bfeebc2a0",
+      "native_fp_depth": 1,
+      "host_above_4g": true,
+      "image_unchanged": true
+    },
+    {
+      "name": "double_constant",
+      "entry": "0x6d3ea0",
+      "local_registers": true,
+      "passed": true,
+      "differences": [],
+      "ignored_undefined_flags": [],
+      "excluded_dead_return_slots": [],
+      "native_registers": {
+        "eax": "0x12345678",
+        "ecx": "0x10001000",
+        "edx": "0x87654321",
+        "ebx": "0x10203040",
+        "esp": "0x1000f004",
+        "ebp": "0x60708090",
+        "esi": "0x13579bdf",
+        "edi": "0x2468ace0"
+      },
+      "native_fp_bits": "0x0",
+      "native_fp_depth": 1,
+      "host_above_4g": true,
+      "image_unchanged": true
+    }
+  ]
+}

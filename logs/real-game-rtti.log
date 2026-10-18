@@ -1,0 +1,11 @@
+$ /Users/zz/Projects/ra2-native/.venv/bin/python /Users/zz/Projects/ra2-native/vendor/pcrecomp/tools/cpp/rtti.py /Users/zz/Projects/ra2-native/game/ra2-upload-41bbcc83/game.exe -o /Users/zz/Projects/ra2-native/poc/generated_game/rtti.json --seeds /Users/zz/Projects/ra2-native/poc/generated_game/rtti-seeds.json
+[*] game.exe
+[*] type descriptors : 977
+[*] complete object locators : 1,194
+[*] vtables          : 1,194
+[*] classes          : 944
+[*] virtual methods  : 6,324  (6,323 attributable to one class)
+[*] wrote /Users/zz/Projects/ra2-native/poc/generated_game/rtti.json
+[*] wrote /Users/zz/Projects/ra2-native/poc/generated_game/rtti-seeds.json (6,324 seeds)
+
+exit_code=0
