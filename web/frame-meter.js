@@ -34,5 +34,5 @@
  };
  setInterval(()=>{const now=performance.now(),elapsed=now-started;if(!last||elapsed<1000)return;label.textContent='FPS '+Math.round(frames*1000/elapsed);frames=0;started=now;},250);
  const observer=new ResizeObserver(place);observer.observe(host);observer.observe(canvas);
- window.addEventListener('resize',place);window.visualViewport?.addEventListener('resize',place);place();
+ window.addEventListener('resize',place);window.addEventListener('ra2-controls-change',place);window.visualViewport?.addEventListener('resize',place);place();
 })();

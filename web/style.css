@@ -39,7 +39,7 @@ body[data-view="game"],body[data-view="game"] *,body.game-active,body.game-activ
 body:is(.game-shell,.game-active,[data-view="game"]) #game-window{flex:1 1 0;min-width:0}
 #canvas{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}
 #game-fps{left:max(16px,env(safe-area-inset-left));top:max(16px,env(safe-area-inset-top));padding:5px 7px;border:1px solid #ffffff25;border-radius:6px;background:#101218b3}
-@media (any-pointer:coarse){#mobile-controls{display:contents}}
+@media (any-pointer:coarse){body.battlefield-controls #mobile-controls{display:contents}}
 #view-stick{position:absolute;left:max(16px,env(safe-area-inset-left));bottom:max(16px,env(safe-area-inset-bottom));width:104px;height:104px;border:2px solid #ffffff40;border-radius:50%;background:radial-gradient(circle,#ffffff08 35%,#11151dcc 70%);box-shadow:inset 0 0 0 8px #0003,0 3px 12px #0008;pointer-events:auto;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 #view-stick .stick-directions{position:absolute;inset:0;display:grid;place-items:center;color:#ffffff40;font:82px/1 system-ui;pointer-events:none}
 #view-stick-thumb{position:absolute;left:50%;top:50%;width:44px;height:44px;margin:-22px 0 0 -22px;border:2px solid #ffffff70;border-radius:50%;background:linear-gradient(#555c6de6,#242936e6);box-shadow:0 3px 8px #0008,inset 0 1px 2px #fff3;pointer-events:none;transform:translate(var(--stick-x,0px),var(--stick-y,0px))}

@@ -69,4 +69,4 @@ def patch(source: str) -> str:
         }'''
     assert old in source
     source = source.replace(old, new)
-    return source
+    return source+'\n'+(ROOT/'runtime/web/interaction.inc').read_text()

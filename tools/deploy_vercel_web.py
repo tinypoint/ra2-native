@@ -7,6 +7,8 @@ from pathlib import Path
 import urllib.error
 import urllib.parse
 import urllib.request
+import subprocess
+import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 ACCESS = ROOT / '.local/web-access'
@@ -26,6 +28,15 @@ def deploy():
         except urllib.error.HTTPError as error:
             message = json.loads(error.read()).get('error', {})
             raise RuntimeError(str(error.code) + ' ' + str(message.get('message', message.get('code', 'API error')))) from None
+        except urllib.error.URLError:
+            # curl's HTTP/2 transport is more reliable on the local upload route.
+            with tempfile.NamedTemporaryFile() as body:
+                body.write(data);body.flush()
+                config=''.join('header = '+json.dumps(key+': '+value)+'\n' for key,value in headers.items())
+                response=subprocess.run(['curl','--config','-','--http2','-fsS','--connect-timeout','10','--max-time','120','--data-binary','@'+body.name,'https://api.vercel.com'+path+query],input=config,text=True,capture_output=True)
+                if response.returncode:raise RuntimeError('Deployment connection failed; production unchanged') from None
+                return json.loads(response.stdout)
+
 
     files = []
     for source in sorted(SITE.rglob('*')):

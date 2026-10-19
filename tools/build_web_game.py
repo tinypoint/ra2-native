@@ -25,6 +25,9 @@ s=s.replace('host_started_ms=hle_ticks_ms();','chdir("/game");setenv("RA2_TRACE"
 # temporaries on the linear C stack instead of thousands of native Wasm locals.
 lift_sources=[]
 for src in sorted(GEN.glob('*.c')):
+ if src.name=='recomp_0016.c':
+  from patch_web_scene import patch as patch_scene
+  copy=HLE/src.name;copy.write_text(patch_scene(src.read_text()));src=copy
  if src.name=='recomp_0062.c':
   original=src.read_text();needle='void sub_005F6690(void) {'
   assert original.count(needle)==1
@@ -68,7 +71,7 @@ with ThreadPoolExecutor(max_workers=3) as pool:
   if n%10==0:print('Compiled',n,'/',len(sources),'failures',len(failures),flush=True)
 if failures:(ROOT/'logs/web-build-errors.json').write_text(json.dumps(failures,indent=2)+'\n');raise SystemExit(1)
 objects=[OBJ/(src.stem+'.o') for src in sources]  # Stable link order keeps updates reproducible.
-link=[emcc,'-O1','-pthread',*map(str,objects),'-L',str(ROOT/'.local/ffmpeg-web/lib'),'-lavformat','-lavcodec','-lswresample','-lavutil','--use-port=sdl2','--use-port=sdl2_ttf','-sGLOBAL_BASE=65536','-sMODULARIZE=1','-sEXPORT_NAME=createRA2Web','-sPROXY_TO_PTHREAD=1','-sPTHREAD_POOL_SIZE=6','-sINITIAL_MEMORY=67108864','-sMAXIMUM_MEMORY=1610612736','-sALLOW_MEMORY_GROWTH=1','-sSTACK_SIZE=4194304','-sEXPORTED_RUNTIME_METHODS=FS,callMain','-sEXPORTED_FUNCTIONS=_main,_ra2_web_mouse,_ra2_web_key','-sENVIRONMENT=web,worker','-sASSERTIONS=1','-sEXIT_RUNTIME=1','-o',str(OUT/'ra2-web.js')]
+link=[emcc,'-O1','-pthread',*map(str,objects),'-L',str(ROOT/'.local/ffmpeg-web/lib'),'-lavformat','-lavcodec','-lswresample','-lavutil','--use-port=sdl2','--use-port=sdl2_ttf','-sGLOBAL_BASE=65536','-sMODULARIZE=1','-sEXPORT_NAME=createRA2Web','-sPROXY_TO_PTHREAD=1','-sPTHREAD_POOL_SIZE=6','-sINITIAL_MEMORY=67108864','-sMAXIMUM_MEMORY=1610612736','-sALLOW_MEMORY_GROWTH=1','-sSTACK_SIZE=4194304','-sEXPORTED_RUNTIME_METHODS=FS,callMain','-sEXPORTED_FUNCTIONS=_main,_ra2_web_mouse,_ra2_web_key,_ra2_web_reset','-sENVIRONMENT=web,worker','-sASSERTIONS=1','-sEXIT_RUNTIME=1','-o',str(OUT/'ra2-web.js')]
 p=subprocess.run(link,env=env,capture_output=True,text=True,timeout=600);(ROOT/'logs/web-link.log').write_text(p.stdout+p.stderr)
 if p.returncode:raise SystemExit(p.stderr[-2500:])
 from patch_web_worker_errors import patch

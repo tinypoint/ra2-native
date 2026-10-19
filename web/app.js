@@ -11,7 +11,19 @@ const $=id=>{
 },canvas=$('canvas');
 let manifest,db,game,right=false,running=false,loading=false,networkBytes=0,startedAt=0;
 let transferStarted=0,transferMilliseconds=0,speedSamples=[];
-let importing=false,pendingReload=false,gameMemory=null;
+let importing=false,pendingReload=false,gameMemory=null,interactionPhase='menu';
+function interactionState(value){
+ const next=['menu','loading','battlefield','dialog'][value]||'menu';
+ if(next===interactionPhase)return;
+ resetTouchInput();
+ if(game){for(const vk of physicalHeld)game._ra2_web_key(0,vk,0);game._ra2_web_reset?.();}
+ physicalHeld.clear();interactionPhase=next;
+ document.body.classList.toggle('battlefield-controls',next==='battlefield');
+ window.dispatchEvent(new Event('ra2-controls-change'));
+ stageText={menu:'游戏菜单',loading:'加载或退出地图',battlefield:'战场运行中',dialog:'游戏内菜单'}[next];
+ try{localStorage.setItem('ra2-last-stage',stageText);}catch{}
+ log('[interaction] '+next);
+}
 let pageLeaving=false,previousRun=null;
 const memoryHistory=[];
 const runtimeWorkers=new Set();
@@ -193,7 +205,7 @@ async function startGame(manual=true){
   if(typeof createRA2Web!=='function'){const script=document.createElement('script');script.src=manifest.script.url;await new Promise((resolve,reject)=>{script.onload=resolve;script.onerror=()=>reject(new Error('启动器加载失败'));document.head.appendChild(script);});}
   let fail;const failed=new Promise((_,reject)=>{fail=reject;});
   progress('准备下载或读取游戏程序…',0,0,true);
-  game=await Promise.race([createRA2Web({canvas,noInitialRun:true,onThreadError:reason=>reportRuntimeError(reason,'pthread'),locateFile:path=>manifest.artifacts[path]?.url||path,instantiateWasm:(imports,success)=>instantiateStreaming(imports,success,fail),print:log,printErr:log,onGameFrame:()=>{if(document.body.classList.contains('game-active'))return;document.body.classList.add('game-active');try{stageText='游戏运行中';localStorage.setItem('ra2-session-active','1');localStorage.setItem('ra2-last-stage',stageText);localStorage.removeItem('ra2-launch-pending');sessionStorage.removeItem('ra2-launch-in-progress');}catch{}loading=false;$('loading').hidden=true;$('boot-progress').hidden=true;$('import').disabled=false;$('start').textContent='游戏运行中';status('游戏已开始输出画面，菜单仍需初始化片刻。');},onAbort:reason=>{document.body.classList.remove('game-active','game-shell');loading=false;running=false;status('游戏停止：'+reason);fail(new Error(String(reason)));},onExit:code=>{try{localStorage.removeItem('ra2-session-active');}catch{}document.body.classList.remove('game-active','game-shell');loading=false;running=false;status('游戏已退出，代码 '+code);$('loading').hidden=true;$('start').disabled=false;$('start').textContent='重新启动游戏';$('import').disabled=false;showRecovery();}}),failed]);
+  game=await Promise.race([createRA2Web({canvas,noInitialRun:true,onInteractionState:interactionState,onThreadError:reason=>reportRuntimeError(reason,'pthread'),locateFile:path=>manifest.artifacts[path]?.url||path,instantiateWasm:(imports,success)=>instantiateStreaming(imports,success,fail),print:log,printErr:log,onGameFrame:()=>{if(document.body.classList.contains('game-active'))return;document.body.classList.add('game-active');try{stageText='游戏运行中';localStorage.setItem('ra2-session-active','1');localStorage.setItem('ra2-last-stage',stageText);localStorage.removeItem('ra2-launch-pending');sessionStorage.removeItem('ra2-launch-in-progress');}catch{}loading=false;$('loading').hidden=true;$('boot-progress').hidden=true;$('import').disabled=false;$('start').textContent='游戏运行中';status('游戏已开始输出画面，菜单仍需初始化片刻。');},onAbort:reason=>{document.body.classList.remove('game-active','game-shell');loading=false;running=false;status('游戏停止：'+reason);fail(new Error(String(reason)));},onExit:code=>{try{localStorage.removeItem('ra2-session-active');}catch{}document.body.classList.remove('game-active','game-shell');loading=false;running=false;status('游戏已退出，代码 '+code);$('loading').hidden=true;$('start').disabled=false;$('start').textContent='重新启动游戏';$('import').disabled=false;showRecovery();}}),failed]);
   game.FS.mkdirTree('/game');let loaded=0;const total=manifest.files.reduce((n,f)=>n+f.size,0);
   for(const file of manifest.files){const bytes=await readResource(file);progress('载入游戏内存：'+file.name,file.size,file.size,true);await new Promise(resolve=>setTimeout(resolve,0));game.FS.writeFile('/game/'+file.name,bytes,{canOwn:true});loaded+=file.size;$('resources').textContent='游戏资源已载入 '+size(loaded)+' / '+size(total)+'；本次下载 '+size(networkBytes);}
   game.FS.chdir('/game');progress('下载与载入完成，原游戏正在初始化…',0,0,true);running=true;game.callMain(['/game/game.exe','--with-launcher']);canvas.focus();
@@ -307,7 +319,7 @@ const point=(event,clamp=false)=>{
  const x=(event.clientX-r.left-(r.width-canvas.width*scale)/2)/scale,y=(event.clientY-r.top-(r.height-canvas.height*scale)/2)/scale;
  if(!clamp&&(x<0||y<0||x>=canvas.width||y>=canvas.height))return null;
  // Keep phone input outside the game's edge-scroll hot zones. Mouse input stays exact.
- const inset=event.pointerType==='touch'?16:0;
+ const inset=event.pointerType==='touch'&&interactionPhase==='battlefield'?16:0;
  return [Math.max(inset,Math.min(canvas.width-1-inset,Math.floor(x))),Math.max(inset,Math.min(canvas.height-1-inset,Math.floor(y)))];
 };
 let active=null,heldButton=0,physicalPosition=[0,0];
@@ -344,7 +356,7 @@ function moveStick(e){
  scrollKeys(keys);
 }
 stick.addEventListener('pointerdown',e=>{
- if(!running||stickPointer!==null||e.button!==0)return;
+ if(!running||interactionPhase!=='battlefield'||stickPointer!==null||e.button!==0)return;
  e.preventDefault();stickPointer=e.pointerId;stick.setPointerCapture(e.pointerId);
  stick.classList.add('active');moveStick(e);
 });
@@ -371,9 +383,9 @@ window.addEventListener('pointermove',e=>{
 window.addEventListener('pagehide',stopPan);
 stick.addEventListener('contextmenu',e=>e.preventDefault());
 canvas.addEventListener('pointerdown',e=>{
- if(!running)return;
+ if(!running||interactionPhase==='loading')return;
  const p=point(e);if(!p)return;
- if(e.pointerType==='touch'){
+ if(e.pointerType==='touch'&&interactionPhase==='battlefield'){
   e.preventDefault();
   if(active!==null)return;
   active=e.pointerId;canvas.setPointerCapture(e.pointerId);heldButton=right?2:0;
@@ -417,13 +429,13 @@ function releaseMouse(){if(running&&active!==null&&!touchPress)game._ra2_web_mou
 function resetTouchInput(){releaseMouse();stopPan();}
 window.addEventListener('blur',resetTouchInput);document.addEventListener('visibilitychange',()=>{if(document.hidden)resetTouchInput();});
 $('mobile-cancel').onclick=()=>{
- if(!running)return;releaseMouse();
+ if(!running||interactionPhase!=='battlefield')return;releaseMouse();
  game._ra2_web_mouse(1,physicalPosition[0],physicalPosition[1],2);
  game._ra2_web_mouse(2,physicalPosition[0],physicalPosition[1],2);
  canvas.focus({preventScroll:true});
 };
 $('mobile-home').onclick=()=>{
- if(!running)return;releaseMouse();
+ if(!running||interactionPhase!=='battlefield')return;releaseMouse();
  game._ra2_web_key(1,72,0);game._ra2_web_key(0,72,0);
  canvas.focus({preventScroll:true});
 };
@@ -449,7 +461,7 @@ document.addEventListener('wheel',event=>{if(document.body.classList.contains('g
 setInterval(()=>{
  if(!running||pageLeaving)return;
  try{
-  const snapshot={time:new Date().toISOString(),stage:stageText,memoryBytes:gameMemory?.buffer.byteLength||null,resourceBytes:manifest?.files.reduce((n,f)=>n+f.size,0),fps:$('game-fps').textContent,visibility:document.visibilityState,version:manifest?.programUpdate?.version};
+  const snapshot={time:new Date().toISOString(),stage:stageText,interactionPhase,memoryBytes:gameMemory?.buffer.byteLength||null,resourceBytes:manifest?.files.reduce((n,f)=>n+f.size,0),fps:$('game-fps').textContent,visibility:document.visibilityState,version:manifest?.programUpdate?.version};
   memoryHistory.push(snapshot);if(memoryHistory.length>60)memoryHistory.shift();
   localStorage.setItem('ra2-session-snapshot',JSON.stringify(snapshot));localStorage.setItem('ra2-memory-history',JSON.stringify(memoryHistory));localStorage.setItem('ra2-last-logs',$('diagnostics').textContent.slice(-6000));
  }catch{}
