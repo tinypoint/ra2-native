@@ -11,14 +11,14 @@
 | `tools/`、`poc/` | 两个平台的构建、转换和检查脚本 |
 | `deploy/vercel/` | 网页托管配置 |
 | `docs/` | 架构、构建、验证与部署说明 |
-| GitHub Releases | 版本化资源及程序产物，不存入源码树 |
+| Vercel Blob | Web 程序与资源下载，不存入源码树 |
 
 源码仓库：https://github.com/tinypoint/ra2-native 。Vercel 项目为 `ra2-web`。
 资源和生成的游戏代码、本机构建产物留在被忽略的 `.local/`、`game/` 等目录。
 Web 当前程序版本为 v0.1.5；移动端摇杆、菜单与加载界面仍在迭代。
 
 - [Web 运行与缓存](docs/WEB_RUNTIME.md)
-- [Vercel 和 GitHub Releases 部署](docs/VERCEL_DEPLOYMENT.md)
+- [Vercel 和 Blob 部署](docs/VERCEL_DEPLOYMENT.md)
 
 ## macOS 验证记录
 
@@ -82,6 +82,6 @@ uv pip install --python .venv/bin/python -r requirements.txt
 
 上游仓库固定在 `repos.lock.json` 的提交；`vendor/` 保持原样，不纳入本工程 Git。生成物和游戏文件也不纳入 Git。实验不执行原始 x86 游戏程序，不安装 Wine、Rosetta 或虚拟机。
 
-两个平台的源码集中维护在本仓库；游戏资源和程序下载由同一仓库的 Releases 管理。
+两个平台的源码集中维护在本仓库；Web 游戏资源和程序下载由 Vercel Blob 托管。
 
 本机交互研究构建：`.venv/bin/python tools/launch_native_game.py`，或打开 `.local/Red Alert 2 ARM64 Optimized.app`。应用包由 `tools/package_local_app.py` 生成，绑定当前资源目录；遭遇战结算与跨进程存档恢复已验收；YR 待验收。

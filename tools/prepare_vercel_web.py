@@ -33,7 +33,8 @@ def read_header(source, magic, limit):
     return json.loads(source.read(length))
 
 
-def prepare(resources_repository=None):
+def prepare(resources_repository=None, blob=False):
+    blob_index = json.loads((ROOT / '.local/blob-assets/index.json').read_text()) if blob else None
     if resources_repository and not re.fullmatch(r'[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+', resources_repository):
         raise ValueError('Use a GitHub repository in owner/repo form')
     release = json.loads((ROOT / 'web/runtime-release.json').read_text())
@@ -72,11 +73,18 @@ def prepare(resources_repository=None):
                 count += len(expanded)
                 if not decompressor.eof or decompressor.unused_data or count != metadata['size'] or h.hexdigest() != metadata['to']:
                     raise ValueError('Complete program failed decompression/hash check')
-        url = 'updates/' + digest(source) + '/' + source.name
-        target = stage / url
-        target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(source, target)
-        return {**metadata, 'url': url}
+        if not resources_repository:
+            raise ValueError('Specify the unified GitHub repository for runtime downloads')
+        parts = []
+        folder = ROOT / '.local/github-runtime'
+        folder.mkdir(exist_ok=True)
+        with source.open('rb') as stream:
+            for block in iter(lambda: stream.read(1024 * 1024), b''):
+                sha = hashlib.sha256(block).hexdigest()
+                name = sha + '.bin'
+                (folder / name).write_bytes(block)
+                parts.append({'url': (blob_index['baseUrl'] if blob_index else '') + 'program/' + name, 'size': len(block), 'sha256': sha})
+        return {**metadata, 'url': (blob_index['baseUrl'] if blob_index else '') + 'program/' + parts[0]['sha256'] + '.bin', 'downloadParts': parts}
 
     with tempfile.TemporaryDirectory(prefix='vercel-stage-', dir=ROOT / '.local') as directory:
         stage = Path(directory)
@@ -102,7 +110,7 @@ def prepare(resources_repository=None):
                 raise ValueError('Resource chunk size differs from browser cache format')
             if [{key: f[key] for key in ('name', 'size', 'sha256')} for f in resources['files']] != [{key: f[key] for key in ('name', 'size', 'sha256')} for f in files]:
                 raise ValueError('Release resources differ from the original import pack')
-            files = resources['files']
+            files = blob_index['files'] if blob_index else resources['files']
         baseline = pack['files'][0]
         for item in (update, update.get('fallback')):
             if item is None:
@@ -110,16 +118,22 @@ def prepare(resources_repository=None):
             allowed = item.setdefault('resourcePrograms', [])
             if not any(old['sha256'] == baseline['sha256'] for old in allowed):
                 allowed.append({key: baseline[key] for key in ('sha256', 'size')})
-        manifest = {'ready': True, 'resourceMode': 'github-releases' if resources else 'local-import', 'diagnostics': False,
+        manifest = {'ready': True, 'resourceMode': 'vercel-blob' if blob_index else ('github-releases' if resources else 'local-import'), 'diagnostics': False,
                     'files': files, 'script': script,
                     'artifacts': {'ra2-web.js': script, 'ra2-web.wasm': program},
                     'programUpdate': update}
         config = json.loads((ROOT / 'deploy/vercel/vercel.json').read_text())
-        if resources:
+        if blob_index:
+            manifest['blobBaseUrl'] = blob_index['baseUrl']
+            for rule in config['headers']:
+                for header in rule['headers']:
+                    if header['key'] == 'Content-Security-Policy':
+                        header['value'] = header['value'].replace("connect-src 'self';", "connect-src 'self' " + blob_index['baseUrl'].rstrip('/') + ";")
+        elif resources:
             manifest['resourcesRelease'] = {'repository': resources_repository, 'tag': resources['releaseTag'], 'viaVercel': True}
-            config['rewrites'] = [{'source': '/resources/:chunk([a-f0-9]{64}).bin',
-                                   'destination': f'https://github.com/{resources_repository}/releases/download/{resources["releaseTag"]}/:chunk.bin'}]
-            config['headers'].append({'source': '/resources/(.*)', 'headers': [{'key': 'Cache-Control', 'value': 'public, max-age=31536000, immutable'}]})
+            config['rewrites'] = [
+                {'source': '/resources/:chunk([a-f0-9]{64}).bin', 'destination': f'https://github.com/{resources_repository}/releases/download/{resources["releaseTag"]}/:chunk.bin'},
+                {'source': '/program/:chunk([a-f0-9]{64}).bin', 'destination': f'https://github.com/{resources_repository}/releases/download/web-v{release["version"]}/:chunk.bin'}]
         (stage / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
         (stage / 'vercel.json').write_text(json.dumps(config, indent=2) + '\n')
         (stage / '.vercelignore').write_text('README.md\nverification.json\n')
@@ -147,4 +161,6 @@ def prepare(resources_repository=None):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--resources-repository', help='Public GitHub owner/repo containing prepared resource release assets')
-    prepare(parser.parse_args().resources_repository)
+    parser.add_argument('--blob', action='store_true', help='Use the prepared public Vercel Blob store for all downloads')
+    args = parser.parse_args()
+    prepare(args.resources_repository, args.blob)

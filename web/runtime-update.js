@@ -59,9 +59,20 @@ async function ensureRuntimeUpdate(){
  progress('下载小型程序更新，保留已导入资源…',0,0,true);
  transferStarted=performance.now();let pack;
  try{
-  const response=await fetch(update.url);if(!response.ok)throw new Error('程序更新下载失败');
-  const reader=response.body.getReader(),parts=[];let received=0;const total=Number(response.headers.get('Content-Length'))||update.downloadBytes||0;
-  while(true){const part=await reader.read();if(part.done)break;received+=part.value.length;networkBytes+=part.value.length;parts.push(part.value);progress('下载程序增量更新（保留已有资源）',received,total);}
+  const pieces=update.downloadParts||[{url:update.url,size:update.downloadBytes||0}],parts=[];
+  let received=0;const total=update.downloadBytes||0;
+  for(const piece of pieces){
+   let bytes=piece.sha256?await get('download:'+piece.sha256):null;
+   if(!(bytes instanceof ArrayBuffer)||bytes.byteLength!==piece.size){
+    const response=await fetch(piece.url);if(!response.ok)throw new Error('程序更新下载失败：'+response.status);
+    const reader=response.body.getReader(),buffers=[];let count=0;
+    while(true){const part=await reader.read();if(part.done)break;count+=part.value.length;if(piece.size&&count>piece.size){await reader.cancel();throw new Error('程序更新分块超出预期');}networkBytes+=part.value.length;buffers.push(part.value);progress('下载程序更新（保留已有资源）',received+count,total);}
+    if(piece.size&&count!==piece.size)throw new Error('程序更新下载中断');
+    bytes=await new Blob(buffers).arrayBuffer();
+    if(piece.sha256){const sha=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),n=>n.toString(16).padStart(2,'0')).join('');if(sha!==piece.sha256)throw new Error('程序更新分块校验失败');await put('download:'+piece.sha256,bytes);}
+   }
+   parts.push(bytes);received+=bytes.byteLength;progress('下载程序更新（保留已有资源）',received,total);
+  }
   pack=new Blob(parts);
  }finally{transferMilliseconds+=performance.now()-transferStarted;transferStarted=0;}
  await applyRuntimeUpdate(pack);

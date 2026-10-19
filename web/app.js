@@ -85,15 +85,22 @@ async function* streamFile(file){
    progress('下载：'+file.name,offset,file.size,true);
    transferStarted=performance.now();
    try{
-   const chunkUrl=file.chunkUrls?.[i];
-   if(file.chunkUrls&&(!chunkUrl||file.chunkUrls.length!==count||file.chunkHashes?.length!==count))throw new Error('资源分块清单不完整');
-   const response=await fetch(chunkUrl||file.url,chunkUrl?{}:{headers:{Range:`bytes=${offset}-${offset+length-1}`}});
-   if(!response.ok)throw new Error(file.name+' 下载失败：'+response.status);
-   if(!chunkUrl&&response.status!==206&&file.size>CHUNK){await response.body?.cancel();throw new Error('服务器未提供分块下载，请刷新页面再试');}
-   if(!chunkUrl&&response.status===206&&response.headers.get('Content-Range')!==`bytes ${offset}-${offset+length-1}/${file.size}`)throw new Error('下载分块位置不正确');
+   const pieces=file.chunkParts?.[i]||[{url:file.chunkUrls?.[i]||file.url,size:length,range:!file.chunkUrls}];
+   if(!pieces.length||pieces.reduce((n,p)=>n+p.size,0)!==length)throw new Error('资源分块清单不完整');
    const output=new Uint8Array(length);let received=0;
-   if(response.body){const reader=response.body.getReader();while(true){const part=await reader.read();if(part.done)break;if(received+part.value.length>length){await reader.cancel();throw new Error('下载分块超出预期大小');}output.set(part.value,received);received+=part.value.length;networkBytes+=part.value.length;progress('下载：'+file.name,offset+received,file.size);}}
-   else{const full=new Uint8Array(await response.arrayBuffer());output.set(full);received=full.length;networkBytes+=received;}
+   for(const piece of pieces){
+    const response=await fetch(piece.url,piece.range?{headers:{Range:`bytes=${offset}-${offset+length-1}`}}:{});
+    if(!response.ok)throw new Error(file.name+' 下载失败：'+response.status);
+    if(piece.range&&response.status!==206&&file.size>CHUNK){await response.body?.cancel();throw new Error('服务器未提供分块下载，请刷新页面再试');}
+    if(piece.range&&response.status===206&&response.headers.get('Content-Range')!==`bytes ${offset}-${offset+length-1}/${file.size}`)throw new Error('下载分块位置不正确');
+    const begin=received;
+    let stream=response.body||new Blob([await response.arrayBuffer()]).stream();
+    stream=stream.pipeThrough(new TransformStream({transform(part,controller){networkBytes+=part.length;controller.enqueue(part);}}));
+    if(piece.compression==='deflate')stream=stream.pipeThrough(new DecompressionStream('deflate'));
+    const reader=stream.getReader();
+    while(true){const part=await reader.read();if(part.done)break;if(received-begin+part.value.length>piece.size){await reader.cancel();throw new Error('下载分块超出预期大小');}output.set(part.value,received);received+=part.value.length;progress('下载：'+file.name,offset+received,file.size);}
+    if(received-begin!==piece.size)throw new Error('资源分块下载中断');
+   }
    if(received!==length)throw new Error('网络传输中断；已完成的分块会保留，刷新后可继续');
    if(file.chunkHashes){const digest=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',output)),n=>n.toString(16).padStart(2,'0')).join('');if(digest!==file.chunkHashes[i])throw new Error('资源下载校验失败：'+file.name+'；刷新后重试');}
    bytes=output.buffer;
@@ -138,7 +145,7 @@ async function initialize(){
   else if(manifest.programUpdate&&(await get(manifest.programUpdate.from+':meta'))?.size===manifest.programUpdate.sourceSize){$('resources').textContent='已导入的游戏资源仍在，仅需程序增量更新'+(manifest.programUpdate.downloadBytes?'（'+size(manifest.programUpdate.downloadBytes)+'）':'')+'，无需重新导入完整资源包。';$('start').textContent='更新程序并启动';}
   if(missingImports){$('start').textContent='先导入资源包';$('resources').textContent+='；请导入手机已有的 .ra2pack 文件，无需重新下载。';}
   $('import').disabled=false;
-  if((complete||manifest.resourceMode==='github-releases')&&location.hash!=='#settings')startGame(false);
+  if((complete||['github-releases','vercel-blob'].includes(manifest.resourceMode))&&location.hash!=='#settings')startGame(false);
   else{if(!complete)status(missingImports?'请导入手机已有的资源包，程序更新会自动下载。':'请导入资源包或程序更新包，也可以下载缺失资源后启动。');openSettings();}
  }catch(e){document.body.classList.remove('game-shell');status('无法准备游戏：'+(e?.message||e));log(e?.stack||e);openSettings();}
 }

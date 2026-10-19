@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Upload only the prepared static site through Vercel's deployment API."""
+import base64
 import hashlib
 import json
 from pathlib import Path
@@ -35,13 +36,15 @@ def deploy():
             continue
         data = source.read_bytes()
         sha = hashlib.sha1(data).hexdigest()
-        request('/v2/files', data, {'Content-Type': 'application/octet-stream', 'x-now-digest': sha, 'x-now-size': str(len(data))})
-        files.append({'file': relative.as_posix(), 'sha': sha, 'size': len(data)})
-        print('Uploaded', relative.as_posix(), len(data), flush=True)
+        if len(data) < 256 * 1024:
+            files.append({'file': relative.as_posix(), 'data': base64.b64encode(data).decode(), 'encoding': 'base64'})
+        else:
+            files.append({'file': relative.as_posix(), 'sha': sha, 'size': len(data)})
+        print('Prepared', relative.as_posix(), len(data), flush=True)
     config = json.loads((SITE / 'vercel.json').read_text())
     body = {'name': project['projectName'], 'project': project['projectId'], 'target': 'production', 'files': files,
             'projectSettings': {key: config[key] for key in ('framework', 'buildCommand', 'installCommand', 'outputDirectory')}}
-    body.update({key: config[key] for key in ('headers', 'redirects', 'rewrites') if key in config})
+    body.update({key: config[key] for key in ('headers', 'redirects', 'rewrites', 'functions') if key in config})
     result = request('/v13/deployments', json.dumps(body).encode(), {'Content-Type': 'application/json'})
     (ACCESS / 'vercel-deployment.json').write_text(json.dumps(result, indent=2) + '\n')
     print(json.dumps({key: result.get(key) for key in ('id', 'url', 'readyState', 'alias')}, ensure_ascii=False), flush=True)
