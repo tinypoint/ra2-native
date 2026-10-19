@@ -69,4 +69,10 @@ def patch(source: str) -> str:
         }'''
     assert old in source
     source = source.replace(old, new)
-    return source+'\n'+(ROOT/'runtime/web/interaction.inc').read_text()
+    # Acknowledge after the guest window procedure returns, not when a
+    # message is merely queued/peeked. Only browser builds get this counter.
+    needle = '    if (m == WM_PAINT && (x = W(h))'
+    assert source.count(needle) == 1
+    source = source.replace(needle, '    if (m == WM_LBUTTONDOWN || m == WM_LBUTTONUP || m == WM_RBUTTONDOWN || m == WM_RBUTTONUP) hle_web_mouse_completed++;\n' + needle)
+    source = 'unsigned hle_web_mouse_completed;\n' + source
+    return source

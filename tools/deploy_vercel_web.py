@@ -47,7 +47,7 @@ def deploy():
             continue
         data = source.read_bytes()
         sha = hashlib.sha1(data).hexdigest()
-        if len(data) < 256 * 1024:
+        if len(data) < 1024 * 1024:
             files.append({'file': relative.as_posix(), 'data': base64.b64encode(data).decode(), 'encoding': 'base64'})
         else:
             files.append({'file': relative.as_posix(), 'sha': sha, 'size': len(data)})
