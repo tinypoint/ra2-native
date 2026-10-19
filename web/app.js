@@ -30,9 +30,18 @@ function showRecovery(){
  $('game-error').hidden=false;
 }
 function dismissRecovery(){$('game-error').hidden=true;}
+$('export-diagnostics').onclick=async()=>{
+ const stored=key=>{try{return localStorage.getItem(key);}catch{return null;}};
+ const report={time:new Date().toISOString(),browser:navigator.userAgent,url:location.origin+location.pathname,version:manifest?.programUpdate?.version,wasm:manifest?.artifacts?.['ra2-web.wasm']?.sha256,isolated:globalThis.crossOriginIsolated,stage:stageText,status:$('status').textContent,previousStage:stored('ra2-last-stage'),previousError:stored('ra2-last-error'),previousLogs:stored('ra2-last-logs'),logs:$('diagnostics').textContent};
+ const file=new File([JSON.stringify(report,null,2)],'ra2-diagnostics-'+Date.now()+'.json',{type:'application/json'});
+ if(navigator.canShare?.({files:[file]})){try{await navigator.share({files:[file]});return;}catch(e){if(e.name==='AbortError')return;}}
+ const url=URL.createObjectURL(file),link=document.createElement('a');link.href=url;link.download=file.name;link.click();setTimeout(()=>URL.revokeObjectURL(url),60000);
+};
+
 const CHUNK=16*1024*1024;
 const size=n=>n>=1048576?(n/1048576).toFixed(1)+' MiB':Math.ceil(n/1024)+' KiB';
-const log=text=>{const el=$('diagnostics');el.textContent=(el.textContent+String(text)+'\n').slice(-32000);};
+let logSaveTimer;
+const log=text=>{const el=$('diagnostics');el.textContent=(el.textContent+String(text)+'\n').slice(-32000);clearTimeout(logSaveTimer);logSaveTimer=setTimeout(()=>{try{localStorage.setItem('ra2-last-logs',el.textContent.slice(-6000));}catch{}},250);};
 function sendDiagnostics(report){
  if(manifest?.diagnostics===false)return;
  fetch('diagnostics',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(report),keepalive:true}).catch(()=>{});
