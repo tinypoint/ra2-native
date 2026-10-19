@@ -49,14 +49,8 @@ body:is(.game-shell,.game-active,[data-view="game"]) #game-window{flex:1 1 0;min
 #boot-progress progress{display:block;margin:10px 0}
 #boot-detail{margin:0;font-size:11px}
 
-#game-settings{width:min(440px,calc(100% - 24px));max-height:calc(100dvh - 32px);padding:20px;margin:auto;border:1px solid #41414b;border-radius:14px;background:#1b1c20;color:#ecebea;overflow:auto;overscroll-behavior:contain;touch-action:pan-y;box-shadow:0 20px 80px #0009}
-#game-settings::backdrop{background:#0009}
-#game-settings .settings-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
-#game-settings h2{margin:0;font-size:19px}
-#settings-close{width:36px;min-height:36px;padding:0;background:#303137;color:#eee;font:24px/1 system-ui}
-#game-settings .buttons{flex-wrap:wrap}
-#game-settings .buttons>button{flex:1}
-#game-settings #status{font-size:13px;line-height:1.6;overflow-wrap:anywhere}
-#game-settings #loading{padding:12px}
-#game-settings #diagnostics{-webkit-user-select:text;user-select:text;max-height:200px;overflow:auto;overscroll-behavior:contain}
-body.settings-open{touch-action:auto}
+
+#game-controls .pad-label{font:600 14px/1.2 system-ui;letter-spacing:0;opacity:1}
+#game-error{z-index:4;left:50%;right:auto;bottom:max(20px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(400px,calc(100% - 32px));padding:16px;border:1px solid #ffffff30;border-radius:12px;background:#15171aee}
+#error-message{margin:0 0 12px;color:#eee;font-size:13px;line-height:1.6}
+#game-error button{min-height:40px;padding:8px 24px}

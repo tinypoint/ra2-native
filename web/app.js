@@ -23,19 +23,13 @@ window.addEventListener('pagehide',()=>{
  try{localStorage.removeItem('ra2-launch-pending');sessionStorage.removeItem('ra2-launch-in-progress');}catch{}
 });
 window.addEventListener('pageshow',event=>{if(event.persisted&&pageLeaving)location.reload();});
-const settings=$('game-settings');
-function openSettings(){
+function showRecovery(){
+ if(!loading)$('start').disabled=false;
  $('boot-progress').hidden=true;resetTouchInput();
- if(game)for(const vk of physicalHeld)game._ra2_web_key(0,vk,0);
- physicalHeld.clear();
- if(!settings.open)settings.showModal();
- document.body.classList.add('settings-open');
+ $('error-message').textContent=$('status').textContent;
+ $('game-error').hidden=false;
 }
-function closeSettings(){if(location.hash==='#settings')history.replaceState(null,'',location.pathname+location.search);if(settings.open)settings.close();}
-$('settings-open').onclick=openSettings;
-$('settings-close').onclick=closeSettings;
-settings.addEventListener('close',()=>{document.body.classList.remove('settings-open');if(location.hash==='#settings')history.replaceState(null,'',location.pathname+location.search);if(running)canvas.focus({preventScroll:true});});
-settings.addEventListener('click',e=>{if(e.target!==settings)return;const r=settings.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeSettings();});
+function dismissRecovery(){$('game-error').hidden=true;}
 const CHUNK=16*1024*1024;
 const size=n=>n>=1048576?(n/1048576).toFixed(1)+' MiB':Math.ceil(n/1024)+' KiB';
 const log=text=>{const el=$('diagnostics');el.textContent=(el.textContent+String(text)+'\n').slice(-32000);};
@@ -45,7 +39,7 @@ function sendDiagnostics(report){
 }
 const status=text=>{
  $('status').textContent=text;if(!loading)$('boot-progress').hidden=true;
- if(gameView){const notice=document.getElementById('game-error');notice.textContent=text;notice.hidden=!/^(游戏运行出错|游戏停止|启动失败|无法准备游戏|游戏程序暂不可用|请通过 HTTPS|当前浏览器缺少)/.test(text);}
+ if(gameView){const notice=document.getElementById('game-error');$('error-message').textContent=text;notice.hidden=!/^(游戏运行出错|游戏停止|启动失败|无法准备游戏|游戏程序暂不可用|请通过 HTTPS|当前浏览器缺少)/.test(text);}
 };
 async function showProgramVersion(){
  const file=manifest.artifacts['ra2-web.wasm'],version=manifest.programUpdate?.version;
@@ -62,7 +56,7 @@ function reportRuntimeError(value,kind='browser'){
  const error=describeError(value)||'浏览器线程退出，未提供具体错误信息';
  const report={kind,error:String(error).slice(0,2000),stage:stageText,logs:$('diagnostics').textContent.slice(-6000)};
  log(error);status('游戏运行出错：'+String(error).split('\n')[0]);running=false;loading=false;document.body.classList.remove('game-active','game-shell');
- $('start').textContent='重新启动游戏';$('start').disabled=false;$('import').disabled=false;$('diagnostics').closest('details').open=true;openSettings();
+ $('start').textContent='重试';$('start').disabled=false;showRecovery();
  try{localStorage.setItem('ra2-last-error',JSON.stringify(report));localStorage.setItem('ra2-launch-pending','1');}catch{}
  sendDiagnostics(report);
 }
@@ -75,7 +69,7 @@ let stageText='',lastPaint=0;
 function progress(stage,current=0,total=0,force=false){
  const now=performance.now();if(!force&&stage===stageText&&now-lastPaint<100)return;
  stageText=stage;lastPaint=now;$('loading').hidden=false;$('phase').textContent=stage;status(stage);
- const overlay=$('boot-progress');overlay.hidden=!loading||settings.open;
+ const overlay=$('boot-progress');overlay.hidden=!loading;
  if(loading){$('boot-phase').textContent=stage;const bar=$('boot-bar');if(total){bar.max=total;bar.value=current;}else bar.removeAttribute('value');$('boot-detail').textContent='本次下载 '+size(networkBytes);}
  try{localStorage.setItem('ra2-last-stage',stage);}catch{}
  if(total){$('progress').max=total;$('progress').value=current;$('percent').textContent=Math.min(100,current/total*100).toFixed(1)+'%';$('bytes').textContent=size(current)+' / '+size(total);}
@@ -139,9 +133,9 @@ async function initialize(){
   const offer=manifest.programUpdate;
   if(offer?.fallback&&(await get(offer.from+':meta'))?.size!==offer.sourceSize)manifest.programUpdate=offer.fallback;
   try{const previous=JSON.parse(localStorage.getItem('ra2-last-error')||'null');if(previous){log('上次运行错误：'+previous.error);sendDiagnostics({...previous,kind:'previous-session'});}}catch{}
-  if(!manifest.ready){document.body.classList.remove('game-shell');status('游戏程序暂不可用。');openSettings();return;}
+  if(!manifest.ready){document.body.classList.remove('game-shell');status('游戏程序暂不可用。');showRecovery();return;}
   await showProgramVersion();
-  if(!globalThis.crossOriginIsolated||typeof SharedArrayBuffer==='undefined'){document.body.classList.remove('game-shell');status('请通过 HTTPS 游戏地址访问；当前浏览器没有提供多线程运行条件。');openSettings();return;}
+  if(!globalThis.crossOriginIsolated||typeof SharedArrayBuffer==='undefined'){document.body.classList.remove('game-shell');status('请通过 HTTPS 游戏地址访问；当前浏览器没有提供多线程运行条件。');showRecovery();return;}
   const total=manifest.files.reduce((n,f)=>n+f.size,0)+manifest.artifacts['ra2-web.wasm'].size;
   const all=[manifest.artifacts['ra2-web.wasm'],...manifest.files];
   const states=await Promise.all(all.map(async file=>{
@@ -159,15 +153,15 @@ async function initialize(){
   else if(manifest.programUpdate&&(await get(manifest.programUpdate.from+':meta'))?.size===manifest.programUpdate.sourceSize){$('resources').textContent='已导入的游戏资源仍在，仅需程序增量更新'+(manifest.programUpdate.downloadBytes?'（'+size(manifest.programUpdate.downloadBytes)+'）':'')+'，无需重新导入完整资源包。';$('start').textContent='更新程序并启动';}
   if(missingImports){$('start').textContent='先导入资源包';$('resources').textContent+='；请导入手机已有的 .ra2pack 文件，无需重新下载。';}
   $('import').disabled=false;
-  if(!interrupted&&(complete||['github-releases','vercel-blob'].includes(manifest.resourceMode))&&location.hash!=='#settings'){
+  if(!interrupted&&(complete||['github-releases','vercel-blob'].includes(manifest.resourceMode))){
    if(performance.getEntriesByType('navigation')[0]?.type==='reload')await new Promise(resolve=>setTimeout(resolve,500));
    if(!pageLeaving)startGame(false);
   }
-  else{if(!complete&&!interrupted)status(missingImports?'请导入手机已有的资源包，程序更新会自动下载。':'请导入资源包或程序更新包，也可以下载缺失资源后启动。');openSettings();}
- }catch(e){document.body.classList.remove('game-shell');status('无法准备游戏：'+(e?.message||e));log(e?.stack||e);openSettings();}
+  else{if(!complete&&!interrupted)status(missingImports?'请导入手机已有的资源包，程序更新会自动下载。':'请导入资源包或程序更新包，也可以下载缺失资源后启动。');showRecovery();}
+ }catch(e){document.body.classList.remove('game-shell');status('无法准备游戏：'+(e?.message||e));log(e?.stack||e);showRecovery();}
 }
 async function startGame(manual=true){
- if(pageLeaving||loading||running||importing)return;closeSettings();document.body.classList.add('game-shell');loading=true;startedAt=performance.now();networkBytes=0;
+ if(pageLeaving||loading||running||importing)return;dismissRecovery();document.body.classList.add('game-shell');loading=true;startedAt=performance.now();networkBytes=0;
  transferStarted=0;transferMilliseconds=0;speedSamples=[{time:startedAt,bytes:0}];
  if(manual)try{localStorage.setItem('ra2-auto-start','1');}catch{}
  try{sessionStorage.setItem('ra2-launch-in-progress','1');}catch{}
@@ -179,13 +173,13 @@ async function startGame(manual=true){
   if(typeof createRA2Web!=='function'){const script=document.createElement('script');script.src=manifest.script.url;await new Promise((resolve,reject)=>{script.onload=resolve;script.onerror=()=>reject(new Error('启动器加载失败'));document.head.appendChild(script);});}
   let fail;const failed=new Promise((_,reject)=>{fail=reject;});
   progress('准备下载或读取游戏程序…',0,0,true);
-  game=await Promise.race([createRA2Web({canvas,noInitialRun:true,onThreadError:reason=>reportRuntimeError(reason,'pthread'),locateFile:path=>manifest.artifacts[path]?.url||path,instantiateWasm:(imports,success)=>instantiateStreaming(imports,success,fail),print:log,printErr:log,onGameFrame:()=>{document.body.classList.add('game-active');try{localStorage.removeItem('ra2-launch-pending');sessionStorage.removeItem('ra2-launch-in-progress');}catch{}loading=false;$('loading').hidden=true;$('boot-progress').hidden=true;$('import').disabled=false;$('start').textContent='游戏运行中';status('游戏已开始输出画面，菜单仍需初始化片刻。');},onAbort:reason=>{document.body.classList.remove('game-active','game-shell');loading=false;running=false;status('游戏停止：'+reason);fail(new Error(String(reason)));},onExit:code=>{document.body.classList.remove('game-active','game-shell');loading=false;running=false;status('游戏已退出，代码 '+code);$('loading').hidden=true;$('start').disabled=false;$('start').textContent='重新启动游戏';$('import').disabled=false;openSettings();}}),failed]);
+  game=await Promise.race([createRA2Web({canvas,noInitialRun:true,onThreadError:reason=>reportRuntimeError(reason,'pthread'),locateFile:path=>manifest.artifacts[path]?.url||path,instantiateWasm:(imports,success)=>instantiateStreaming(imports,success,fail),print:log,printErr:log,onGameFrame:()=>{document.body.classList.add('game-active');try{localStorage.removeItem('ra2-launch-pending');sessionStorage.removeItem('ra2-launch-in-progress');}catch{}loading=false;$('loading').hidden=true;$('boot-progress').hidden=true;$('import').disabled=false;$('start').textContent='游戏运行中';status('游戏已开始输出画面，菜单仍需初始化片刻。');},onAbort:reason=>{document.body.classList.remove('game-active','game-shell');loading=false;running=false;status('游戏停止：'+reason);fail(new Error(String(reason)));},onExit:code=>{document.body.classList.remove('game-active','game-shell');loading=false;running=false;status('游戏已退出，代码 '+code);$('loading').hidden=true;$('start').disabled=false;$('start').textContent='重新启动游戏';$('import').disabled=false;showRecovery();}}),failed]);
   game.FS.mkdirTree('/game');let loaded=0;const total=manifest.files.reduce((n,f)=>n+f.size,0);
   for(const file of manifest.files){const bytes=await readResource(file);progress('载入游戏内存：'+file.name,file.size,file.size,true);await new Promise(resolve=>setTimeout(resolve,0));game.FS.writeFile('/game/'+file.name,bytes,{canOwn:true});loaded+=file.size;$('resources').textContent='游戏资源已载入 '+size(loaded)+' / '+size(total)+'；本次下载 '+size(networkBytes);}
   game.FS.chdir('/game');progress('下载与载入完成，原游戏正在初始化…',0,0,true);running=true;game.callMain(['/game/game.exe','--with-launcher']);canvas.focus();
- }catch(e){document.body.classList.remove('game-active','game-shell');loading=false;running=false;status('启动失败：'+(e?.message||String(e)));log(e?.stack||e);$('phase').textContent='启动失败，已保存的资源分块仍然保留';$('start').textContent='刷新后重试';$('start').disabled=false;$('import').disabled=false;openSettings();}
+ }catch(e){document.body.classList.remove('game-active','game-shell');loading=false;running=false;status('启动失败：'+(e?.message||String(e)));log(e?.stack||e);$('phase').textContent='启动失败，已保存的资源分块仍然保留';$('start').textContent='刷新后重试';$('start').disabled=false;$('import').disabled=false;showRecovery();}
 }
-$('start').onclick=()=>{if(loading||importing)return;if(game||pendingReload){closeSettings();location.reload();return;}startGame(true);};
+$('start').onclick=()=>{if(loading||importing)return;if(game||pendingReload){dismissRecovery();location.reload();return;}startGame(true);};
 $('import').onclick=()=>{if(loading||importing)return;$('pack').click();};
 $('pack').onchange=async()=>{
  const pack=$('pack').files[0];if(!pack||loading||importing)return;
@@ -330,7 +324,7 @@ function moveStick(e){
  scrollKeys(keys);
 }
 stick.addEventListener('pointerdown',e=>{
- if(!running||settings.open||stickPointer!==null||e.button!==0)return;
+ if(!running||stickPointer!==null||e.button!==0)return;
  e.preventDefault();stickPointer=e.pointerId;stick.setPointerCapture(e.pointerId);
  stick.classList.add('active');moveStick(e);
 });
@@ -413,14 +407,13 @@ $('mobile-home').onclick=()=>{
 };
 $('right').onclick=()=>{right=!right;$('right').textContent=right?'右键模式':'左键模式';};
 for(const button of document.querySelectorAll('.key'))button.onclick=()=>{if(running){game._ra2_web_key(1,+button.dataset.vk,0);game._ra2_web_key(0,+button.dataset.vk,0);}};
-const physicalHeld=new Set();document.addEventListener('keydown',e=>{if(!running||settings.open||physicalHeld.has(e.keyCode))return;physicalHeld.add(e.keyCode);if(!panKeys.has(e.keyCode))game._ra2_web_key(1,e.keyCode,0);if([27,32,37,38,39,40].includes(e.keyCode))e.preventDefault();});document.addEventListener('keyup',e=>{if(!running||settings.open)return;physicalHeld.delete(e.keyCode);if(!panKeys.has(e.keyCode))game._ra2_web_key(0,e.keyCode,0);});window.addEventListener('blur',()=>{if(game)for(const vk of physicalHeld)game._ra2_web_key(0,vk,0);physicalHeld.clear();});
+const physicalHeld=new Set();document.addEventListener('keydown',e=>{if(!running||physicalHeld.has(e.keyCode))return;physicalHeld.add(e.keyCode);if(!panKeys.has(e.keyCode))game._ra2_web_key(1,e.keyCode,0);if([27,32,37,38,39,40].includes(e.keyCode))e.preventDefault();});document.addEventListener('keyup',e=>{if(!running)return;physicalHeld.delete(e.keyCode);if(!panKeys.has(e.keyCode))game._ra2_web_key(0,e.keyCode,0);});window.addEventListener('blur',()=>{if(game)for(const vk of physicalHeld)game._ra2_web_key(0,vk,0);physicalHeld.clear();});
 $('fullscreen').onclick=()=>canvas.requestFullscreen?.().catch(log);
 // Safari versions that ignore overscroll-behavior still need a cancelable
 // touchmove handler. Setup can scroll internally; game gestures never pan the page.
 let touchX=0,touchY=0;
 document.addEventListener('touchstart',event=>{const touch=event.touches[0];if(touch){touchX=touch.clientX;touchY=touch.clientY;}},{passive:true});
 document.addEventListener('touchmove',event=>{
- if(settings.contains(event.target))return;
  if(document.body.classList.contains('game-active')){if(event.cancelable)event.preventDefault();return;}
  if(event.touches.length!==1)return;
  const touch=event.touches[0],dx=touch.clientX-touchX,dy=touch.clientY-touchY;touchX=touch.clientX;touchY=touch.clientY;
@@ -430,7 +423,7 @@ document.addEventListener('touchmove',event=>{
  }
  if(event.cancelable)event.preventDefault();
 },{passive:false});
-document.addEventListener('wheel',event=>{if(!settings.contains(event.target)&&document.body.classList.contains('game-active')&&event.cancelable)event.preventDefault();},{passive:false});
+document.addEventListener('wheel',event=>{if(document.body.classList.contains('game-active')&&event.cancelable)event.preventDefault();},{passive:false});
 initialize();
 
 window.addEventListener('error',event=>{if(running||loading)reportRuntimeError(event);});
