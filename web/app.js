@@ -14,7 +14,7 @@ let transferStarted=0,transferMilliseconds=0,speedSamples=[];
 let importing=false,pendingReload=false,gameMemory=null;
 const settings=$('game-settings');
 function openSettings(){
- resetTouchInput();
+ $('boot-progress').hidden=true;resetTouchInput();
  if(game)for(const vk of physicalHeld)game._ra2_web_key(0,vk,0);
  physicalHeld.clear();
  if(!settings.open)settings.showModal();
@@ -33,7 +33,7 @@ function sendDiagnostics(report){
  fetch('diagnostics',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(report),keepalive:true}).catch(()=>{});
 }
 const status=text=>{
- $('status').textContent=text;
+ $('status').textContent=text;if(!loading)$('boot-progress').hidden=true;
  if(gameView){const notice=document.getElementById('game-error');notice.textContent=text;notice.hidden=!/^(游戏运行出错|游戏停止|启动失败|无法准备游戏|游戏程序暂不可用|请通过 HTTPS|当前浏览器缺少)/.test(text);}
 };
 async function showProgramVersion(){
@@ -63,6 +63,8 @@ let stageText='',lastPaint=0;
 function progress(stage,current=0,total=0,force=false){
  const now=performance.now();if(!force&&stage===stageText&&now-lastPaint<100)return;
  stageText=stage;lastPaint=now;$('loading').hidden=false;$('phase').textContent=stage;status(stage);
+ const overlay=$('boot-progress');overlay.hidden=!loading||settings.open;
+ if(loading){$('boot-phase').textContent=stage;const bar=$('boot-bar');if(total){bar.max=total;bar.value=current;}else bar.removeAttribute('value');$('boot-detail').textContent='本次下载 '+size(networkBytes);}
  try{localStorage.setItem('ra2-last-stage',stage);}catch{}
  if(total){$('progress').max=total;$('progress').value=current;$('percent').textContent=Math.min(100,current/total*100).toFixed(1)+'%';$('bytes').textContent=size(current)+' / '+size(total);}
  else{$('progress').removeAttribute('value');$('percent').textContent='';$('bytes').textContent='此阶段没有准确百分比，请稍候';}
@@ -162,7 +164,7 @@ async function startGame(manual=true){
   if(typeof createRA2Web!=='function'){const script=document.createElement('script');script.src=manifest.script.url;await new Promise((resolve,reject)=>{script.onload=resolve;script.onerror=()=>reject(new Error('启动器加载失败'));document.head.appendChild(script);});}
   let fail;const failed=new Promise((_,reject)=>{fail=reject;});
   progress('准备下载或读取游戏程序…',0,0,true);
-  game=await Promise.race([createRA2Web({canvas,noInitialRun:true,onThreadError:reason=>reportRuntimeError(reason,'pthread'),locateFile:path=>manifest.artifacts[path]?.url||path,instantiateWasm:(imports,success)=>instantiateStreaming(imports,success,fail),print:log,printErr:log,onGameFrame:()=>{document.body.classList.add('game-active');try{localStorage.removeItem('ra2-launch-pending');sessionStorage.removeItem('ra2-launch-in-progress');}catch{}loading=false;$('loading').hidden=true;$('import').disabled=false;$('start').textContent='游戏运行中';status('游戏已开始输出画面，菜单仍需初始化片刻。');},onAbort:reason=>{document.body.classList.remove('game-active','game-shell');loading=false;running=false;status('游戏停止：'+reason);fail(new Error(String(reason)));},onExit:code=>{document.body.classList.remove('game-active','game-shell');loading=false;running=false;status('游戏已退出，代码 '+code);$('loading').hidden=true;$('start').disabled=false;$('start').textContent='重新启动游戏';$('import').disabled=false;openSettings();}}),failed]);
+  game=await Promise.race([createRA2Web({canvas,noInitialRun:true,onThreadError:reason=>reportRuntimeError(reason,'pthread'),locateFile:path=>manifest.artifacts[path]?.url||path,instantiateWasm:(imports,success)=>instantiateStreaming(imports,success,fail),print:log,printErr:log,onGameFrame:()=>{document.body.classList.add('game-active');try{localStorage.removeItem('ra2-launch-pending');sessionStorage.removeItem('ra2-launch-in-progress');}catch{}loading=false;$('loading').hidden=true;$('boot-progress').hidden=true;$('import').disabled=false;$('start').textContent='游戏运行中';status('游戏已开始输出画面，菜单仍需初始化片刻。');},onAbort:reason=>{document.body.classList.remove('game-active','game-shell');loading=false;running=false;status('游戏停止：'+reason);fail(new Error(String(reason)));},onExit:code=>{document.body.classList.remove('game-active','game-shell');loading=false;running=false;status('游戏已退出，代码 '+code);$('loading').hidden=true;$('start').disabled=false;$('start').textContent='重新启动游戏';$('import').disabled=false;openSettings();}}),failed]);
   game.FS.mkdirTree('/game');let loaded=0;const total=manifest.files.reduce((n,f)=>n+f.size,0);
   for(const file of manifest.files){const bytes=await readResource(file);progress('载入游戏内存：'+file.name,file.size,file.size,true);await new Promise(resolve=>setTimeout(resolve,0));game.FS.writeFile('/game/'+file.name,bytes,{canOwn:true});loaded+=file.size;$('resources').textContent='游戏资源已载入 '+size(loaded)+' / '+size(total)+'；本次下载 '+size(networkBytes);}
   game.FS.chdir('/game');progress('下载与载入完成，原游戏正在初始化…',0,0,true);running=true;game.callMain(['/game/game.exe','--with-launcher']);canvas.focus();

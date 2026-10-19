@@ -44,6 +44,10 @@ body:is(.game-shell,.game-active,[data-view="game"]) #game-window{flex:1 1 0;min
 #view-stick .stick-directions{position:absolute;inset:0;display:grid;place-items:center;color:#ffffff40;font:82px/1 system-ui;pointer-events:none}
 #view-stick-thumb{position:absolute;left:50%;top:50%;width:44px;height:44px;margin:-22px 0 0 -22px;border:2px solid #ffffff70;border-radius:50%;background:linear-gradient(#555c6de6,#242936e6);box-shadow:0 3px 8px #0008,inset 0 1px 2px #fff3;pointer-events:none;transform:translate(var(--stick-x,0px),var(--stick-y,0px))}
 #view-stick.active{border-color:#ffffff90}
+#boot-progress{position:absolute;z-index:2;left:50%;top:50%;transform:translate(-50%,-50%);width:min(320px,70%);padding:16px;color:#ddd;background:#101218e6;border:1px solid #ffffff20;border-radius:12px;font:13px/1.6 system-ui;pointer-events:none}
+#boot-progress[hidden]{display:none}
+#boot-progress progress{display:block;margin:10px 0}
+#boot-detail{margin:0;font-size:11px}
 
 #game-settings{width:min(440px,calc(100% - 24px));max-height:calc(100dvh - 32px);padding:20px;margin:auto;border:1px solid #41414b;border-radius:14px;background:#1b1c20;color:#ecebea;overflow:auto;overscroll-behavior:contain;touch-action:pan-y;box-shadow:0 20px 80px #0009}
 #game-settings::backdrop{background:#0009}

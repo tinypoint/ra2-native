@@ -4,11 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>红色警戒 2</title>
-<link rel="stylesheet" href="style.css?ui=joystick-1">
+<link rel="stylesheet" href="style.css?ui=blob-loading-1">
 </head>
 <body data-view="game" class="game-shell">
 <main><section><div id="game-window">
 <canvas id="canvas" width="640" height="480" tabindex="0" aria-label="游戏画面"></canvas>
+<div id="boot-progress" hidden role="status"><span id="boot-phase"></span><progress id="boot-bar" max="1"></progress><small id="boot-detail"></small></div>
 </div>
 <div id="game-controls" role="toolbar" aria-label="游戏控制">
 <div id="mobile-controls" aria-label="游戏快捷键">
@@ -34,6 +35,6 @@
 </dialog>
 <script src="runtime-update.js?ui=release-parts-1"></script>
 <script src="frame-meter.js?ui=joystick-1"></script>
-<script src="app.js?ui=vercel-blob-1"></script>
+<script src="app.js?ui=blob-loading-1"></script>
 </body>
 </html>
