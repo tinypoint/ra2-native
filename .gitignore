@@ -12,3 +12,8 @@ __pycache__/
 incoming/
 .local/
 poc/generated_game/
+
+# Local deployment association and import/build packages
+.vercel/
+*.ra2pack
+*.ra2update

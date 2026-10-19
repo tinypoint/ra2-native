@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>红色警戒 2</title>
+<link rel="stylesheet" href="style.css?ui=joystick-1">
+</head>
+<body data-view="game" class="game-shell">
+<main><section><div id="game-window">
+<canvas id="canvas" width="640" height="480" tabindex="0" aria-label="游戏画面"></canvas>
+</div>
+<div id="game-controls" role="toolbar" aria-label="游戏控制">
+<div id="mobile-controls" aria-label="游戏快捷键">
+<div id="view-stick" role="group" aria-label="视野摇杆"><span class="stick-directions" aria-hidden="true">✥</span><span id="view-stick-thumb" aria-hidden="true"></span></div>
+<button type="button" id="mobile-cancel" aria-label="取消选择（鼠标右键）" title="取消选择"><span class="pad-letter">×</span><span class="pad-label">取消</span></button>
+<button type="button" id="mobile-home" aria-label="回基地（H 键）" title="回基地"><span class="pad-letter">H</span><span class="pad-label">基地</span></button>
+</div>
+<button type="button" id="settings-open" aria-label="游戏设置" aria-haspopup="dialog" title="游戏设置">⚙</button>
+</div></section></main>
+<p id="game-error" role="alert" hidden></p>
+<dialog id="game-settings" aria-labelledby="settings-title">
+<div class="settings-heading"><h2 id="settings-title">游戏设置</h2><button type="button" id="settings-close" aria-label="关闭设置">×</button></div>
+<p id="version" class="note">检查程序版本…</p>
+<div class="buttons"><button type="button" id="import" disabled>导入资源 / 更新包</button><input id="pack" type="file" accept=".ra2pack,.ra2update,application/octet-stream" hidden></div>
+<p id="resources" class="note">检查本地资源…</p>
+<div id="loading" hidden role="status" aria-live="polite">
+<div class="load-title"><strong id="phase">准备启动…</strong><span id="percent"></span></div>
+<progress id="progress" max="1"></progress><div id="bytes"></div><small id="elapsed"></small>
+</div>
+<p id="status" role="status">检查游戏模块…</p>
+<div class="buttons"><button type="button" id="start" disabled>启动游戏</button></div>
+<details><summary>诊断记录</summary><pre id="diagnostics"></pre></details>
+</dialog>
+<script src="runtime-update.js?ui=emulator-overlay-1"></script>
+<script src="frame-meter.js?ui=joystick-1"></script>
+<script src="app.js?ui=release-resources-1"></script>
+</body>
+</html>
