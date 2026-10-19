@@ -12,7 +12,7 @@ const $=id=>{
 let manifest,db,game,right=false,running=false,loading=false,networkBytes=0,startedAt=0;
 let transferStarted=0,transferMilliseconds=0,speedSamples=[];
 let importing=false,pendingReload=false,gameMemory=null;
-let pageLeaving=false;
+let pageLeaving=false,previousRun=null;
 const runtimeWorkers=new Set();
 const BrowserWorker=globalThis.Worker;
 if(BrowserWorker)globalThis.Worker=new Proxy(BrowserWorker,{construct(Target,args){const worker=Reflect.construct(Target,args);runtimeWorkers.add(worker);return worker;}});
@@ -20,7 +20,7 @@ window.addEventListener('pagehide',()=>{
  pageLeaving=true;
  for(const worker of runtimeWorkers)worker.terminate();
  runtimeWorkers.clear();
- try{localStorage.removeItem('ra2-launch-pending');sessionStorage.removeItem('ra2-launch-in-progress');}catch{}
+ try{localStorage.removeItem('ra2-launch-pending');localStorage.removeItem('ra2-session-active');sessionStorage.removeItem('ra2-launch-in-progress');}catch{}
 });
 window.addEventListener('pageshow',event=>{if(event.persisted&&pageLeaving)location.reload();});
 function showRecovery(){
@@ -32,7 +32,7 @@ function showRecovery(){
 function dismissRecovery(){$('game-error').hidden=true;}
 function diagnosticReport(){
  const stored=key=>{try{return localStorage.getItem(key);}catch{return null;}};
- const report={time:new Date().toISOString(),browser:navigator.userAgent,url:location.origin+location.pathname,version:manifest?.programUpdate?.version,wasm:manifest?.artifacts?.['ra2-web.wasm']?.sha256,isolated:globalThis.crossOriginIsolated,stage:stageText,status:$('status').textContent,previousStage:stored('ra2-last-stage'),previousError:stored('ra2-last-error'),previousLogs:stored('ra2-last-logs'),logs:$('diagnostics').textContent};
+ const report={previousRun,time:new Date().toISOString(),browser:navigator.userAgent,url:location.origin+location.pathname,version:manifest?.programUpdate?.version,wasm:manifest?.artifacts?.['ra2-web.wasm']?.sha256,isolated:globalThis.crossOriginIsolated,stage:stageText,status:$('status').textContent,previousStage:stored('ra2-last-stage'),previousError:stored('ra2-last-error'),previousLogs:stored('ra2-last-logs'),logs:$('diagnostics').textContent};
  return JSON.stringify(report,null,2);
 }
 $('copy-diagnostics').onclick=async()=>{
@@ -147,6 +147,7 @@ function instantiateStreaming(imports,success,reject){
 }
 async function initialize(){
  try{
+  try{previousRun={snapshot:JSON.parse(localStorage.getItem('ra2-session-snapshot')||'null'),logs:localStorage.getItem('ra2-last-logs'),error:localStorage.getItem('ra2-last-error')};}catch{}
   manifest=await(await fetch('manifest.json',{cache:'no-store'})).json();db=await database();
   const offer=manifest.programUpdate;
   if(offer?.fallback&&(await get(offer.from+':meta'))?.size!==offer.sourceSize)manifest.programUpdate=offer.fallback;
@@ -164,8 +165,8 @@ async function initialize(){
   const missingImports=manifest.resourceMode==='local-import'&&!states.slice(1).every(Boolean);
   const complete=states.every(Boolean),cached=all.reduce((n,f,i)=>n+(states[i]?f.size:0),0);
   $('resources').textContent='已确认本地缓存 '+size(cached)+' / '+size(total)+(complete?'，无需重新导入或下载游戏资源。':'；已保存的分块会复用。');
-  let interrupted=false,lastStage='';try{interrupted=localStorage.getItem('ra2-launch-pending')==='1';lastStage=localStorage.getItem('ra2-last-stage')||'';}catch{}
-  status(interrupted?'上次启动中断'+(lastStage?'（'+lastStage+'）':'')+'。'+(complete?'资源缓存仍在，无需重新导入。':'正在显示实际缓存状态。'):'资源检查完成，点击启动游戏。');
+  let interrupted=false,lastStage='';try{interrupted=localStorage.getItem('ra2-launch-pending')==='1'||localStorage.getItem('ra2-session-active')==='1';lastStage=localStorage.getItem('ra2-last-stage')||'';}catch{}
+  status(interrupted?'上次游戏异常中断；可复制诊断后重试'+(lastStage?'（'+lastStage+'）':'')+'。'+(complete?'资源缓存仍在，无需重新导入。':'正在显示实际缓存状态。'):'资源检查完成，点击启动游戏。');
   $('start').textContent=complete?'启动游戏（本地资源已就绪）':'下载缺失资源并启动';$('start').disabled=missingImports;
   if(complete)$('import').textContent='重新导入资源包（可选）';
   else if(manifest.programUpdate&&(await get(manifest.programUpdate.from+':meta'))?.size===manifest.programUpdate.sourceSize){$('resources').textContent='已导入的游戏资源仍在，仅需程序增量更新'+(manifest.programUpdate.downloadBytes?'（'+size(manifest.programUpdate.downloadBytes)+'）':'')+'，无需重新导入完整资源包。';$('start').textContent='更新程序并启动';}
@@ -191,7 +192,7 @@ async function startGame(manual=true){
   if(typeof createRA2Web!=='function'){const script=document.createElement('script');script.src=manifest.script.url;await new Promise((resolve,reject)=>{script.onload=resolve;script.onerror=()=>reject(new Error('启动器加载失败'));document.head.appendChild(script);});}
   let fail;const failed=new Promise((_,reject)=>{fail=reject;});
   progress('准备下载或读取游戏程序…',0,0,true);
-  game=await Promise.race([createRA2Web({canvas,noInitialRun:true,onThreadError:reason=>reportRuntimeError(reason,'pthread'),locateFile:path=>manifest.artifacts[path]?.url||path,instantiateWasm:(imports,success)=>instantiateStreaming(imports,success,fail),print:log,printErr:log,onGameFrame:()=>{document.body.classList.add('game-active');try{localStorage.removeItem('ra2-launch-pending');sessionStorage.removeItem('ra2-launch-in-progress');}catch{}loading=false;$('loading').hidden=true;$('boot-progress').hidden=true;$('import').disabled=false;$('start').textContent='游戏运行中';status('游戏已开始输出画面，菜单仍需初始化片刻。');},onAbort:reason=>{document.body.classList.remove('game-active','game-shell');loading=false;running=false;status('游戏停止：'+reason);fail(new Error(String(reason)));},onExit:code=>{document.body.classList.remove('game-active','game-shell');loading=false;running=false;status('游戏已退出，代码 '+code);$('loading').hidden=true;$('start').disabled=false;$('start').textContent='重新启动游戏';$('import').disabled=false;showRecovery();}}),failed]);
+  game=await Promise.race([createRA2Web({canvas,noInitialRun:true,onThreadError:reason=>reportRuntimeError(reason,'pthread'),locateFile:path=>manifest.artifacts[path]?.url||path,instantiateWasm:(imports,success)=>instantiateStreaming(imports,success,fail),print:log,printErr:log,onGameFrame:()=>{if(document.body.classList.contains('game-active'))return;document.body.classList.add('game-active');try{localStorage.setItem('ra2-session-active','1');localStorage.setItem('ra2-last-stage','游戏运行中');localStorage.removeItem('ra2-launch-pending');sessionStorage.removeItem('ra2-launch-in-progress');}catch{}loading=false;$('loading').hidden=true;$('boot-progress').hidden=true;$('import').disabled=false;$('start').textContent='游戏运行中';status('游戏已开始输出画面，菜单仍需初始化片刻。');},onAbort:reason=>{document.body.classList.remove('game-active','game-shell');loading=false;running=false;status('游戏停止：'+reason);fail(new Error(String(reason)));},onExit:code=>{try{localStorage.removeItem('ra2-session-active');}catch{}document.body.classList.remove('game-active','game-shell');loading=false;running=false;status('游戏已退出，代码 '+code);$('loading').hidden=true;$('start').disabled=false;$('start').textContent='重新启动游戏';$('import').disabled=false;showRecovery();}}),failed]);
   game.FS.mkdirTree('/game');let loaded=0;const total=manifest.files.reduce((n,f)=>n+f.size,0);
   for(const file of manifest.files){const bytes=await readResource(file);progress('载入游戏内存：'+file.name,file.size,file.size,true);await new Promise(resolve=>setTimeout(resolve,0));game.FS.writeFile('/game/'+file.name,bytes,{canOwn:true});loaded+=file.size;$('resources').textContent='游戏资源已载入 '+size(loaded)+' / '+size(total)+'；本次下载 '+size(networkBytes);}
   game.FS.chdir('/game');progress('下载与载入完成，原游戏正在初始化…',0,0,true);running=true;game.callMain(['/game/game.exe','--with-launcher']);canvas.focus();
@@ -442,6 +443,10 @@ document.addEventListener('touchmove',event=>{
  if(event.cancelable)event.preventDefault();
 },{passive:false});
 document.addEventListener('wheel',event=>{if(document.body.classList.contains('game-active')&&event.cancelable)event.preventDefault();},{passive:false});
+setInterval(()=>{
+ if(!running||pageLeaving)return;
+ try{localStorage.setItem('ra2-session-snapshot',JSON.stringify({time:new Date().toISOString(),stage:stageText,memoryBytes:gameMemory?.buffer.byteLength||null,version:manifest?.programUpdate?.version}));localStorage.setItem('ra2-last-logs',$('diagnostics').textContent.slice(-6000));}catch{}
+},5000);
 initialize();
 
 window.addEventListener('error',event=>{if(running||loading)reportRuntimeError(event);});
