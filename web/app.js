@@ -13,6 +13,7 @@ let manifest,db,game,right=false,running=false,loading=false,networkBytes=0,star
 let transferStarted=0,transferMilliseconds=0,speedSamples=[];
 let importing=false,pendingReload=false,gameMemory=null;
 let pageLeaving=false,previousRun=null;
+const memoryHistory=[];
 const runtimeWorkers=new Set();
 const BrowserWorker=globalThis.Worker;
 if(BrowserWorker)globalThis.Worker=new Proxy(BrowserWorker,{construct(Target,args){const worker=Reflect.construct(Target,args);runtimeWorkers.add(worker);return worker;}});
@@ -147,7 +148,7 @@ function instantiateStreaming(imports,success,reject){
 }
 async function initialize(){
  try{
-  try{previousRun={snapshot:JSON.parse(localStorage.getItem('ra2-session-snapshot')||'null'),logs:localStorage.getItem('ra2-last-logs'),error:localStorage.getItem('ra2-last-error')};}catch{}
+  try{previousRun={snapshot:JSON.parse(localStorage.getItem('ra2-session-snapshot')||'null'),logs:localStorage.getItem('ra2-last-logs'),error:localStorage.getItem('ra2-last-error'),controls:localStorage.getItem('ra2-last-controls'),memoryHistory:JSON.parse(localStorage.getItem('ra2-memory-history')||'[]')};}catch{}
   manifest=await(await fetch('manifest.json',{cache:'no-store'})).json();db=await database();
   const offer=manifest.programUpdate;
   if(offer?.fallback&&(await get(offer.from+':meta'))?.size!==offer.sourceSize)manifest.programUpdate=offer.fallback;
@@ -192,7 +193,7 @@ async function startGame(manual=true){
   if(typeof createRA2Web!=='function'){const script=document.createElement('script');script.src=manifest.script.url;await new Promise((resolve,reject)=>{script.onload=resolve;script.onerror=()=>reject(new Error('启动器加载失败'));document.head.appendChild(script);});}
   let fail;const failed=new Promise((_,reject)=>{fail=reject;});
   progress('准备下载或读取游戏程序…',0,0,true);
-  game=await Promise.race([createRA2Web({canvas,noInitialRun:true,onThreadError:reason=>reportRuntimeError(reason,'pthread'),locateFile:path=>manifest.artifacts[path]?.url||path,instantiateWasm:(imports,success)=>instantiateStreaming(imports,success,fail),print:log,printErr:log,onGameFrame:()=>{if(document.body.classList.contains('game-active'))return;document.body.classList.add('game-active');try{localStorage.setItem('ra2-session-active','1');localStorage.setItem('ra2-last-stage','游戏运行中');localStorage.removeItem('ra2-launch-pending');sessionStorage.removeItem('ra2-launch-in-progress');}catch{}loading=false;$('loading').hidden=true;$('boot-progress').hidden=true;$('import').disabled=false;$('start').textContent='游戏运行中';status('游戏已开始输出画面，菜单仍需初始化片刻。');},onAbort:reason=>{document.body.classList.remove('game-active','game-shell');loading=false;running=false;status('游戏停止：'+reason);fail(new Error(String(reason)));},onExit:code=>{try{localStorage.removeItem('ra2-session-active');}catch{}document.body.classList.remove('game-active','game-shell');loading=false;running=false;status('游戏已退出，代码 '+code);$('loading').hidden=true;$('start').disabled=false;$('start').textContent='重新启动游戏';$('import').disabled=false;showRecovery();}}),failed]);
+  game=await Promise.race([createRA2Web({canvas,noInitialRun:true,onThreadError:reason=>reportRuntimeError(reason,'pthread'),locateFile:path=>manifest.artifacts[path]?.url||path,instantiateWasm:(imports,success)=>instantiateStreaming(imports,success,fail),print:log,printErr:log,onGameFrame:()=>{if(document.body.classList.contains('game-active'))return;document.body.classList.add('game-active');try{stageText='游戏运行中';localStorage.setItem('ra2-session-active','1');localStorage.setItem('ra2-last-stage',stageText);localStorage.removeItem('ra2-launch-pending');sessionStorage.removeItem('ra2-launch-in-progress');}catch{}loading=false;$('loading').hidden=true;$('boot-progress').hidden=true;$('import').disabled=false;$('start').textContent='游戏运行中';status('游戏已开始输出画面，菜单仍需初始化片刻。');},onAbort:reason=>{document.body.classList.remove('game-active','game-shell');loading=false;running=false;status('游戏停止：'+reason);fail(new Error(String(reason)));},onExit:code=>{try{localStorage.removeItem('ra2-session-active');}catch{}document.body.classList.remove('game-active','game-shell');loading=false;running=false;status('游戏已退出，代码 '+code);$('loading').hidden=true;$('start').disabled=false;$('start').textContent='重新启动游戏';$('import').disabled=false;showRecovery();}}),failed]);
   game.FS.mkdirTree('/game');let loaded=0;const total=manifest.files.reduce((n,f)=>n+f.size,0);
   for(const file of manifest.files){const bytes=await readResource(file);progress('载入游戏内存：'+file.name,file.size,file.size,true);await new Promise(resolve=>setTimeout(resolve,0));game.FS.writeFile('/game/'+file.name,bytes,{canOwn:true});loaded+=file.size;$('resources').textContent='游戏资源已载入 '+size(loaded)+' / '+size(total)+'；本次下载 '+size(networkBytes);}
   game.FS.chdir('/game');progress('下载与载入完成，原游戏正在初始化…',0,0,true);running=true;game.callMain(['/game/game.exe','--with-launcher']);canvas.focus();
@@ -293,7 +294,7 @@ function reportControls(){
  try{
   const snapshot=controlSnapshot();if(!snapshot)return;
   const serialized=JSON.stringify(snapshot);if(serialized===lastControlReport)return;lastControlReport=serialized;
-  log('[controls] '+serialized);
+  try{localStorage.setItem('ra2-last-controls',serialized);}catch{}
   sendDiagnostics({kind:'controls',stage:'menu-input',error:'',logs:serialized});
  }catch{/* Diagnostic reads must never change game input or error state. */}
 }
@@ -445,7 +446,11 @@ document.addEventListener('touchmove',event=>{
 document.addEventListener('wheel',event=>{if(document.body.classList.contains('game-active')&&event.cancelable)event.preventDefault();},{passive:false});
 setInterval(()=>{
  if(!running||pageLeaving)return;
- try{localStorage.setItem('ra2-session-snapshot',JSON.stringify({time:new Date().toISOString(),stage:stageText,memoryBytes:gameMemory?.buffer.byteLength||null,version:manifest?.programUpdate?.version}));localStorage.setItem('ra2-last-logs',$('diagnostics').textContent.slice(-6000));}catch{}
+ try{
+  const snapshot={time:new Date().toISOString(),stage:stageText,memoryBytes:gameMemory?.buffer.byteLength||null,resourceBytes:manifest?.files.reduce((n,f)=>n+f.size,0),fps:$('game-fps').textContent,visibility:document.visibilityState,version:manifest?.programUpdate?.version};
+  memoryHistory.push(snapshot);if(memoryHistory.length>60)memoryHistory.shift();
+  localStorage.setItem('ra2-session-snapshot',JSON.stringify(snapshot));localStorage.setItem('ra2-memory-history',JSON.stringify(memoryHistory));localStorage.setItem('ra2-last-logs',$('diagnostics').textContent.slice(-6000));
+ }catch{}
 },5000);
 initialize();
 
