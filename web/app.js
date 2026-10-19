@@ -374,9 +374,9 @@ canvas.addEventListener('pointerdown',e=>{
  if(!running)return;
  const p=point(e);if(!p)return;
  if(e.pointerType==='touch'){
-  e.preventDefault();canvas.setPointerCapture(e.pointerId);
+  e.preventDefault();
   if(active!==null)return;
-  active=e.pointerId;heldButton=right?2:0;
+  active=e.pointerId;canvas.setPointerCapture(e.pointerId);heldButton=right?2:0;
   touchPress={point:p,x:e.clientX,y:e.clientY};return;
  }
  if(active!==null)return;
@@ -385,6 +385,8 @@ canvas.addEventListener('pointerdown',e=>{
 });
 canvas.addEventListener('pointermove',e=>{
  if(!running)return;
+ // A lifted finger must never move the game cursor between independent taps.
+ if(e.pointerType==='touch'&&active!==e.pointerId)return;
  if(active!==null&&active!==e.pointerId)return;
  const p=point(e,active===e.pointerId);if(!p)return;
  if(touchPress){
@@ -396,7 +398,7 @@ canvas.addEventListener('pointermove',e=>{
 });
 function release(e){
  if(!running||active!==e.pointerId)return;
- const p=e.type==='lostpointercapture'?physicalPosition:point(e,true);
+ const p=e.type==='lostpointercapture'?physicalPosition:(point(e,true)||physicalPosition);
  if(touchPress){
   if(e.type==='pointerup'&&p){
    game._ra2_web_mouse(0,p[0],p[1],heldButton);game._ra2_web_mouse(1,p[0],p[1],heldButton);
@@ -406,7 +408,7 @@ function release(e){
  }else if(p){game._ra2_web_mouse(2,p[0],p[1],heldButton);physicalPosition=p;}
  active=null;
 }
-canvas.addEventListener('pointerup',release);canvas.addEventListener('pointercancel',release);canvas.addEventListener('lostpointercapture',release);canvas.addEventListener('contextmenu',e=>e.preventDefault());
+window.addEventListener('pointerup',release,true);window.addEventListener('pointercancel',release,true);canvas.addEventListener('lostpointercapture',release);canvas.addEventListener('contextmenu',e=>e.preventDefault());
 // Keep iOS long presses inside the game; input itself uses Pointer Events.
 canvas.addEventListener('touchstart',e=>{if(e.cancelable)e.preventDefault();},{passive:false});
 $('game-window').addEventListener('selectstart',e=>e.preventDefault());
