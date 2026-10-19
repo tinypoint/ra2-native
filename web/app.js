@@ -30,10 +30,19 @@ function showRecovery(){
  $('game-error').hidden=false;
 }
 function dismissRecovery(){$('game-error').hidden=true;}
-$('export-diagnostics').onclick=async()=>{
+function diagnosticReport(){
  const stored=key=>{try{return localStorage.getItem(key);}catch{return null;}};
  const report={time:new Date().toISOString(),browser:navigator.userAgent,url:location.origin+location.pathname,version:manifest?.programUpdate?.version,wasm:manifest?.artifacts?.['ra2-web.wasm']?.sha256,isolated:globalThis.crossOriginIsolated,stage:stageText,status:$('status').textContent,previousStage:stored('ra2-last-stage'),previousError:stored('ra2-last-error'),previousLogs:stored('ra2-last-logs'),logs:$('diagnostics').textContent};
- const file=new File([JSON.stringify(report,null,2)],'ra2-diagnostics-'+Date.now()+'.json',{type:'application/json'});
+ return JSON.stringify(report,null,2);
+}
+$('copy-diagnostics').onclick=async()=>{
+ const button=$('copy-diagnostics');
+ try{await navigator.clipboard.writeText(diagnosticReport());button.textContent='已复制';}
+ catch{button.textContent='复制失败，请导出';}
+ setTimeout(()=>{button.textContent='复制诊断';},3000);
+};
+$('export-diagnostics').onclick=async()=>{
+ const file=new File([diagnosticReport()],'ra2-diagnostics-'+Date.now()+'.json',{type:'application/json'});
  if(navigator.canShare?.({files:[file]})){try{await navigator.share({files:[file]});return;}catch(e){if(e.name==='AbortError')return;}}
  const url=URL.createObjectURL(file),link=document.createElement('a');link.href=url;link.download=file.name;link.click();setTimeout(()=>URL.revokeObjectURL(url),60000);
 };
