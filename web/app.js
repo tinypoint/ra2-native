@@ -12,6 +12,17 @@ const $=id=>{
 let manifest,db,game,right=false,running=false,loading=false,networkBytes=0,startedAt=0;
 let transferStarted=0,transferMilliseconds=0,speedSamples=[];
 let importing=false,pendingReload=false,gameMemory=null;
+let pageLeaving=false;
+const runtimeWorkers=new Set();
+const BrowserWorker=globalThis.Worker;
+if(BrowserWorker)globalThis.Worker=new Proxy(BrowserWorker,{construct(Target,args){const worker=Reflect.construct(Target,args);runtimeWorkers.add(worker);return worker;}});
+window.addEventListener('pagehide',()=>{
+ pageLeaving=true;
+ for(const worker of runtimeWorkers)worker.terminate();
+ runtimeWorkers.clear();
+ try{localStorage.removeItem('ra2-launch-pending');sessionStorage.removeItem('ra2-launch-in-progress');}catch{}
+});
+window.addEventListener('pageshow',event=>{if(event.persisted&&pageLeaving)location.reload();});
 const settings=$('game-settings');
 function openSettings(){
  $('boot-progress').hidden=true;resetTouchInput();
@@ -47,6 +58,7 @@ function describeError(value,seen=new Set()){
  return describeError(value.error,seen)||describeError(value.reason,seen)||value.stack||(value.message&&value.message!=='[object ErrorEvent]'?value.message:'')||(value.filename?'线程异常：'+value.filename+':'+(value.lineno||0):'');
 }
 function reportRuntimeError(value,kind='browser'){
+ if(pageLeaving)return;
  const error=describeError(value)||'浏览器线程退出，未提供具体错误信息';
  const report={kind,error:String(error).slice(0,2000),stage:stageText,logs:$('diagnostics').textContent.slice(-6000)};
  log(error);status('游戏运行出错：'+String(error).split('\n')[0]);running=false;loading=false;document.body.classList.remove('game-active','game-shell');
@@ -147,12 +159,15 @@ async function initialize(){
   else if(manifest.programUpdate&&(await get(manifest.programUpdate.from+':meta'))?.size===manifest.programUpdate.sourceSize){$('resources').textContent='已导入的游戏资源仍在，仅需程序增量更新'+(manifest.programUpdate.downloadBytes?'（'+size(manifest.programUpdate.downloadBytes)+'）':'')+'，无需重新导入完整资源包。';$('start').textContent='更新程序并启动';}
   if(missingImports){$('start').textContent='先导入资源包';$('resources').textContent+='；请导入手机已有的 .ra2pack 文件，无需重新下载。';}
   $('import').disabled=false;
-  if((complete||['github-releases','vercel-blob'].includes(manifest.resourceMode))&&location.hash!=='#settings')startGame(false);
-  else{if(!complete)status(missingImports?'请导入手机已有的资源包，程序更新会自动下载。':'请导入资源包或程序更新包，也可以下载缺失资源后启动。');openSettings();}
+  if(!interrupted&&(complete||['github-releases','vercel-blob'].includes(manifest.resourceMode))&&location.hash!=='#settings'){
+   if(performance.getEntriesByType('navigation')[0]?.type==='reload')await new Promise(resolve=>setTimeout(resolve,500));
+   if(!pageLeaving)startGame(false);
+  }
+  else{if(!complete&&!interrupted)status(missingImports?'请导入手机已有的资源包，程序更新会自动下载。':'请导入资源包或程序更新包，也可以下载缺失资源后启动。');openSettings();}
  }catch(e){document.body.classList.remove('game-shell');status('无法准备游戏：'+(e?.message||e));log(e?.stack||e);openSettings();}
 }
 async function startGame(manual=true){
- if(loading||running||importing)return;closeSettings();document.body.classList.add('game-shell');loading=true;startedAt=performance.now();networkBytes=0;
+ if(pageLeaving||loading||running||importing)return;closeSettings();document.body.classList.add('game-shell');loading=true;startedAt=performance.now();networkBytes=0;
  transferStarted=0;transferMilliseconds=0;speedSamples=[{time:startedAt,bytes:0}];
  if(manual)try{localStorage.setItem('ra2-auto-start','1');}catch{}
  try{sessionStorage.setItem('ra2-launch-in-progress','1');}catch{}
