@@ -8,12 +8,17 @@ int (*hle_screen_compose_hook)(const uint8_t *,int,int,int,uint32_t *);
 int (*hle_screen_key_hook)(int,int);
 int (*hle_screen_cursor_hook)(void);
 void (*hle_screen_settings_hook)(const char *,int,int);
+extern void ra2_web_pump_input(void);
 static uint32_t shown_ms;
 void hle_screen_pump(void){
  uint32_t now=hle_ticks_ms();if(shown_ms&&now-shown_ms<32)return;
+ shown_ms=now;
+ /* Input must progress even while resolution changes release the primary.
+  * Fetch pixels AFTER input: a click can recreate/free the old surface. */
+ ra2_web_pump_input();
  const uint8_t *px;const uint32_t *pal;int w,h,pitch,bpp;unsigned seq;
  if(!hle_dd_frame(&px,&w,&h,&pitch,&bpp,&pal,&seq))return;
- shown_ms=now;if(hle_screen_frame_hook)hle_screen_frame_hook(px,w,h,pitch,bpp);
+ if(hle_screen_frame_hook)hle_screen_frame_hook(px,w,h,pitch,bpp);
  MAIN_THREAD_EM_ASM({
   const px=$0;const w=$1;const h=$2;const pitch=$3;const bpp=$4;const pal=$5;
   const canvas=Module['canvas'];if(!canvas)return;

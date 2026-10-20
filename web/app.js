@@ -373,9 +373,19 @@ window.addEventListener('pointermove',e=>{
 },true);
 window.addEventListener('pagehide',stopPan);
 stick.addEventListener('contextmenu',e=>e.preventDefault());
+let resolutionHwnd=0;
+function updateResolutionDialog(hwnd){
+ const dialog=$('resolution-confirm');if(hwnd===resolutionHwnd)return;resolutionHwnd=hwnd;
+ if(hwnd){resetTouchInput();if(game)for(const vk of physicalHeld)game._ra2_web_key(0,vk,0);physicalHeld.clear();$('resolution-accept').disabled=$('resolution-cancel').disabled=false;if(!dialog.open)dialog.showModal();}
+ else if(dialog.open)dialog.close();
+}
+function answerResolution(accept){if(!resolutionHwnd||!game)return;if(game._ra2_web_resolution_reply(resolutionHwnd,accept?1:0))$('resolution-accept').disabled=$('resolution-cancel').disabled=true;}
+$('resolution-accept').onclick=()=>answerResolution(true);$('resolution-cancel').onclick=()=>answerResolution(false);
+$('resolution-confirm').addEventListener('cancel',e=>{e.preventDefault();answerResolution(false);});
 let mobileState={active:false,mode:0,cameos:[]};
 const fingers=new Map();let twoPan=false,panCenter=null,panOrigin=null,panTimer=0,longTimer=0,longFired=false,panAllowed=false;
 function updateMobileState(state){
+ updateResolutionDialog(state.resolution||0);
  const changed=mobileState.active!==!!state.active||mobileState.mode!==state.mode;
  mobileState={...state,active:!!state.active};
  document.body.classList.toggle('mobile-battle',mobileState.active);
@@ -389,7 +399,7 @@ function clearLong(){clearTimeout(longTimer);longTimer=0;}
 function stopTwoPan(){clearTimeout(panTimer);scrollKeys([],'touch');panCenter=panOrigin=null;panAllowed=false;}
 function center(){const a=[...fingers.values()];return[(a[0][0]+a[1][0])/2,(a[0][1]+a[1][1])/2];}
 canvas.addEventListener('pointerdown',e=>{
- if(!running||$('operation-manual').open)return;
+ if(!running||$('operation-manual').open||$('resolution-confirm').open)return;
  const p=point(e);if(!p)return;
  if(e.pointerType==='touch'){
   e.preventDefault();fingers.set(e.pointerId,[e.clientX,e.clientY]);canvas.setPointerCapture(e.pointerId);
@@ -471,7 +481,7 @@ $('manual-open').onclick=()=>{resetTouchInput();if(game)for(const vk of physical
 $('manual-close').onclick=()=>$('operation-manual').close();
 $('operation-manual').addEventListener('close',()=>canvas.focus({preventScroll:true}));
 for(const button of document.querySelectorAll('.key'))button.onclick=()=>{if(running){game._ra2_web_key(1,+button.dataset.vk,0);game._ra2_web_key(0,+button.dataset.vk,0);}};
-const physicalHeld=new Set();document.addEventListener('keydown',e=>{if(!running||$('operation-manual').open||physicalHeld.has(e.keyCode))return;physicalHeld.add(e.keyCode);if(!panKeys.has(e.keyCode))game._ra2_web_key(1,e.keyCode,0);if([27,32,37,38,39,40].includes(e.keyCode))e.preventDefault();});document.addEventListener('keyup',e=>{if(!running)return;physicalHeld.delete(e.keyCode);if(!panKeys.has(e.keyCode))game._ra2_web_key(0,e.keyCode,0);});window.addEventListener('blur',()=>{if(game)for(const vk of physicalHeld)game._ra2_web_key(0,vk,0);physicalHeld.clear();});
+const physicalHeld=new Set();document.addEventListener('keydown',e=>{if(!running||$('operation-manual').open||$('resolution-confirm').open||physicalHeld.has(e.keyCode))return;physicalHeld.add(e.keyCode);if(!panKeys.has(e.keyCode))game._ra2_web_key(1,e.keyCode,0);if([27,32,37,38,39,40].includes(e.keyCode))e.preventDefault();});document.addEventListener('keyup',e=>{if(!running)return;physicalHeld.delete(e.keyCode);if(!panKeys.has(e.keyCode))game._ra2_web_key(0,e.keyCode,0);});window.addEventListener('blur',()=>{if(game)for(const vk of physicalHeld)game._ra2_web_key(0,vk,0);physicalHeld.clear();});
 $('fullscreen').onclick=()=>canvas.requestFullscreen?.().catch(log);
 // Safari versions that ignore overscroll-behavior still need a cancelable
 // touchmove handler. Setup can scroll internally; game gestures never pan the page.

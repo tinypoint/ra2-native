@@ -41,7 +41,7 @@ def manifest():
   candidate=json.loads(update.read_text())
   if candidate['to']==artifacts.get('ra2-web.wasm',{}).get('sha256'):result['programUpdate']=candidate
  return result
-assets={'':('web/index.html','text/html; charset=utf-8'),'index.html':('web/index.html','text/html; charset=utf-8'),'style.css':('web/style.css','text/css; charset=utf-8'),'app.js':('web/app.js','text/javascript; charset=utf-8'),'frame-meter.js':('web/frame-meter.js','text/javascript; charset=utf-8'),'runtime-update.js':('web/runtime-update.js','text/javascript; charset=utf-8')}
+assets={'user-files.js':('web/user-files.js','text/javascript; charset=utf-8'),'':('web/index.html','text/html; charset=utf-8'),'index.html':('web/index.html','text/html; charset=utf-8'),'style.css':('web/style.css','text/css; charset=utf-8'),'app.js':('web/app.js','text/javascript; charset=utf-8'),'frame-meter.js':('web/frame-meter.js','text/javascript; charset=utf-8'),'runtime-update.js':('web/runtime-update.js','text/javascript; charset=utf-8')}
 manifest_cache=None
 manifest_signature=None
 class Handler(BaseHTTPRequestHandler):

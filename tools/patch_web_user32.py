@@ -76,6 +76,26 @@ def patch(source: str) -> str:
     source = source.replace(needle, '    if (m == WM_LBUTTONDOWN || m == WM_LBUTTONUP || m == WM_RBUTTONDOWN || m == WM_RBUTTONUP) hle_web_mouse_completed++;\n' + needle)
     source = 'unsigned hle_web_mouse_completed;\n' + source
     source += """
+/* The original mode-confirmation dialog is logically active but its custom
+ * pixels are not composed into the Web primary. Expose only this exact dialog. */
+uint32_t hle_web_resolution_dialog(void) {
+ for(int i=0;i<MAX_WIN;i++){win_t *x=&g_win[i];
+  if(!x->used||x->destroying||x->id!=1499||strcmp(x->text,"GUI:ConfirmModeChange")||!visible(x))continue;
+  win_t *p=W(x->parent);int ok=0,cancel=0;
+  if(!p||p->destroying||!visible(p))continue;
+  for(int j=0;j<MAX_WIN;j++)if(g_win[j].used&&g_win[j].parent==p->hwnd){ok|=g_win[j].id==1473;cancel|=g_win[j].id==1738;}
+  if(ok&&cancel)return (uint32_t)p->seq; /* HWND slots are reused between the two confirmations. */
+ }return 0;
+}
+void hle_web_resolution_reply(uint32_t h,int accept) {
+ if(!h||hle_web_resolution_dialog()!=h)return;
+ uint32_t id=accept?1473:1738,hwnd=0;
+ for(int i=0;i<MAX_WIN;i++)if(g_win[i].used&&(uint32_t)g_win[i].seq==h){hwnd=g_win[i].hwnd;break;}
+ if(!hwnd)return;
+ for(int i=0;i<MAX_WIN;i++)if(g_win[i].used&&g_win[i].parent==hwnd&&g_win[i].id==id){
+  hle_send(hwnd,WM_COMMAND,id,g_win[i].hwnd);return;
+ }
+}
 int hle_web_dialog_open(void) {
  for(int i=0;i<MAX_WIN;i++){win_t *x=&g_win[i];
   if(x->used&&!x->destroying&&x->w>0&&x->h>0&&(x->kind==K_DIALOG||x->dlgproc)&&visible(x))return 1;

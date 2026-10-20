@@ -4,10 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>红色警戒 2</title>
-<link rel="stylesheet" href="style.css?ui=user-files-019">
+<link rel="stylesheet" href="style.css?ui=resolution-019">
 </head>
 <body data-view="game" class="game-shell">
 <main><section><div id="game-window">
+<span id="build-version" aria-label="网页版本">v0.1.9</span>
 <canvas id="canvas" width="640" height="480" tabindex="0" aria-label="游戏画面"></canvas>
 <div id="boot-progress" hidden role="status"><span id="boot-phase"></span><progress id="boot-bar" max="1"></progress><small id="boot-detail"></small></div>
 </div>
@@ -24,9 +25,10 @@
 </div>
 </div></section></main>
 <div id="game-error" role="alert" hidden><p id="error-message"></p><button type="button" id="start" disabled>重试</button><button type="button" id="copy-diagnostics" class="secondary">复制诊断</button><button type="button" id="export-diagnostics" class="secondary">导出诊断</button></div>
+<dialog id="resolution-confirm" aria-labelledby="resolution-title"><h2 id="resolution-title">更改游戏分辨率</h2><p>游戏需要两次确认：先切换分辨率，再确认保留。取消会返回原设置。</p><div class="buttons"><button type="button" id="resolution-accept">确认</button><button type="button" id="resolution-cancel" class="secondary">取消</button></div></dialog>
 <dialog id="operation-manual" aria-labelledby="manual-title">
 <div class="manual-heading"><h2 id="manual-title">手机操作手册</h2><button id="manual-close" type="button" aria-label="关闭操作手册">关闭</button></div>
-<p class="manual-note">手机操作版 0.1.8 · 已接入，实际手感待手机验证。打开手册不会暂停对局。</p>
+<p class="manual-note">手机操作版 0.1.9 · 已接入，实际手感待手机验证。打开手册不会暂停对局。</p>
 <p id="save-status" class="manual-note" role="status">正在准备设置／存档存储…</p><p class="manual-note">设置和存档保存在当前浏览器。清除网站数据、无痕会话结束或换浏览器不会保留这些数据。</p><h3>触摸与视野</h3><dl>
 <dt>点击</dt><dd>单指轻点：选中单位、下达移动或攻击命令、操作菜单。</dd>
 <dt>框选与拖动</dt><dd>单指按住并移动：地图上框选，菜单中拖动滑块。两次独立点击不作为拖拽。</dd>
@@ -46,9 +48,9 @@
 </ul><p class="manual-note">战场浮层在游戏允许战场输入时启用。菜单保留普通点击、下拉选择及滑块拖动。电脑浏览器仍可直接使用鼠标和键盘。</p>
 </dialog>
 <script src="runtime-update.js?ui=release-parts-1"></script>
-<script src="frame-meter.js?ui=user-files-019"></script>
+<script src="frame-meter.js?ui=resolution-019"></script>
 <div id="save-warning" role="alert" hidden></div>
-<script src="user-files.js?ui=user-files-019"></script>
-<script src="app.js?ui=user-files-019"></script>
+<script src="user-files.js?ui=resolution-019"></script>
+<script src="app.js?ui=resolution-019"></script>
 </body>
 </html>
