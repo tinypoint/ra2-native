@@ -75,4 +75,11 @@ def patch(source: str) -> str:
     assert source.count(needle) == 1
     source = source.replace(needle, '    if (m == WM_LBUTTONDOWN || m == WM_LBUTTONUP || m == WM_RBUTTONDOWN || m == WM_RBUTTONUP) hle_web_mouse_completed++;\n' + needle)
     source = 'unsigned hle_web_mouse_completed;\n' + source
+    source += """
+int hle_web_dialog_open(void) {
+ for(int i=0;i<MAX_WIN;i++){win_t *x=&g_win[i];
+  if(x->used&&!x->destroying&&x->w>0&&x->h>0&&(x->kind==K_DIALOG||x->dlgproc)&&visible(x))return 1;
+ }return 0;
+}
+"""
     return source

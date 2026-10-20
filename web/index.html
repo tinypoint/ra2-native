@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>红色警戒 2</title>
-<link rel="stylesheet" href="style.css?ui=interaction-state-1">
+<link rel="stylesheet" href="style.css?ui=mobile-guide-018">
 </head>
 <body data-view="game" class="game-shell">
 <main><section><div id="game-window">
@@ -12,16 +12,41 @@
 <div id="boot-progress" hidden role="status"><span id="boot-phase"></span><progress id="boot-bar" max="1"></progress><small id="boot-detail"></small></div>
 </div>
 <div id="game-controls" role="toolbar" aria-label="游戏控制">
+<button type="button" id="manual-open" aria-haspopup="dialog">操作<br>手册</button>
 <div id="mobile-controls" aria-label="游戏快捷键">
 <div id="view-stick" role="group" aria-label="视野摇杆"><span id="view-stick-thumb" aria-hidden="true"></span></div>
-<button type="button" id="mobile-cancel" aria-label="取消选择（鼠标右键）" title="取消选择"><span class="pad-label">取消</span></button>
+<button type="button" id="mobile-cancel" aria-label="取消当前操作" hidden><span class="pad-label">取消</span></button>
 <button type="button" id="mobile-home" aria-label="回基地（H 键）" title="回基地"><span class="pad-label">基地</span></button>
+<button type="button" id="mobile-deploy" data-mobile-key="68">部署</button>
+<button type="button" id="mobile-stop" data-mobile-key="83">停止</button>
+<button type="button" id="mobile-guard" data-mobile-key="71">警戒</button>
+<button type="button" id="mobile-type" data-mobile-key="84">同类</button>
 </div>
-
 </div></section></main>
 <div id="game-error" role="alert" hidden><p id="error-message"></p><button type="button" id="start" disabled>重试</button><button type="button" id="copy-diagnostics" class="secondary">复制诊断</button><button type="button" id="export-diagnostics" class="secondary">导出诊断</button></div>
+<dialog id="operation-manual" aria-labelledby="manual-title">
+<div class="manual-heading"><h2 id="manual-title">手机操作手册</h2><button id="manual-close" type="button" aria-label="关闭操作手册">关闭</button></div>
+<p class="manual-note">手机操作版 0.1.8 · 已接入，实际手感待手机验证。打开手册不会暂停对局。</p>
+<h3>触摸与视野</h3><dl>
+<dt>点击</dt><dd>单指轻点：选中单位、下达移动或攻击命令、操作菜单。</dd>
+<dt>框选与拖动</dt><dd>单指按住并移动：地图上框选，菜单中拖动滑块。两次独立点击不作为拖拽。</dd>
+<dt>移动视野</dt><dd>左下角摇杆，或双指同时落在地图上拖动。手指向右拖，地图向右移动；支持斜向，松手停止。已经开始单指框选时，请先松手再双指平移。</dd>
+<dt>生产图标右键</dt><dd>在生产图标上停留约半秒；一次长按触发一次右键，不追加左键。生产中的项目先暂停，再长按可取消；具体队列行为由原游戏处理。</dd>
+<dt>右下角取消</dt><dd>按当前状态显示“取消放置”“取消目标”“取消操作”或“取消选中”；没有可取消内容时隐藏。先松开地图上的手指再点取消。取消选中不等于停止部队。</dd>
+</dl><h3>快捷按钮</h3><dl>
+<dt>基地 · H</dt><dd>视野回到基地，位于摇杆上方。</dd>
+<dt>部署 · D</dt><dd>执行选中单位的部署功能，例如基地车展开、美国大兵架枪或收起。</dd>
+<dt>停止 · S</dt><dd>停止选中部队当前行动。</dd>
+<dt>警戒 · G</dt><dd>令选中部队警戒当前位置。</dd>
+<dt>同类 · T</dt><dd>点一次选择屏幕内同类单位；快速点两次扩大到全地图，由原游戏判断。</dd>
+</dl><h3>手机未实现</h3><ul>
+<li>编队创建与选择：手机未实现，本轮不做。</li>
+<li>Shift 加选、强制攻击、强制移动、攻击移动和路径点的专用手势：手机未实现。</li>
+<li>聊天：手机未实现，本轮不做。</li>
+</ul><p class="manual-note">战场浮层在游戏允许战场输入时启用。菜单保留普通点击、下拉选择及滑块拖动。电脑浏览器仍可直接使用鼠标和键盘。</p>
+</dialog>
 <script src="runtime-update.js?ui=release-parts-1"></script>
-<script src="frame-meter.js?ui=interaction-state-1"></script>
-<script src="app.js?ui=interaction-state-1"></script>
+<script src="frame-meter.js?ui=mobile-guide-018"></script>
+<script src="app.js?ui=mobile-guide-018"></script>
 </body>
 </html>

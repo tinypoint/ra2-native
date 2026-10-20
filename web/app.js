@@ -9,7 +9,7 @@ const $=id=>{
  }
  return optionalUI.get(id);
 },canvas=$('canvas');
-let manifest,db,game,right=false,running=false,loading=false,networkBytes=0,startedAt=0;
+let manifest,db,game,running=false,loading=false,networkBytes=0,startedAt=0;
 let transferStarted=0,transferMilliseconds=0,speedSamples=[];
 let importing=false,pendingReload=false,gameMemory=null;
 let pageLeaving=false,previousRun=null;
@@ -193,7 +193,7 @@ async function startGame(manual=true){
   if(typeof createRA2Web!=='function'){const script=document.createElement('script');script.src=manifest.script.url;await new Promise((resolve,reject)=>{script.onload=resolve;script.onerror=()=>reject(new Error('启动器加载失败'));document.head.appendChild(script);});}
   let fail;const failed=new Promise((_,reject)=>{fail=reject;});
   progress('准备下载或读取游戏程序…',0,0,true);
-  game=await Promise.race([createRA2Web({canvas,noInitialRun:true,onThreadError:reason=>reportRuntimeError(reason,'pthread'),locateFile:path=>manifest.artifacts[path]?.url||path,instantiateWasm:(imports,success)=>instantiateStreaming(imports,success,fail),print:log,printErr:log,onGameFrame:()=>{if(document.body.classList.contains('game-active'))return;document.body.classList.add('game-active');try{stageText='游戏运行中';localStorage.setItem('ra2-session-active','1');localStorage.setItem('ra2-last-stage',stageText);localStorage.removeItem('ra2-launch-pending');sessionStorage.removeItem('ra2-launch-in-progress');}catch{}loading=false;$('loading').hidden=true;$('boot-progress').hidden=true;$('import').disabled=false;$('start').textContent='游戏运行中';status('游戏已开始输出画面，菜单仍需初始化片刻。');},onAbort:reason=>{document.body.classList.remove('game-active','game-shell');loading=false;running=false;status('游戏停止：'+reason);fail(new Error(String(reason)));},onExit:code=>{try{localStorage.removeItem('ra2-session-active');}catch{}document.body.classList.remove('game-active','game-shell');loading=false;running=false;status('游戏已退出，代码 '+code);$('loading').hidden=true;$('start').disabled=false;$('start').textContent='重新启动游戏';$('import').disabled=false;showRecovery();}}),failed]);
+  game=await Promise.race([createRA2Web({canvas,noInitialRun:true,onMobileState:updateMobileState,onThreadError:reason=>reportRuntimeError(reason,'pthread'),locateFile:path=>manifest.artifacts[path]?.url||path,instantiateWasm:(imports,success)=>instantiateStreaming(imports,success,fail),print:log,printErr:log,onGameFrame:()=>{if(document.body.classList.contains('game-active'))return;document.body.classList.add('game-active');try{stageText='游戏运行中';localStorage.setItem('ra2-session-active','1');localStorage.setItem('ra2-last-stage',stageText);localStorage.removeItem('ra2-launch-pending');sessionStorage.removeItem('ra2-launch-in-progress');}catch{}loading=false;$('loading').hidden=true;$('boot-progress').hidden=true;$('import').disabled=false;$('start').textContent='游戏运行中';status('游戏已开始输出画面，菜单仍需初始化片刻。');},onAbort:reason=>{document.body.classList.remove('game-active','game-shell');loading=false;running=false;status('游戏停止：'+reason);fail(new Error(String(reason)));},onExit:code=>{try{localStorage.removeItem('ra2-session-active');}catch{}document.body.classList.remove('game-active','game-shell');loading=false;running=false;status('游戏已退出，代码 '+code);$('loading').hidden=true;$('start').disabled=false;$('start').textContent='重新启动游戏';$('import').disabled=false;showRecovery();}}),failed]);
   game.FS.mkdirTree('/game');let loaded=0;const total=manifest.files.reduce((n,f)=>n+f.size,0);
   for(const file of manifest.files){const bytes=await readResource(file);progress('载入游戏内存：'+file.name,file.size,file.size,true);await new Promise(resolve=>setTimeout(resolve,0));game.FS.writeFile('/game/'+file.name,bytes,{canOwn:true});loaded+=file.size;$('resources').textContent='游戏资源已载入 '+size(loaded)+' / '+size(total)+'；本次下载 '+size(networkBytes);}
   game.FS.chdir('/game');progress('下载与载入完成，原游戏正在初始化…',0,0,true);running=true;game.callMain(['/game/game.exe','--with-launcher']);canvas.focus();
@@ -315,7 +315,9 @@ let active=null,heldButton=0,physicalPosition=[0,0];
 // The left stick owns camera keys; canvas fingers remain ordinary game input.
 const panKeys=new Set(),stick=$('view-stick');
 let touchPress=null,stickPointer=null,stickTouch=null;
-function scrollKeys(keys){
+const cameraSources=new Map();
+function scrollKeys(keys,source='stick'){
+ cameraSources.set(source,keys);keys=[...new Set([...cameraSources.values()].flat())];
  for(const vk of panKeys)if(!keys.includes(vk)){
   if(game&&!physicalHeld.has(vk))game._ra2_web_key(0,vk,0);
   panKeys.delete(vk);
@@ -344,7 +346,7 @@ function moveStick(e){
  scrollKeys(keys);
 }
 stick.addEventListener('pointerdown',e=>{
- if(!running||stickPointer!==null||e.button!==0)return;
+ if(!running||!mobileState.active||stickPointer!==null||e.button!==0)return;
  e.preventDefault();stickPointer=e.pointerId;stick.setPointerCapture(e.pointerId);
  stick.classList.add('active');moveStick(e);
 });
@@ -370,40 +372,78 @@ window.addEventListener('pointermove',e=>{
 },true);
 window.addEventListener('pagehide',stopPan);
 stick.addEventListener('contextmenu',e=>e.preventDefault());
+let mobileState={active:false,mode:0,cameos:[]};
+const fingers=new Map();let twoPan=false,panCenter=null,panOrigin=null,panTimer=0,longTimer=0,longFired=false,panAllowed=false;
+function updateMobileState(state){
+ const changed=mobileState.active!==!!state.active||mobileState.mode!==state.mode;
+ mobileState={...state,active:!!state.active};
+ document.body.classList.toggle('mobile-battle',mobileState.active);
+ const names=['','取消选中','取消放置','取消目标','取消操作'];
+ const cancel=$('mobile-cancel');cancel.hidden=!state.active||!state.mode;cancel.textContent=names[state.mode]||'取消操作';cancel.setAttribute('aria-label',cancel.textContent);
+ if(!state.active){stopPan();stopTwoPan();}
+ if(changed)window.dispatchEvent(new Event('ra2-controls-change'));
+}
+function cameoAt(p){return mobileState.cameos.some(([x,y,w,h])=>p[0]>=x&&p[0]<x+w&&p[1]>=y&&p[1]<y+h);}
+function clearLong(){clearTimeout(longTimer);longTimer=0;}
+function stopTwoPan(){clearTimeout(panTimer);scrollKeys([],'touch');panCenter=panOrigin=null;panAllowed=false;}
+function center(){const a=[...fingers.values()];return[(a[0][0]+a[1][0])/2,(a[0][1]+a[1][1])/2];}
 canvas.addEventListener('pointerdown',e=>{
- if(!running)return;
+ if(!running||$('operation-manual').open)return;
  const p=point(e);if(!p)return;
  if(e.pointerType==='touch'){
-  e.preventDefault();
-  if(active!==null)return;
-  active=e.pointerId;canvas.setPointerCapture(e.pointerId);heldButton=right?2:0;
-  touchPress={point:p,x:e.clientX,y:e.clientY};return;
+  e.preventDefault();fingers.set(e.pointerId,[e.clientX,e.clientY]);canvas.setPointerCapture(e.pointerId);
+  if(fingers.size>=2){
+   clearLong();
+   if(!twoPan){panAllowed=mobileState.active&&!!touchPress;twoPan=true;releaseMouse();panCenter=panOrigin=center();}
+   return;
+  }
+  if(twoPan||active!==null)return;
+  active=e.pointerId;heldButton=0;longFired=false;
+  touchPress={point:p,x:e.clientX,y:e.clientY};
+  if(mobileState.active&&cameoAt(p))longTimer=setTimeout(()=>{
+   if(!touchPress||active!==e.pointerId||fingers.size!==1||!mobileState.active||!cameoAt(p))return;
+   touchPress=null;longFired=true;physicalPosition=p;
+   game._ra2_web_mouse(0,p[0],p[1],2);game._ra2_web_mouse(1,p[0],p[1],2);game._ra2_web_mouse(2,p[0],p[1],2);
+  },500);
+  return;
  }
  if(active!==null)return;
- e.preventDefault();active=e.pointerId;physicalPosition=p;heldButton=right||e.button===2?2:0;canvas.setPointerCapture(e.pointerId);
+ e.preventDefault();active=e.pointerId;physicalPosition=p;heldButton=e.button===2?2:0;canvas.setPointerCapture(e.pointerId);
  game._ra2_web_mouse(0,p[0],p[1],heldButton);game._ra2_web_mouse(1,p[0],p[1],heldButton);
 });
 canvas.addEventListener('pointermove',e=>{
  if(!running)return;
- // A lifted finger must never move the game cursor between independent taps.
+ if(e.pointerType==='touch'&&fingers.has(e.pointerId))fingers.set(e.pointerId,[e.clientX,e.clientY]);
+ if(twoPan){
+  e.preventDefault();if(!panAllowed||!mobileState.active||fingers.size<2)return;
+  const c=center();if(panOrigin&&Math.hypot(c[0]-panOrigin[0],c[1]-panOrigin[1])<10)return;
+  panOrigin=null;const dx=c[0]-panCenter[0],dy=c[1]-panCenter[1];
+  if(Math.hypot(dx,dy)<6)return;panCenter=c;
+  const major=Math.max(Math.abs(dx),Math.abs(dy)),keys=[];
+  if(Math.abs(dx)>=major*.35)keys.push(dx>0?37:39);
+  if(Math.abs(dy)>=major*.35)keys.push(dy>0?38:40);
+  scrollKeys(keys,'touch');clearTimeout(panTimer);panTimer=setTimeout(()=>scrollKeys([],'touch'),80);return;
+ }
+ if(longFired)return;
  if(e.pointerType==='touch'&&active!==e.pointerId)return;
  if(active!==null&&active!==e.pointerId)return;
  const p=point(e,active===e.pointerId);if(!p)return;
  if(touchPress){
   if(Math.hypot(e.clientX-touchPress.x,e.clientY-touchPress.y)<6)return;
-  const start=touchPress.point;touchPress=null;
+  clearLong();const start=touchPress.point;touchPress=null;
   game._ra2_web_mouse(0,start[0],start[1],heldButton);game._ra2_web_mouse(1,start[0],start[1],heldButton);
  }
  physicalPosition=p;game._ra2_web_mouse(0,p[0],p[1],heldButton);
 });
 function release(e){
+ if(e.pointerType==='touch')fingers.delete(e.pointerId);
+ if(twoPan){if(fingers.size<2)stopTwoPan();if(!fingers.size)twoPan=false;return;}
  if(!running||active!==e.pointerId)return;
+ clearLong();
+ if(longFired){longFired=false;active=null;return;}
  const p=e.type==='lostpointercapture'?physicalPosition:(point(e,true)||physicalPosition);
  if(touchPress){
-  if(e.type==='pointerup'&&p){
-   game._ra2_web_mouse(0,p[0],p[1],heldButton);game._ra2_web_mouse(1,p[0],p[1],heldButton);
-   game._ra2_web_mouse(2,p[0],p[1],heldButton);physicalPosition=p;
-  }
+  if(e.type==='pointerup'&&p){game._ra2_web_mouse(0,p[0],p[1],heldButton);game._ra2_web_mouse(1,p[0],p[1],heldButton);game._ra2_web_mouse(2,p[0],p[1],heldButton);physicalPosition=p;}
   touchPress=null;
  }else if(p){game._ra2_web_mouse(2,p[0],p[1],heldButton);physicalPosition=p;}
  active=null;
@@ -413,29 +453,31 @@ window.addEventListener('pointerup',release,true);window.addEventListener('point
 canvas.addEventListener('touchstart',e=>{if(e.cancelable)e.preventDefault();},{passive:false});
 $('game-window').addEventListener('selectstart',e=>e.preventDefault());
 $('game-window').addEventListener('dragstart',e=>e.preventDefault());
-function releaseMouse(){if(running&&active!==null&&!touchPress)game._ra2_web_mouse(2,physicalPosition[0],physicalPosition[1],heldButton);active=null;touchPress=null;}
-function resetTouchInput(){releaseMouse();stopPan();}
+function releaseMouse(){clearLong();if(running&&active!==null&&!touchPress&&!longFired)game._ra2_web_mouse(2,physicalPosition[0],physicalPosition[1],heldButton);active=null;touchPress=null;longFired=false;}
+function resetTouchInput(){releaseMouse();stopPan();stopTwoPan();fingers.clear();twoPan=false;}
 window.addEventListener('blur',resetTouchInput);document.addEventListener('visibilitychange',()=>{if(document.hidden)resetTouchInput();});
 $('mobile-cancel').onclick=()=>{
- if(!running)return;releaseMouse();
- game._ra2_web_mouse(1,physicalPosition[0],physicalPosition[1],2);
- game._ra2_web_mouse(2,physicalPosition[0],physicalPosition[1],2);
- canvas.focus({preventScroll:true});
+ if(!running||!mobileState.active||!mobileState.mode||active!==null||fingers.size)return;
+ game._ra2_web_cancel(mobileState.mode);canvas.focus({preventScroll:true});
 };
-$('mobile-home').onclick=()=>{
- if(!running)return;releaseMouse();
- game._ra2_web_key(1,72,0);game._ra2_web_key(0,72,0);
- canvas.focus({preventScroll:true});
-};
-$('right').onclick=()=>{right=!right;$('right').textContent=right?'右键模式':'左键模式';};
+function mobileKey(vk){
+ if(!running||!mobileState.active||active!==null||fingers.size)return;
+ game._ra2_web_key(1,vk,0);game._ra2_web_key(0,vk,0);canvas.focus({preventScroll:true});
+}
+$('mobile-home').onclick=()=>mobileKey(72);
+for(const button of document.querySelectorAll('[data-mobile-key]'))button.onclick=()=>mobileKey(+button.dataset.mobileKey);
+$('manual-open').onclick=()=>{resetTouchInput();if(game)for(const vk of physicalHeld)game._ra2_web_key(0,vk,0);physicalHeld.clear();$('operation-manual').showModal();};
+$('manual-close').onclick=()=>$('operation-manual').close();
+$('operation-manual').addEventListener('close',()=>canvas.focus({preventScroll:true}));
 for(const button of document.querySelectorAll('.key'))button.onclick=()=>{if(running){game._ra2_web_key(1,+button.dataset.vk,0);game._ra2_web_key(0,+button.dataset.vk,0);}};
-const physicalHeld=new Set();document.addEventListener('keydown',e=>{if(!running||physicalHeld.has(e.keyCode))return;physicalHeld.add(e.keyCode);if(!panKeys.has(e.keyCode))game._ra2_web_key(1,e.keyCode,0);if([27,32,37,38,39,40].includes(e.keyCode))e.preventDefault();});document.addEventListener('keyup',e=>{if(!running)return;physicalHeld.delete(e.keyCode);if(!panKeys.has(e.keyCode))game._ra2_web_key(0,e.keyCode,0);});window.addEventListener('blur',()=>{if(game)for(const vk of physicalHeld)game._ra2_web_key(0,vk,0);physicalHeld.clear();});
+const physicalHeld=new Set();document.addEventListener('keydown',e=>{if(!running||$('operation-manual').open||physicalHeld.has(e.keyCode))return;physicalHeld.add(e.keyCode);if(!panKeys.has(e.keyCode))game._ra2_web_key(1,e.keyCode,0);if([27,32,37,38,39,40].includes(e.keyCode))e.preventDefault();});document.addEventListener('keyup',e=>{if(!running)return;physicalHeld.delete(e.keyCode);if(!panKeys.has(e.keyCode))game._ra2_web_key(0,e.keyCode,0);});window.addEventListener('blur',()=>{if(game)for(const vk of physicalHeld)game._ra2_web_key(0,vk,0);physicalHeld.clear();});
 $('fullscreen').onclick=()=>canvas.requestFullscreen?.().catch(log);
 // Safari versions that ignore overscroll-behavior still need a cancelable
 // touchmove handler. Setup can scroll internally; game gestures never pan the page.
 let touchX=0,touchY=0;
 document.addEventListener('touchstart',event=>{const touch=event.touches[0];if(touch){touchX=touch.clientX;touchY=touch.clientY;}},{passive:true});
 document.addEventListener('touchmove',event=>{
+ if($('operation-manual').open&&$('operation-manual').contains(event.target))return;
  if(document.body.classList.contains('game-active')){if(event.cancelable)event.preventDefault();return;}
  if(event.touches.length!==1)return;
  const touch=event.touches[0],dx=touch.clientX-touchX,dy=touch.clientY-touchY;touchX=touch.clientX;touchY=touch.clientY;
@@ -445,7 +487,7 @@ document.addEventListener('touchmove',event=>{
  }
  if(event.cancelable)event.preventDefault();
 },{passive:false});
-document.addEventListener('wheel',event=>{if(document.body.classList.contains('game-active')&&event.cancelable)event.preventDefault();},{passive:false});
+document.addEventListener('wheel',event=>{if(!$('operation-manual').open&&document.body.classList.contains('game-active')&&event.cancelable)event.preventDefault();},{passive:false});
 setInterval(()=>{
  if(!running||pageLeaving)return;
  try{

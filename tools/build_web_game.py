@@ -32,7 +32,7 @@ for src in sorted(GEN.glob('*.c')):
   copy.write_text(original.replace(needle,'__attribute__((optnone, noinline)) '+needle))
   src=copy
  lift_sources.append(src)
-sources=[*lift_sources,*[HLE/(n+'.c') for n in names],HLE/'web_boot.c',ROOT/'runtime/web/guest_memory.c',ROOT/'runtime/web/input.c',ROOT/'runtime/ra2/blowfish.c']
+sources=[*lift_sources,*[HLE/(n+'.c') for n in names],HLE/'web_boot.c',ROOT/'runtime/web/guest_memory.c',ROOT/'runtime/web/input.c',ROOT/'runtime/web/mobile.c',ROOT/'runtime/ra2/blowfish.c']
 flags=['-O1','-w','-pthread','-DRECOMP_LOCAL_REGS','-fno-strict-aliasing','-fwrapv','-ffp-contract=off','-include',str(ROOT/'runtime/arm64/guest_cpu.h'),'-I',str(GEN),'-I',str(ROOT/'runtime/win32hle-arm64'),'-I',str(ROOT/'runtime/arm64'),'-I',str(ROOT/'vendor/pcrecomp/runtime/recomp32'),'-DHLE_WITH_FFMPEG','-I',str(ROOT/'.local/ffmpeg-web/include'),'--use-port=sdl2','--use-port=sdl2_ttf']
 headers=[*GEN.glob('*.h'),* (ROOT/'runtime/arm64').glob('*.h'),*(ROOT/'runtime/win32hle-arm64').glob('*.h'),ROOT/'vendor/pcrecomp/runtime/recomp32/recomp_types.h']
 sig=hashlib.sha256((' '.join(flags)).encode()+b''.join(p.read_bytes() for p in sorted(headers))).digest()
@@ -68,7 +68,7 @@ with ThreadPoolExecutor(max_workers=3) as pool:
   if n%10==0:print('Compiled',n,'/',len(sources),'failures',len(failures),flush=True)
 if failures:(ROOT/'logs/web-build-errors.json').write_text(json.dumps(failures,indent=2)+'\n');raise SystemExit(1)
 objects=[OBJ/(src.stem+'.o') for src in sources]  # Stable link order keeps updates reproducible.
-link=[emcc,'-O1','-pthread',*map(str,objects),'-L',str(ROOT/'.local/ffmpeg-web/lib'),'-lavformat','-lavcodec','-lswresample','-lavutil','--use-port=sdl2','--use-port=sdl2_ttf','-sGLOBAL_BASE=65536','-sMODULARIZE=1','-sEXPORT_NAME=createRA2Web','-sPROXY_TO_PTHREAD=1','-sPTHREAD_POOL_SIZE=6','-sINITIAL_MEMORY=67108864','-sMAXIMUM_MEMORY=1610612736','-sALLOW_MEMORY_GROWTH=1','-sSTACK_SIZE=4194304','-sEXPORTED_RUNTIME_METHODS=FS,callMain','-sEXPORTED_FUNCTIONS=_main,_ra2_web_mouse,_ra2_web_key','-sENVIRONMENT=web,worker','-sASSERTIONS=1','-sEXIT_RUNTIME=1','-o',str(OUT/'ra2-web.js')]
+link=[emcc,'-O1','-pthread',*map(str,objects),'-L',str(ROOT/'.local/ffmpeg-web/lib'),'-lavformat','-lavcodec','-lswresample','-lavutil','--use-port=sdl2','--use-port=sdl2_ttf','-sGLOBAL_BASE=65536','-sMODULARIZE=1','-sEXPORT_NAME=createRA2Web','-sPROXY_TO_PTHREAD=1','-sPTHREAD_POOL_SIZE=6','-sINITIAL_MEMORY=67108864','-sMAXIMUM_MEMORY=1610612736','-sALLOW_MEMORY_GROWTH=1','-sSTACK_SIZE=4194304','-sEXPORTED_RUNTIME_METHODS=FS,callMain','-sEXPORTED_FUNCTIONS=_main,_ra2_web_mouse,_ra2_web_key,_ra2_web_cancel','-sENVIRONMENT=web,worker','-sASSERTIONS=1','-sEXIT_RUNTIME=1','-o',str(OUT/'ra2-web.js')]
 p=subprocess.run(link,env=env,capture_output=True,text=True,timeout=600);(ROOT/'logs/web-link.log').write_text(p.stdout+p.stderr)
 if p.returncode:raise SystemExit(p.stderr[-2500:])
 from patch_web_worker_errors import patch
