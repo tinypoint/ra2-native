@@ -21,3 +21,9 @@ Guest state is reported synchronously to the main thread at most every 100 ms, a
 ## Remaining verification
 
 Physical iPhone playtesting is still required: battle guard coverage, production long press, diagonal two-finger pan, deployment followed by cancel, menu sliders, and independent tap release. No browser gameplay pass was run for this release, per user request.
+
+## Browser settings and saves
+
+The `user-files.js` frontend adds a mutable overlay in the separate `ra2-web-user-files` IndexedDB database. After immutable resource loading and before callMain, it restores changed files and deletion tombstones. Successful writes, truncations, renames and deletes under /game are tracked. Open writable handles defer persistence; closing a dirty file schedules a transaction after 100 ms. Transactions contain fresh byte copies; failed transactions retain dirty paths for retry and show an on-screen warning. Read-only resource loads are not copied into the save database. Visibility/pagehide flushing is supplementary, not the primary save mechanism.
+
+No automatic game-state save is implied: the user must use the game's save action. Browser termination before a completed IndexedDB transaction can still lose the newest change. Storage is scoped to the website and browser; clearing site data, private browsing teardown, or browser eviction can remove it. Existing lost saves cannot be recovered. The frontend update reuses the 0.1.8 runtime with no program download. The contract check in tests/web-user-files.cjs covers restoration, open-writer exclusion, rename/delete, cache separation and transaction failure retry; physical iPhone game save/load is not yet playtested.

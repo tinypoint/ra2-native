@@ -88,7 +88,7 @@ def prepare(resources_repository=None, blob=False):
 
     with tempfile.TemporaryDirectory(prefix='vercel-stage-', dir=ROOT / '.local') as directory:
         stage = Path(directory)
-        for name in ('index.html', 'style.css', 'app.js', 'frame-meter.js', 'runtime-update.js'):
+        for name in ('index.html', 'style.css', 'app.js', 'frame-meter.js', 'runtime-update.js', 'user-files.js'):
             shutil.copy2(ROOT / 'web' / name, stage / name)
         js = ROOT / '.local/web-published/ra2-web.js'
         script = {'name': js.name, 'size': js.stat().st_size, 'sha256': digest(js)}

@@ -66,3 +66,5 @@ body:is(.game-shell,.game-active,[data-view="game"]) #game-window{flex:1 1 0;min
 #operation-manual::backdrop{background:#0009}
 .manual-heading{display:flex;align-items:center;justify-content:space-between;gap:16px}.manual-heading h2{margin:0}.manual-heading button{background:#343b43;color:#fff;min-height:40px;padding:8px 14px}
 #operation-manual h3{color:#e8c28d;margin:22px 0 10px;font-size:15px}#operation-manual dt{font-weight:650;font-size:14px;margin-top:14px}#operation-manual dd{margin:5px 0 12px;color:#bbc3cc;font-size:13px;line-height:1.65}#operation-manual li{font-size:13px}.manual-note{font-size:12px;color:#9ba6b3;line-height:1.6}
+
+#save-warning{position:fixed;z-index:5;left:50%;bottom:8px;transform:translateX(-50%);max-width:90vw;padding:10px;border:1px solid #d69c55;border-radius:8px;background:#24190fee;color:#ffe1b8;font-size:13px}#save-warning[hidden]{display:none}

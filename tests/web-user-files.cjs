@@ -1,0 +1,16 @@
+// Persistence contract only; does not launch the game or browser.
+const fs=require('fs'),vm=require('vm'),assert=require('assert/strict');
+const disk=new Map();let rejectWrite=false;
+const database={transaction(_name,mode){const tx={error:new Error('quota'),objectStore(){return {getAll(){const req={};queueMicrotask(()=>{req.result=[...disk.values()].map(r=>structuredClone(r));req.onsuccess();});return req;},put(row){tx.rows??=[];tx.rows.push(structuredClone(row));}};}};if(mode==='readwrite')setTimeout(()=>{if(rejectWrite)tx.onerror();else{for(const r of tx.rows)disk.set(r.path,r);tx.oncomplete();}},0);return tx;},close(){}};
+function makeFS(){const files=new Map([['/game/RA2.INI',Buffer.from('original')],['/game/game.exe',Buffer.from('asset')]]),streams=[];return {files,streams,cwd:()=>'/game',getPath:n=>n.path,isDir:()=>false,mkdirTree(){},stat(p){if(!files.has(p))throw {errno:44};return {mode:1};},readFile(p){this.stat(p);return new Uint8Array(files.get(p));},writeFile(p,b){files.set(p,new Uint8Array(b));},open(p,flags){const s={node:{path:p},path:p,flags,fd:streams.length};streams.push(s);return s;},write(s,b){files.set(s.path,Buffer.from(b));},truncate(p){files.set(p,new Uint8Array());},close(s){streams[s.fd]=null;s.fd=null;},unlink(p){this.stat(p);files.delete(p);},rename(a,b){this.stat(a);files.set(b,files.get(a));files.delete(a);}};}
+const timers=new Set(),messages=[];
+const ctx={window:{addEventListener(){}},document:{addEventListener(){}},indexedDB:{open(){const r={};queueMicrotask(()=>{r.result=database;r.onsuccess();});return r;}},setTimeout(fn,ms){const id=setTimeout(fn,ms);timers.add(id);return id;},clearTimeout,Uint8Array,Date,Set,Error};vm.createContext(ctx);vm.runInContext(fs.readFileSync('web/user-files.js','utf8'),ctx);
+(async()=>{let FS=makeFS();const api=await ctx.window.RA2UserFiles.attach(FS,(...m)=>messages.push(m));
+ let s=FS.open('/game/SAVE01.SAV',2);FS.write(s,'save');await api.flush();assert.equal(disk.size,0,'open writer must not persist');FS.close(s);await api.flush();assert.equal(Buffer.from(disk.get('/game/SAVE01.SAV').bytes).toString(),'save');
+ s=FS.open('/game/RA2.INI',2);FS.write(s,'ScreenWidth=1024');FS.close(s);await api.flush();
+ s=FS.open('/game/game.exe',0);FS.close(s);await api.flush();assert(!disk.has('/game/game.exe'),'read-only assets are not persisted');
+ FS.rename('/game/SAVE01.SAV','/game/SAVE02.SAV');await api.flush();assert(disk.get('/game/SAVE01.SAV').deleted);assert(!disk.get('/game/SAVE02.SAV').deleted);
+ FS=makeFS();const api2=await ctx.window.RA2UserFiles.attach(FS,(...m)=>messages.push(m));assert.equal(Buffer.from(FS.readFile('/game/RA2.INI')).toString(),'ScreenWidth=1024');assert.equal(Buffer.from(FS.readFile('/game/SAVE02.SAV')).toString(),'save');
+ FS.unlink('/game/SAVE02.SAV');rejectWrite=true;await api2.flush();assert(messages.at(-1)[1],'quota failure surfaced');assert(!disk.get('/game/SAVE02.SAV').deleted,'previous committed save retained');rejectWrite=false;await api2.flush();assert(disk.get('/game/SAVE02.SAV').deleted);
+ console.log('PASS: closed writes, settings restore, saves restore, rename/delete, read-only cache separation, failed-write retry');
+})().catch(e=>{console.error(e);process.exitCode=1;}).finally(()=>{for(const id of timers)clearTimeout(id);});
