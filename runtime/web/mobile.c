@@ -4,7 +4,6 @@
 #include <emscripten.h>
 #include "win32hle.h"
 extern int hle_web_dialog_open(void);
-extern uint32_t hle_web_resolution_dialog(void);
 #define DISPLAY 0x8324E0u
 static int busy;
 int ra2_mobile_active(void){
@@ -33,7 +32,7 @@ void ra2_mobile_report(void){
  static uint32_t last;uint32_t now=hle_ticks_ms();
  if(busy||now-last<100)return;last=now;
  int active=ra2_mobile_active(),mode=active?cancel_mode():0;
- char json[8192];int n=snprintf(json,sizeof json,"{\"active\":%d,\"mode\":%d,\"resolution\":%u,\"cameos\":[",active,mode,hle_web_resolution_dialog()),count=0;
+ char json[8192];int n=snprintf(json,sizeof json,"{\"active\":%d,\"mode\":%d,\"cameos\":[",active,mode),count=0;
  if(active){
   /* Active gadget chain, not every preallocated/hidden cameo. Link +4 is next. */
   uint32_t p=MEM32(0xA40EEC);

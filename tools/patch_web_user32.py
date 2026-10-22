@@ -3,6 +3,52 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 def patch(source: str) -> str:
+    # Guest windows share DirectDraw pixels. Preserve the visible upper window
+    # while an overlapping lower window repaints, including synchronous paints
+    # issued from inside the upper window's own paint callback.
+    needle = 'static uint32_t call_proc(uint32_t proc, uint32_t h, uint32_t m, uint32_t w, uint32_t l) {'
+    assert source.count(needle) == 1
+    source = source.replace(needle, '''static int visible(win_t *);
+static void origin(win_t *, int *, int *);
+extern void *ra2_web_save_pixels(int,int,int,int);
+extern void ra2_web_restore_pixels(void *);
+typedef struct web_clip { void *pixels; struct web_clip *next; } web_clip;
+static int web_clipping;
+static web_clip *web_clip_above(uint32_t h) {
+    win_t *painted=W(h), *layer=painted;
+    if (!painted || !visible(painted)) return NULL;
+    while (layer && layer->kind!=K_DIALOG) layer=W(layer->parent);
+    if (!layer) return NULL;
+    int px,py; origin(painted,&px,&py);
+    web_clip *clips=NULL;
+    for(int i=0;i<MAX_WIN;i++) {
+        win_t *above=&g_win[i];
+        if(!above->used || above->destroying || above->kind!=K_DIALOG ||
+           above->parent!=layer->parent || above->seq<=layer->seq || !visible(above)) continue;
+        int ax,ay; origin(above,&ax,&ay);
+        int l=px>ax?px:ax,t=py>ay?py:ay;
+        int r=px+painted->w<ax+above->w?px+painted->w:ax+above->w;
+        int b=py+painted->h<ay+above->h?py+painted->h:ay+above->h;
+        if(r<=l || b<=t)continue;
+        void *pixels=ra2_web_save_pixels(ax,ay,ax+above->w,ay+above->h);
+        if(!pixels)continue;
+        web_clip *item=malloc(sizeof *item);
+        if(!item){ra2_web_restore_pixels(pixels);continue;}
+        item->pixels=pixels;item->next=clips;clips=item;
+    }
+    return clips;
+}
+''' + needle)
+    needle = '    uint32_t r = hle_call_guest(proc, 4, a);'
+    assert source.count(needle) == 1
+    source = source.replace(needle, '''    web_clip *clips=NULL;int was_clipping=web_clipping;
+    if(m==WM_PAINT && !web_clipping) {
+        clips=web_clip_above(h);
+        if(clips)web_clipping=1;
+    }
+''' + needle + '''
+    while(clips){web_clip *next=clips->next;ra2_web_restore_pixels(clips->pixels);free(clips);clips=next;}
+    web_clipping=was_clipping;''')
     start = source.index('static uint32_t combobox_proc(')
     end = source.index('\nstatic uint32_t trackbar_proc(', start)
     source = source[:start] + (ROOT/'runtime/web/combobox.inc').read_text() + source[end:]
@@ -21,6 +67,21 @@ def patch(source: str) -> str:
         }
     }
 ''' + source[start:]
+    # A visible popup covers lower controls even if those controls have a
+    # deeper parent chain. Pointer targeting must follow the displayed layer.
+    needle = '    win_t *best = NULL;'
+    start = source.index(needle, source.index('uint32_t hle_window_at('))
+    source = source[:start] + '''    win_t *cover = NULL;
+    for (int i=0;i<MAX_WIN;i++) {
+        win_t *x=&g_win[i];int ox,oy;
+        if(!x->used||x->destroying||x->kind!=K_DIALOG||!visible(x))continue;
+        origin(x,&ox,&oy);
+        if(sx>=ox&&sy>=oy&&sx<ox+x->w&&sy<oy+x->h&&(!cover||x->seq>cover->seq))cover=x;
+    }
+''' + source[start:]
+    needle = 'if (!x->used || !visible(x) || (x->style & WS_DISABLED) || x->kind == K_STATIC) continue;'
+    assert source.count(needle) == 1
+    source = source.replace(needle, needle + '\n        if (cover && !is_descendant(x->hwnd,cover->hwnd)) continue;')
     # An open combo captures its list, but a press on a different control
     # must close it and continue to the newly hit control in the same click.
     start = source.index('    g_cursor_x = sx, g_cursor_y = sy;', source.index('void hle_input_mouse('))
@@ -76,26 +137,6 @@ def patch(source: str) -> str:
     source = source.replace(needle, '    if (m == WM_LBUTTONDOWN || m == WM_LBUTTONUP || m == WM_RBUTTONDOWN || m == WM_RBUTTONUP) hle_web_mouse_completed++;\n' + needle)
     source = 'unsigned hle_web_mouse_completed;\n' + source
     source += """
-/* The original mode-confirmation dialog is logically active but its custom
- * pixels are not composed into the Web primary. Expose only this exact dialog. */
-uint32_t hle_web_resolution_dialog(void) {
- for(int i=0;i<MAX_WIN;i++){win_t *x=&g_win[i];
-  if(!x->used||x->destroying||x->id!=1499||strcmp(x->text,"GUI:ConfirmModeChange")||!visible(x))continue;
-  win_t *p=W(x->parent);int ok=0,cancel=0;
-  if(!p||p->destroying||!visible(p))continue;
-  for(int j=0;j<MAX_WIN;j++)if(g_win[j].used&&g_win[j].parent==p->hwnd){ok|=g_win[j].id==1473;cancel|=g_win[j].id==1738;}
-  if(ok&&cancel)return (uint32_t)p->seq; /* HWND slots are reused between the two confirmations. */
- }return 0;
-}
-void hle_web_resolution_reply(uint32_t h,int accept) {
- if(!h||hle_web_resolution_dialog()!=h)return;
- uint32_t id=accept?1473:1738,hwnd=0;
- for(int i=0;i<MAX_WIN;i++)if(g_win[i].used&&(uint32_t)g_win[i].seq==h){hwnd=g_win[i].hwnd;break;}
- if(!hwnd)return;
- for(int i=0;i<MAX_WIN;i++)if(g_win[i].used&&g_win[i].parent==hwnd&&g_win[i].id==id){
-  hle_send(hwnd,WM_COMMAND,id,g_win[i].hwnd);return;
- }
-}
 int hle_web_dialog_open(void) {
  for(int i=0;i<MAX_WIN;i++){win_t *x=&g_win[i];
   if(x->used&&!x->destroying&&x->w>0&&x->h>0&&(x->kind==K_DIALOG||x->dlgproc)&&visible(x))return 1;
