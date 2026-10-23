@@ -15,7 +15,7 @@
 
 源码仓库：https://github.com/tinypoint/ra2-native 。Vercel 项目为 `ra2-web`。
 资源和生成的游戏代码、本机构建产物留在被忽略的 `.local/`、`game/` 等目录。
-Web 当前程序版本为 v0.1.5；移动端摇杆、菜单与加载界面仍在迭代。
+Web 当前已发布程序版本为 **v0.1.11**，入口为 https://ra2-web-alpha.vercel.app/ 。阶段收尾状态与已知问题见 [交付记录](docs/PROJECT_STATUS.md)。
 
 - [Web 运行与缓存](docs/WEB_RUNTIME.md)
 - [Vercel 和 Blob 部署](docs/VERCEL_DEPLOYMENT.md)
