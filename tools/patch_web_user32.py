@@ -105,6 +105,17 @@ static web_clip *web_clip_above(uint32_t h) {
     new = 'if (do_size && x->kind == K_COMBOBOX && (x->style & 3u) != 1u) { if (ph > x->h) x->drop_h = ph; ph = x->h; }'
     assert old in source
     source = source.replace(old, new)
+    # Moving a list without resizing must not send WM_SIZE. The game's list
+    # resize handler repositions its separate sibling scrollbar. A fabricated
+    # resize moves that scrollbar before the dialog's layout enumerator reaches
+    # it, so the same centering offset is applied twice at larger resolutions.
+    needle = '    if (do_move) x->x = px, x->y = py;'
+    assert source.count(needle) == 1
+    source = source.replace(needle, '''    int web_notify_size = do_size && (x->kind != K_LISTBOX || pw != x->w || ph != x->h);
+''' + needle)
+    needle = '    if (do_size) hle_send(h, WM_SIZE,'
+    assert source.count(needle) == 1
+    source = source.replace(needle, '    if (web_notify_size) hle_send(h, WM_SIZE,')
     # Destroying/hiding a custom popup exposes its parent again. Windows
     # generates paint for that region; retaining the last pixels is incorrect.
     start = source.index('    item_free(x);\n    x->used = 0;', source.index('static void destroy('))
