@@ -1815,6 +1815,13 @@ static void u_ShowCursor(void) { RET((uint32_t)(A32(0) ? ++g_cursor_shown : --g_
  * not draw its own (screen.c, hle_screen_cursor_hook). */
 static uint32_t g_current_cursor;
 uint32_t hle_current_cursor(void) { return g_current_cursor; }
+/* Native presentation follows ShowCursor, while Win32 dialogs must retain
+ * their resource cursor even when the surrounding DirectDraw scene hides it. */
+int hle_native_cursor_visible(void) {
+    for (unsigned i = 0; i < MAX_WIN; i++)
+        if (g_win[i].used && g_win[i].kind == K_DIALOG && visible(&g_win[i])) return 1;
+    return g_cursor_shown >= 0;
+}
 static void u_SetCursor(void) {
     uint32_t previous = g_current_cursor;
     g_current_cursor = A32(0);

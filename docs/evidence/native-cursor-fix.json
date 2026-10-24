@@ -1,0 +1,17 @@
+{
+  "scope": "macOS native cursor policy; Web bootstrap excluded by __EMSCRIPTEN__ guard",
+  "cause": "SDL cursor hidden by default; native bootstrap did not assign hle_screen_cursor_hook",
+  "change": "Show guest resource cursor for visible Win32 dialogs; otherwise follow guest ShowCursor count",
+  "build": "release ARM64 incremental build passed",
+  "startupProbe": "logs/native-cursor-fix-run.log",
+  "observedCursorStates": [
+    "the game's, from its resources",
+    "drawn by the game",
+    "the game's, from its resources"
+  ],
+  "probeExit": 124,
+  "probeExitReason": "expected 12-second diagnostic watchdog",
+  "appUpdated": ".local/Red Alert 2 ARM64 Optimized.app",
+  "appSignatureVerified": true,
+  "physicalMouseUserConfirmation": false
+}

@@ -116,6 +116,10 @@ int main(int argc,char **argv) {
     extern void (*hle_ws_post_message)(uint32_t,uint32_t,uint32_t,uint32_t);
     hle_ws_post_message=hle_post_message;
     hle_screen_frame_hook=capture_frame;
+#ifndef __EMSCRIPTEN__
+    extern int hle_native_cursor_visible(void);
+    hle_screen_cursor_hook=hle_native_cursor_visible;
+#endif
     if(hle_screen_open("Red Alert 2 — ARM64 migration",0,0))return 4;
     char game_dir[2048];
     if (!getcwd(game_dir,sizeof game_dir)) return 2;
